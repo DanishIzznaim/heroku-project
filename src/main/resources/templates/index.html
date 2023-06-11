@@ -1,95 +1,132 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'index')}">
-<body>
-
-<div class="jumbotron text-center">
-    <div class="container">
-        <a href="/" class="lang-logo">
-            <img alt="" th:src="@{/lang-logo.png}">
-        </a>
-        <h4>burn</h4>
-        <a th:href="@{/login}">login</a>
-        <p>This is a sample Java application deployed to Heroku. It's a reasonably simple app - but a good foundation
-            for understanding how to get the most out of the Heroku platform.</p>
-        <a type="button" class="btn btn-lg btn-default"
-           href="https://devcenter.heroku.com/articles/getting-started-with-java"><span
-                class="glyphicon glyphicon-flash"></span> Getting Started with Java</a>
-        <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/java-getting-started"><span
-                class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-    </div>
-</div>
-
-<div class="container">
-    <div class="alert alert-info text-center" role="alert">
-        To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a
-            href="https://devcenter.heroku.com/articles/getting-started-with-java" class="alert-link">Getting Started
-        with Java on Heroku</a> tutorial.
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-6">
-            <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-            <ul>
-                <li>This app was deployed to Heroku, either using Git or by using <a
-                        href="https://github.com/heroku/java-getting-started">Heroku Button</a> on the repository.
-                </li>
-
-                <li>When Heroku received the source code, it fetched all the dependencies in the <a
-                        href="https://github.com/heroku/java-getting-started/blob/main/pom.xml">pom.xml</a>, creating a
-                    slug.
-                </li>
-                <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in
-                    which the slug can be mounted and executed.
-                </li>
-                <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on
-                    services</a>, from the Dashboard or CLI.
-                </li>
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/dz.png">
+    <title>Home</title>
+    <link rel="stylesheet" href="stylesheets/homepage.css">
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">DZ EMPIRE RENTAL</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Feedback</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+              </li>
             </ul>
+          </div>
         </div>
-        <div class="col-md-6">
-            <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
-            <ul>
-                <li>If you are following the <a href="https://devcenter.heroku.com/articles/getting-started-with-java">Getting
-                    Started</a> guide, then please head back to the tutorial and follow the next steps!
-                </li>
-                <li>If you deployed this app by deploying the Heroku Button, then in a command line shell, run:</li>
-                <li>
-                    <ul>
-                        <li><code>git clone https://github.com/heroku/java-getting-started.git</code> - this will create
-                            a
-                            local copy of the source code for the app
-                        </li>
-                        <li><code>cd java-getting-started</code> - change directory into the local source code
-                            repository
-                        </li>
-                        <li><code>heroku git:remote -a &lt;your-app-name></code> - associate the Heroku app with the
-                            repository
-                        </li>
-                        <li>You'll now be set up to run the app locally, or <a
-                                href="https://devcenter.heroku.com/articles/getting-started-with-java#push-local-changes">deploy
-                            changes</a> to Heroku
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-            <ul>
-                <li><a href="https://www.heroku.com/home">Heroku</a></li>
-                <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-                <li><a href="https://devcenter.heroku.com/articles/getting-started-with-java">Getting Started with Java
-                    on Heroku</a></li>
-                <li><a href="https://devcenter.heroku.com/articles/deploying-java">Deploying Java Apps on Heroku</a>
-                </li>
-            </ul>
+      </nav>
+      <img src="images/header2c.jpg" class="img-fluid" alt="header1">
+      <div class="container-fluid" style="background-color:#F39D7D">
+        <h1 class="text-center">DZ EMPIRE CAR RENTAL</h1>
+        <p class="text-center" style="font-family:'Alike', serif; font-size: 20px;">Looking for ways to spend your holiday? Why not go on a Selangor, and rent car at DZ Empire Rental. 
+            Selangor, Malaysia has some indefinable quality that makes it perfect for road trips. 
+            Cruising down the roads with a Selangor, Malaysia car hire and the wind in your hair,  
+            your favorite tunes playing and miles of open road ahead has to be the ideal start to any adventure. 
+            The sheer diversity of landscapes and cultures within Selangor, Malaysia alone makes for myriad
+            tour opportunities,no matter what kind of journey you’re after.</p>
+        <div class="row justify-content-evenly container-fluid">
+            <div class="col-3"style="background-color: #301959; border-radius:10px;">
+                <p class="text-center mt-3" style="color:white; font-size: 20px;">Sedan</p>
+                <img class="container-fluid" style="border-radius: 10px;" src="images/sedanhome.jpg">
+                <p class="text-center container-fluid mt-2" style="font-family: 'Alike', serif; color:#F39D7D;">A sedan car is a four seater vehicle designed for comfortable everyday transportation,
+                  typically used for personal and family purposes</p>
+            </div>
+            <div class="col-3"style="background-color: #301959; border-radius:10px;">
+                <p class="text-center mt-3" style="color:white; font-size: 20px;">Compact</p>
+                <img class="container-fluid" style="border-radius: 10px;"src="images/compacthome.jpg">
+                <p class="text-center container-fluid mt-2" style="font-family: 'Alike', serif; color:#F39D7D;">A compact car is a small, fuel-efficient vehicle, typically with four doors and seating for four 
+                  to five passengers, designed for city driving and everyday personal transportation.</p>
+            </div>
+            <div class="col-3"style="background-color: #301959; border-radius:10px;">
+                <p class="text-center mt-3" style="color:white; font-size: 20px;">MPV</p>
+                <img class="container-fluid"style="border-radius: 10px;" src="images/mpvhome.jpg">
+                <p class="text-center container-fluid mt-2" style="font-family: 'Alike', serif; color:#F39D7D;">A MPV car is a roomy and adaptable vehicle with seven or more seats that is designed for
+                  large groups or families, and often used for both personal and commercial purposes</p>
+            </div>
         </div>
-    </div>
-
-    <div class="alert alert-info text-center" role="alert">
-        Please do work through the Getting Started guide, even if you do know how to build such an application. The
-        guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order
-        to build and deploy your own apps.
-    </div>
-</div>
-
-</body>
+        <h3 class="mt-5 d-flex justify-content-center mb-3"><u>Sedan</u></h3>
+        <div class="row justify-content-evenly container-fluid mb-5">
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan2.jpg" class="container-fluid mt-3 rounded">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan3.png" class="container-fluid mt-3 rounded">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3">Condition: 6/10</p>
+          </div>
+        </div>
+        <div class="row justify-content-evenly container-fluid">
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan4.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan5.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;" >
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan6.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3">Condition: 6/10</p>
+          </div>
+        </div>
+      </div>
+      <br>
+      <footer class="py-3 bg-dark text-white">
+        <div class="container">
+          <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
+        </div>
+      </footer>
+  </body>
+  <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+  <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </html>
