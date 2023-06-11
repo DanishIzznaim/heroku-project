@@ -31,6 +31,11 @@ public class GettingStartedApplication {
         return "homepage";
     }
 
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (
