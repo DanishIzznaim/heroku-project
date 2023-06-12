@@ -41,6 +41,11 @@ public class GettingStartedApplication {
         return "login";
     }
 
+    @GetMapping("/profilecust")
+    public String profilecust() {
+        return "profilecust";
+    }
+
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (
