@@ -30,7 +30,7 @@ public class GettingStartedApplication {
     public String homepage() {
         return "homepage";
     }
-
+    
     @GetMapping("/signup")
     public String signup() {
         return "signup";
