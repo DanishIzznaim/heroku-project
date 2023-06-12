@@ -47,22 +47,27 @@
             <div class="card-body">
               <div class="container-fluid mt-4 justify-content-center rounded p-2" style="background-color: blanchedalmond;">
                 <p class="text-capitalize text-center mt-3">Login To Your Account</p>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                  <label class="form-check-label" for="flexRadioDefault1">Admin</label>
+                <form 
+                 method="post"
+                 th:action="@{/login}"
+                 modelAttribute="login"
+                 th:object="(${login})">
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="user" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">Admin</label>
+                    </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="user" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">Customer</label>
                   </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                  <label class="form-check-label" for="flexRadioDefault2">Customer</label>
-                </div>
-                <form>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username:</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"required>
+                    <input type="email" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp"required>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password:</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1"required>
+                    <input type="password" class="form-control" name="password" required>
                   </div>
                   <button type="submit" class="btn btn-danger col-10 me-4 ms-4 mt-3">Login</button>
               </form>

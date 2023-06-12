@@ -30,16 +30,29 @@ public class GettingStartedApplication {
     public String homepage() {
         return "homepage";
     }
-
-    @GetMapping("/signup")
-    public String signup() {
-        return "signup";
+    @GetMapping("/sedan")
+    public String sedan() {
+        return "sedan";
     }
-
-     @GetMapping("/login")
-    public String login() {
-        return "login";
+    @GetMapping("/book")
+    public String book() {
+        return "book";
     }
+    
+    // @GetMapping("/signup")
+    // public String signup() {
+    //     return "signup";
+    // }
+
+    // @GetMapping("/login")
+    // public String login() {
+    //     return "login";
+    // }
+
+    //  @GetMapping("/login")
+    // public String login() {
+    //     return "login";
+    // }
     
     @GetMapping("/homeadmin")
     public String homeadmin() {
@@ -49,7 +62,8 @@ public class GettingStartedApplication {
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
-        try (Connection connection = dataSource.getConnection()) {
+        try (
+            Connection connection = dataSource.getConnection()) {
             final var statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
             statement.executeUpdate("INSERT INTO ticks VALUES (now())");
