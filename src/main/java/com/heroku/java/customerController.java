@@ -2,9 +2,10 @@ package com.heroku.java;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import jakarta.servlet.http.HttpSession;
@@ -19,12 +20,20 @@ public class customerController {
     public customerController(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
     //insert cust into database
-    @PostMapping("/addAccount")
-    public String addAccount(HttpSession session, @ModelAttribute("account")Customer customer) {
+    @PostMapping("/signup")
+    public String addAccount(HttpSession session, @ModelAttribute("signup")Customer customer) {
     try {
       Connection connection = dataSource.getConnection();
-      String sql = "INSERT INTO staff(fullname, address, phonenum,icnumber,licensecard,username,password) VALUES (?,?,?,?,?,?,?)";
+      String sql = "INSERT INTO customer (fullname, address, phonenum,icnumber,licensecard,username,password) VALUES (?,?,?,?,?,?,?)";
       final var statement = connection.prepareStatement(sql);
 
       statement.setString(1, customer.getFullname());
@@ -38,7 +47,7 @@ public class customerController {
       statement.executeUpdate();
 
       connection.close();
-
+      
       return "redirect:/login";
 
     } catch (SQLException sqe) {

@@ -43,9 +43,9 @@
             <form 
               class="p-3" 
               method="post" 
-              th:action="@{/addAcount}" 
-              modelAttribute="account"
-              th:object="$account"
+              th:action="@{/signup}" 
+              modelAttribute="signup"
+              th:object="(${signup})"
               >
 
               <label for="InputFullName">Full Name</label>

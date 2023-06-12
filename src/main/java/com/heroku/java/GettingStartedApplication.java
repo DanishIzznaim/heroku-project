@@ -30,21 +30,24 @@ public class GettingStartedApplication {
     public String homepage() {
         return "homepage";
     }
+    @GetMapping("/sedan")
+    public String sedan() {
+        return "sedan";
+    }
+    @GetMapping("/book")
+    public String book() {
+        return "book";
+    }
     
-    @GetMapping("/signup")
-    public String signup() {
-        return "signup";
-    }
+    // @GetMapping("/signup")
+    // public String signup() {
+    //     return "signup";
+    // }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/profilecust")
-    public String profilecust() {
-        return "profilecust";
-    }
+    // @GetMapping("/login")
+    // public String login() {
+    //     return "login";
+    // }
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
