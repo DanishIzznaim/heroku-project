@@ -40,27 +40,64 @@
 
     <div class="container-fluid" style="background-color:#F39D7D;">
         <div class="container-fluid card col-7" style="background-color:#c47df3;">
-            <form class="p-3" method="post" th:action="@{/addAccount}" ModelAttribute="account">
+            <form 
+              class="p-3" 
+              method="post" 
+              th:action="@{/addAcount}" 
+              modelAttribute="account"
+              th:object="$account"
+              >
+
               <label for="InputFullName">Full Name</label>
-              <input type="fullname" class="form-control" id="InputFullName" aria-describedby="fullnameHelp" name="fullname">
+              <input type="fullname" 
+               class="form-control" 
+               id="InputFullName" 
+               aria-describedby="fullnameHelp" 
+               name="fullname">
 
               <label for="InputAddress">Address</label>
-                <input type="address" class="form-control" id="InputAddress" aria-describedby="addressHelp" name="address">
+                <input type="address" 
+                 class="form-control" 
+                 id="InputAddress" 
+                 aria-describedby="addressHelp" 
+                 name="address">
              
                 <label for="InputPhoneNumber">Phone Number</label>
-                <input type="phonenumber" class="form-control" id="InputPhoneNumber" aria-describedby="phonenumberHelp" placeholder="example: 0123456789" name="phonenum">
+                <input type="phonenumber" 
+                 class="form-control" 
+                id="InputPhoneNumber" 
+                aria-describedby="phonenumberHelp" 
+                placeholder="example: 0123456789" 
+                name="phonenum">
               
                 <label for="InputICNumber">Identity Card Number</label>
-                <input type="icnumber" class="form-control" id="InputicNumber" aria-describedby="icnumberHelp" placeholder="######-##-####" name="icnumber">
+                <input type="icnumber" 
+                 class="form-control" 
+                 id="InputicNumber" 
+                 aria-describedby="icnumberHelp" 
+                 placeholder="######-##-####" 
+                 name="icnumber">
               
                 <label for="InputValidity">Validity License Card</label>
-                <input type="validitylicensecard" class="form-control" id="InputValidity" aria-describedby="validityHelp" placeholder="mm/month/year" name="licensecard">
+                <input type="validitylicensecard" 
+                 class="form-control" 
+                 id="InputValidity" 
+                 aria-describedby="validityHelp" 
+                 placeholder="mm/month/year" 
+                 name="licensecard">
               
                 <label for="InputUsername">Username</label>
-                <input type="username" class="form-control" id="InputUsername" aria-describedby="usernameHelp" name="username">
+                <input type="username" 
+                 class="form-control" 
+                 id="InputUsername" 
+                 aria-describedby="usernameHelp" 
+                 name="username">
               
-              <label for="InputPassword">Password</label>
-              <input type="password" class="form-control" id="InputPassword" name="password" required>
+                <label for="InputPassword">Password</label>
+                <input type="password" 
+                 class="form-control" 
+                 id="InputPassword" 
+                 name="password" required>
               
               
               <button type="submit" class="btn btn-danger col-10 mx-5 mt-3" >SIGN UP</button>
