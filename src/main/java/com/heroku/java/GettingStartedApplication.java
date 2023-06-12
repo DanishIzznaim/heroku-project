@@ -49,6 +49,12 @@ public class GettingStartedApplication {
     //     return "login";
     // }
 
+     @GetMapping("/homecustomer")
+    public String homecustomer() {
+        return "customer/homecustomer";
+    }
+
+
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (
