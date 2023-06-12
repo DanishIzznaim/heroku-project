@@ -1,0 +1,240 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/dz.png">
+    <title>Home</title>
+    <link rel="stylesheet" href="stylesheets/homepage.css">
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">DZ EMPIRE RENTAL</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Feedback</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Logout</a>
+              </li>
+              <li class="nav-item">
+                <img src="../../images/profile.png" style="width: 30px; height: 30px;">
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <img src="images/header2c.jpg" class="img-fluid" alt="header1">
+      <div class="container-fluid" style="background-color:#F39D7D">
+        <h1 class="text-center">DZ EMPIRE CAR RENTAL</h1>
+        <p class="text-center" style="font-family:'Alike', serif; font-size: 20px;">Looking for ways to spend your holiday? Why not go on a Selangor, and rent car at DZ Empire Rental. 
+            Selangor, Malaysia has some indefinable quality that makes it perfect for road trips. 
+            Cruising down the roads with a Selangor, Malaysia car hire and the wind in your hair,  
+            your favorite tunes playing and miles of open road ahead has to be the ideal start to any adventure. 
+            The sheer diversity of landscapes and cultures within Selangor, Malaysia alone makes for myriad
+            tour opportunities,no matter what kind of journey you’re after.</p>
+        <div class="row justify-content-evenly container-fluid">
+            <div class="col-3"style="background-color: #301959; border-radius:10px;">
+                <p class="text-center mt-3" style="color:white; font-size: 20px;">Sedan</p>
+                <img class="container-fluid" style="border-radius: 10px;" src="images/sedanhome.jpg">
+                <p class="text-center container-fluid mt-2" style="font-family: 'Alike', serif; color:#F39D7D;">A sedan car is a four seater vehicle designed for comfortable everyday transportation,
+                  typically used for personal and family purposes</p>
+            </div>
+            <div class="col-3"style="background-color: #301959; border-radius:10px;">
+                <p class="text-center mt-3" style="color:white; font-size: 20px;">Compact</p>
+                <img class="container-fluid" style="border-radius: 10px;"src="images/compacthome.jpg">
+                <p class="text-center container-fluid mt-2" style="font-family: 'Alike', serif; color:#F39D7D;">A compact car is a small, fuel-efficient vehicle, typically with four doors and seating for four 
+                  to five passengers, designed for city driving and everyday personal transportation.</p>
+            </div>
+            <div class="col-3"style="background-color: #301959; border-radius:10px;">
+                <p class="text-center mt-3" style="color:white; font-size: 20px;">MPV</p>
+                <img class="container-fluid"style="border-radius: 10px;" src="images/mpvhome.jpg">
+                <p class="text-center container-fluid mt-2" style="font-family: 'Alike', serif; color:#F39D7D;">A MPV car is a roomy and adaptable vehicle with seven or more seats that is designed for
+                  large groups or families, and often used for both personal and commercial purposes</p>
+            </div>
+        </div>
+        <h3 class="mt-5 d-flex justify-content-center mb-3"><u>Sedan</u></h3>
+        <div class="row justify-content-evenly container-fluid mb-5">
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+        </div>
+        <div class="row justify-content-evenly container-fluid mb-5">
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+        </div>
+        <h3 class="mt-5 d-flex justify-content-center mb-3"><u>Compact</u></h3>
+        <div class="row justify-content-evenly container-fluid mb-5">
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+        </div>
+        <div class="row justify-content-evenly container-fluid mb-5">
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+        </div>
+        <h3 class="mt-5 d-flex justify-content-center mb-3"><u>MPV</u></h3>
+        <div class="row justify-content-evenly container-fluid mb-5" >
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+        </div>
+        <div class="row justify-content-evenly container-fluid p-2">
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+          <div class="col-3"style="background-color: #301959; border-radius:10px;">
+            <img src="sedan/sedan1.jpg" class="container-fluid mt-3 rounded" style="height: 55%;width: 100%;">
+            <div class="row justify-content-between">
+              <p class="col-4 container-fluid text-light mt-2 mb-0"name="car_name">Honda FK8</p>
+              <p class="col-5 container-fluid text-light mt-2 mb-0" name="car_price">Price: RM150/DAY</p>
+            </div>
+            <p class="col-12 container-fluid text-light mb-3"name="condition">Condition: 6/10</p>
+          </div>
+        </div>
+        
+      </div>
+      <footer class="py-3 bg-dark text-white col-12">
+        <div class="container-fluid">
+          <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
+        </div>
+      </footer> 
+
+
+        
+   </body>
