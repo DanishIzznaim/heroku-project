@@ -30,6 +30,11 @@ public class GettingStartedApplication {
     public String homepage() {
         return "homepage";
     }
+    
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -38,7 +43,8 @@ public class GettingStartedApplication {
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
-        try (Connection connection = dataSource.getConnection()) {
+        try (
+            Connection connection = dataSource.getConnection()) {
             final var statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
             statement.executeUpdate("INSERT INTO ticks VALUES (now())");
