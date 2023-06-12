@@ -63,7 +63,7 @@
 
                 <div class="col">
                   <label for="InputValidity">Validity License</label>
-                  <input type="validitylicensecard" class="form-control" id="InputValidity" aria-describedby="validityHelp" placeholder="mm/month/year" name="licensecard" required>
+                  <input type="validitylicensecard" class="form-control" id="InputValidity" aria-describedby="validityHelp" placeholder="yyyy/mm/dd" name="licensecard" required>
                 </div>
               </div>
 
@@ -79,7 +79,7 @@
                 </div>
               </div>
               
-              <button type="submit" class="btn btn-danger col-10 mx-5 mt-4" style="margin-bottom: 10px;" >SIGN UP</button>
+              <a th:href="@{/login}"><button type="submit" class="btn btn-danger col-10 mx-5 mt-4" style="margin-bottom: 10px;" >SIGN UP</button></a>
             </form>
         </div>
     </div>

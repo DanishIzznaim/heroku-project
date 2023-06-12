@@ -36,6 +36,11 @@ public class GettingStartedApplication {
         return "signup";
     }
 
+     @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (Connection connection = dataSource.getConnection()) {
