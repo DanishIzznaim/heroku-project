@@ -40,6 +40,12 @@ public class GettingStartedApplication {
     public String login() {
         return "login";
     }
+    
+    @GetMapping("/homeadmin")
+    public String homeadmin() {
+        return "admin/homeadmin";
+    }
+
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
