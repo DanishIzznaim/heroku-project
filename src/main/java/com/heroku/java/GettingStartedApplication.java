@@ -59,6 +59,11 @@ public class GettingStartedApplication {
         return "admin/homeadmin";
     }
 
+    @GetMapping("/profileadmin")
+    public String profileadmin() {
+        return "admin/profileadmin";
+    }
+
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
