@@ -28,6 +28,14 @@ public class customerController {
     public String login() {
         return "login";
     }
+    @GetMapping("/profilecust")
+    public String profilecust() {
+        return "profilecust";
+    }
+    @GetMapping("/feedback")
+    public String feedback() {
+        return "feedback";
+    }
     //insert cust into database
     @PostMapping("/signup")
     public String addAccount(HttpSession session, @ModelAttribute("signup")Customer customer) {
