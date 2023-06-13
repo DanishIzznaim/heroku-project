@@ -2,8 +2,6 @@ package com.heroku.java;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-<<<<<<<<< Temporary merge branch 1
-import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +19,16 @@ public class customerController {
     public customerController(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-<<<<<<<<< Temporary merge branch 1
-    @GetMapping("/signup")
-    public String signup() {
-        return "signup";
-    }
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+    // @GetMapping("/login")
+    // public String login() {
+    //     return "login";
+    // }
+
+    // @GetMapping("/signup")
+    // public String signup() {
+    //     return "signup";
+    // }
+
     //insert cust into database
     @PostMapping("/signup")
     public String addAccount(HttpSession session, @ModelAttribute("signup")Customer customer) {
@@ -49,11 +48,6 @@ public class customerController {
       statement.executeUpdate();
 
       connection.close();
-<<<<<<<<< Temporary merge branch 1
-      
-=========
-
->>>>>>>>> Temporary merge branch 2
       return "redirect:/login";
 
     } catch (SQLException sqe) {
