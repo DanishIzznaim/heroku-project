@@ -10,6 +10,7 @@ public class Customer {
     public String username;
     public String password;
 
+    
 
     public String getFullname() {
         return this.fullname;

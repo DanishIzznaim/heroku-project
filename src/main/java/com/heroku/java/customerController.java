@@ -2,6 +2,7 @@ package com.heroku.java;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+<<<<<<<<< Temporary merge branch 1
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ public class customerController {
     public customerController(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+<<<<<<<<< Temporary merge branch 1
     @GetMapping("/signup")
     public String signup() {
         return "signup";
@@ -27,14 +29,6 @@ public class customerController {
     @GetMapping("/login")
     public String login() {
         return "login";
-    }
-    @GetMapping("/profilecust")
-    public String profilecust() {
-        return "profilecust";
-    }
-    @GetMapping("/feedback")
-    public String feedback() {
-        return "feedback";
     }
     //insert cust into database
     @PostMapping("/signup")
@@ -55,7 +49,11 @@ public class customerController {
       statement.executeUpdate();
 
       connection.close();
+<<<<<<<<< Temporary merge branch 1
       
+=========
+
+>>>>>>>>> Temporary merge branch 2
       return "redirect:/login";
 
     } catch (SQLException sqe) {
@@ -72,5 +70,37 @@ public class customerController {
     }
 
   }
-}
+  @PostMapping("/login") 
+    public String HomePage(HttpSession session, @ModelAttribute("login") Customer customer) { 
+        try (
+            Connection connection = dataSource.getConnection()) { 
+            final var statement = connection.createStatement(); 
+            String sql ="SELECT username, password FROM customer"; 
+            final var resultSet = statement.executeQuery(sql); 
+ 
+            String returnPage = ""; 
+ 
+            while (resultSet.next()) { 
+                String username = resultSet.getString("username"); 
+                String password = resultSet.getString("password");  
+ 
+                if (username.equals(customer.getUsername()) && password.equals(customer.getPassword())) { 
+                    session.setAttribute("username",customer.getUsername());
+                    returnPage = "redirect:/homecustomer"; 
+                    break; 
+                } else { 
+                    returnPage = "/login"; 
+                } 
+            } 
+        
+            return returnPage; 
+ 
+        } catch (Throwable t) { 
+            System.out.println("message : " + t.getMessage()); 
+            return "/login"; 
+        } 
+ 
+    }
 
+
+}
