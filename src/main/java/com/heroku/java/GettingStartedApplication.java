@@ -78,7 +78,7 @@ public class GettingStartedApplication {
 
     @GetMapping("/profilecust")
     public String profilecust() {
-        return "customer/profilecust";
+        return "profilecust";
     }
 
     @GetMapping("/database")
