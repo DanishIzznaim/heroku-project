@@ -53,6 +53,15 @@ public class GettingStartedApplication {
     public String homecustomer() {
         return "customer/homecustomer";
     }
+    //  @GetMapping("/login")
+    // public String login() {
+    //     return "login";
+    // }
+    
+    @GetMapping("/homeadmin")
+    public String homeadmin() {
+        return "admin/homeadmin";
+    }
 
 
     @GetMapping("/database")
