@@ -2,7 +2,6 @@ package com.heroku.java;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +19,16 @@ public class customerController {
     public customerController(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    @GetMapping("/signup")
-    public String signup() {
-        return "signup";
-    }
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+    // @GetMapping("/login")
+    // public String login() {
+    //     return "login";
+    // }
+
+    // @GetMapping("/signup")
+    // public String signup() {
+    //     return "signup";
+    // }
+
     //insert cust into database
     @PostMapping("/signup")
     public String addAccount(HttpSession session, @ModelAttribute("signup")Customer customer) {
@@ -47,7 +48,6 @@ public class customerController {
       statement.executeUpdate();
 
       connection.close();
-      
       return "redirect:/login";
 
     } catch (SQLException sqe) {
@@ -64,5 +64,37 @@ public class customerController {
     }
 
   }
-}
+  @PostMapping("/login") 
+    public String HomePage(HttpSession session, @ModelAttribute("login") Customer customer) { 
+        try (
+            Connection connection = dataSource.getConnection()) { 
+            final var statement = connection.createStatement(); 
+            String sql ="SELECT username, password FROM customer"; 
+            final var resultSet = statement.executeQuery(sql); 
+ 
+            String returnPage = ""; 
+ 
+            while (resultSet.next()) { 
+                String username = resultSet.getString("username"); 
+                String password = resultSet.getString("password");  
+ 
+                if (username.equals(customer.getUsername()) && password.equals(customer.getPassword())) { 
+                    session.setAttribute("username",customer.getUsername());
+                    returnPage = "redirect:/homecustomer"; 
+                    break; 
+                } else { 
+                    returnPage = "/login"; 
+                } 
+            } 
+        
+            return returnPage; 
+ 
+        } catch (Throwable t) { 
+            System.out.println("message : " + t.getMessage()); 
+            return "/login"; 
+        } 
+ 
+    }
 
+
+}

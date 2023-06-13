@@ -34,8 +34,22 @@
               </li>
             </ul>
           </div>
+          
+           <!-- <p><i>Login to your Account</i></p>
+            <form action="" method="" class="form">
+              <input type="radio" name="user" id="admin" value="admin">
+              <label>Admin</label>
+              <input type="radio" name="user" id="customer" value="customer">
+              <label>Customer</label><br><br>
+              <label>Username</label><br>
+              <input type="text" name="username" placeholder="Username"><br><br>
+              <label>Password</label><br>
+              <input type="text" name="password" placeholder="Enter Your Password"><br><br>
+              <button type="submit" class="signup-button"><a href="home-login.html">Log In</a></button>
+            </form><br><br>
+            <p><a href="signup.html" class="signup"><u>Don't Have any Account?</u></a></p> -->
           </div>
-      </nav>
+      </nav> 
 
     <div class="container" style="height: 100%;">
       <div class="card col-8 offset-2 mb-3 mt-5 align-items-center">
@@ -54,24 +68,24 @@
                  th:object="(${login})">
 
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="user" id="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="user" id="flexRadioDefault1" value="customer">
                     <label class="form-check-label" for="flexRadioDefault1">Admin</label>
                     </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="user" id="flexRadioDefault2" checked>
+                    <input class="form-check-input" type="radio" name="user" id="flexRadioDefault2" value="admin" checked>
                     <label class="form-check-label" for="flexRadioDefault2">Customer</label>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Username:</label>
-                    <input type="email" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp"required>
+                    <label for="exampleInputUsername" class="form-label">Username:</label>
+                    <input type="text" class="form-control" name="username" id="username" aria-describedby="usernameHelp"required>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password:</label>
+                    <label for="exampleInputPassword" class="form-label">Password:</label>
                     <input type="password" class="form-control" name="password" required>
                   </div>
                   <button type="submit" class="btn btn-danger col-10 me-4 ms-4 mt-3">Login</button>
               </form>
-              <a href="#" class="me-5 ms-5 mt-5 text-decoration-none">Don't have any account?Sign Up!</a>
+              <a th:href="@{/signup}" class="me-5 ms-5 mt-5 text-decoration-none">Don't have any account?Sign Up!</a>
               </div>
             </div>
             </div>
