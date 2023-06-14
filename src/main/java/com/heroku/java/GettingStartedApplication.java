@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import jakarta.servlet.http.HttpSession;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -39,30 +41,45 @@ public class GettingStartedApplication {
         return "book";
     }
     
-    // @GetMapping("/signup")
-    // public String signup() {
-    //     return "signup";
-    // }
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
 
     // @GetMapping("/login")
     // public String login() {
     //     return "login";
     // }
 
+    @GetMapping("/login") 
+    public String login(HttpSession session) { 
+        if(session.getAttribute("username") != null){ 
+            return "customer/homecustomer"; 
+        }else{ 
+            return "login"; 
+        } 
+    }
+
      @GetMapping("/homecustomer")
     public String homecustomer() {
         return "customer/homecustomer";
     }
-    //  @GetMapping("/login")
-    // public String login() {
-    //     return "login";
-    // }
+
     
     @GetMapping("/homeadmin")
     public String homeadmin() {
         return "admin/homeadmin";
     }
 
+    @GetMapping("/profilecust")
+    public String profilecust() {
+        return "profilecust";
+    }
+
+     @GetMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
