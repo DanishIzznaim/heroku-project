@@ -76,6 +76,11 @@ public class GettingStartedApplication {
         return "admin/profileadmin";
     }
 
+    @GetMapping("/custdetail")
+    public String custdetail() {
+        return "admin/custdetail";
+    }
+
     @GetMapping("/profilecust")
     public String profilecust() {
         return "/profilecust";
