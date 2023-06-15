@@ -46,10 +46,10 @@ public class GettingStartedApplication {
         return "signup";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+    // @GetMapping("/login")
+    // public String login() {
+    //     return "login";
+    // }
 
     @GetMapping("/login") 
     public String login(HttpSession session) { 
@@ -74,6 +74,11 @@ public class GettingStartedApplication {
     @GetMapping("/profilecust")
     public String profilecust() {
         return "profilecust";
+    }
+
+     @GetMapping("/feedback")
+    public String feedback() {
+        return "feedback";
     }
 
     @GetMapping("/database")
