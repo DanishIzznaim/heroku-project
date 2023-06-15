@@ -89,7 +89,7 @@ public class customerController {
                     returnPage = "/login"; 
                 } 
             } 
-        
+            connection.close();
             return returnPage; 
  
         } catch (Throwable t) { 
@@ -136,5 +136,51 @@ public class customerController {
         // Customer not found or username is null, handle accordingly (e.g., redirect to an error page)
         return "error";
         }
+
+        //Update Profile Customer
+        @PostMapping("/updateProf") 
+        public String updateProfile(HttpSession session, @ModelAttribute("profilecust") Customer customer, Model model) { 
+            String username = customer.getUsername();
+            String password = customer.getPassword();
+            String fullname = customer.getFullname();
+            String phonenum = customer.getPhonenum();
+            String icnumber = customer.getIcnumber();
+            String address =  customer.getAddress();
+            Date licensecard = customer.getLicensecard();
+            try (
+            Connection connection = dataSource.getConnection()) { 
+            String sql = "UPDATE customer SET fullname=? ,address=?, phonenum=?, icnumber=? , licensecard=?, username=?,password=? WHERE username=?";
+            final var statement = connection.prepareStatement(sql);
+            // String fullname = customer.getFullname();
+            // String address = customer.getAddress();
+            // String phonenum = customer.getPhonenum();
+            // String icnumber = customer.getIcnumber();
+            // Date licensecard = customer.getLicensecard();
+            // String password = customer.getPassword();
+            
+
+            statement.setString(1, fullname);
+            statement.setString(2, address);
+            statement.setString(3, phonenum);
+            statement.setString(4, icnumber);
+            statement.setDate(5, licensecard);
+            statement.setString(6, username);
+            statement.setString(7, password);
+            statement.setString(8, username);
+
+            statement.executeUpdate();
+                
+            String returnPage = "profilecust"; 
+ 
+        
+            return returnPage; 
+ 
+        } catch (Throwable t) { 
+            System.out.println("message : " + t.getMessage()); 
+            System.out.println("error");
+            return "/login"; 
+        } 
+ 
+    }
 
 }
