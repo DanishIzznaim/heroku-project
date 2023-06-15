@@ -98,13 +98,10 @@ public class customerController {
         } 
  
     }
-    
-
         @GetMapping("/profilecust")
         public String viewProfile(HttpSession session, Customer customer, Model model) {
         String username = (String) session.getAttribute("username");
-    
-    
+
         if (username != null) { 
         try (Connection connection = dataSource.getConnection()) {
             final var statement = connection.prepareStatement("SELECT fullname, address, phonenum, icnumber, licensecard, username, password FROM customer WHERE username = ? ");
@@ -124,16 +121,12 @@ public class customerController {
                 model.addAttribute("profilecust", profilecust);
                 System.out.println("Session profileCust : " + model.getAttribute("profilecust"));
                 // Return the view name for displaying customer details
-            }
-                
+            }   
                 return "profilecust";
-            
         } catch (SQLException e) {
-            // Handle the exception (e.g., log the error, display an error page)
             e.printStackTrace();
         }
         }
-    
         // Customer not found or username is null, handle accordingly (e.g., redirect to an error page)
         return "error";
         }
@@ -147,7 +140,7 @@ public class customerController {
             String phonenum = customer.getPhonenum();
             String icnumber = customer.getIcnumber();
             String address =  customer.getAddress();
-            Date licensecard = customer.getLicensecard();
+            Date licensecard = customer.getLicensecard ();
             try (
             Connection connection = dataSource.getConnection()) { 
             String sql = "UPDATE customer SET fullname=? ,address=?, phonenum=?, icnumber=? , licensecard=?, username=?,password=? WHERE username=?";
@@ -158,7 +151,6 @@ public class customerController {
             // String icnumber = customer.getIcnumber();
             // Date licensecard = customer.getLicensecard();
             // String password = customer.getPassword();
-            
 
             statement.setString(1, fullname);
             statement.setString(2, address);
@@ -172,8 +164,6 @@ public class customerController {
             statement.executeUpdate();
                 
             String returnPage = "profilecust"; 
- 
-        
             return returnPage; 
  
         } catch (Throwable t) { 
@@ -183,5 +173,40 @@ public class customerController {
         } 
  
     }
+    //delete controller
+    @PostMapping("/deleteProf")
+    public String deleteProfile(HttpSession session, Model model) {
+    String username = (String) session.getAttribute("username");
+
+    if (username != null) {
+        try (Connection connection = dataSource.getConnection()) {
+            final var statement = connection.prepareStatement("DELETE FROM customer WHERE username=?");
+            statement.setString(1, username);
+
+            // Execute the delete statement
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Profile deleted successfully
+                // You can redirect to a success page or perform any other desired actions
+                return "login";
+            } else {
+                // Profile not found or deletion failed
+                // You can redirect to an error page or perform any other desired actions
+                // return "deleteError";
+                System.out.println("delete fail");
+            }
+        } catch (SQLException e) {
+            // Handle any potential exceptions (e.g., log the error, display an error page)
+            e.printStackTrace();
+            return "deleteError";
+        }
+    }
+
+    // Username is null, handle accordingly (e.g., redirect to an error page)
+    return "deleteError";
+}
+
+
 
 }
