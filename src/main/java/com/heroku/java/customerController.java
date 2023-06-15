@@ -98,6 +98,7 @@ public class customerController {
         } 
  
     }
+    
 
         @GetMapping("/profilecust")
         public String viewProfile(HttpSession session, Customer customer, Model model) {
