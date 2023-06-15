@@ -189,7 +189,7 @@ public class customerController {
             if (rowsAffected > 0) {
                 // Profile deleted successfully
                 // You can redirect to a success page or perform any other desired actions
-                return "login";
+                return "redirect:/login";
             } else {
                 // Profile not found or deletion failed
                 // You can redirect to an error page or perform any other desired actions
