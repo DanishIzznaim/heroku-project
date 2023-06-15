@@ -60,9 +60,14 @@ public class GettingStartedApplication {
         } 
     }
 
-     @GetMapping("/homecustomer")
-    public String homecustomer() {
-        return "customer/homecustomer";
+    @GetMapping("/homecustomer")
+    public String homecustomer(HttpSession session) {
+        if(session.getAttribute("username") != null){ 
+            return "customer/homecustomer"; 
+        }else{ 
+            System.out.println("Session expired or invalid");
+            return "login"; 
+        } 
     }
 
     
@@ -70,11 +75,17 @@ public class GettingStartedApplication {
     public String homeadmin() {
         return "admin/homeadmin";
     }
-
-    @GetMapping("/profilecust")
-    public String profilecust() {
-        return "profilecust";
-    }
+    
+    // @GetMapping("/profilecust")
+    // public String profilecust(HttpSession session) {
+    //     if(session.getAttribute("username") != null){ 
+    //         System.out.println("Session username : " + session.getAttribute("username"));
+    //         return "profilecust";
+    //     }else{ 
+    //         System.out.println("Session expired or invalid");
+    //         return "login"; 
+    //     } 
+    // }
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
