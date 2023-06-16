@@ -11,6 +11,18 @@ public class Customer {
     public String password;
 
     
+    public Customer(String fullname, String address, String phonenum, String icnumber, Date licensecard, String username, String password) {
+        this.fullname = fullname;
+        this.address = address;
+        this.phonenum = phonenum;
+        this.icnumber = icnumber;
+        this.licensecard = licensecard;
+        this.username = username;
+        this.password = password;
+    }
+    // public Customer(String fullname2, String address2, String phonenum2, String icnumber2, String licensecard2,
+    //         String username2, String password2) {
+    // }
 
     public String getFullname() {
         return this.fullname;
@@ -67,5 +79,8 @@ public class Customer {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    // public void addAttribute(String string, Customer profile) {
+    // }
 
 }
