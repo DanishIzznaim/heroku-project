@@ -75,6 +75,16 @@ public class GettingStartedApplication {
     public String homeadmin() {
         return "admin/homeadmin";
     }
+
+    @GetMapping("/profileadmin")
+    public String profileadmin() {
+        return "admin/profileadmin";
+    }
+
+    // @GetMapping("/profilecust")
+    // public String profilecust() {
+    //     return "profilecust";
+    // }
     
     // @GetMapping("/profilecust")
     // public String profilecust(HttpSession session) {
