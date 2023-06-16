@@ -81,6 +81,16 @@ public class GettingStartedApplication {
         return "admin/profileadmin";
     }
 
+    @GetMapping("/account")
+    public String account() {
+        return "admin/account";
+    }
+
+    @GetMapping("/custdetail")
+    public String custdetail() {
+        return "admin/custdetail";
+    }
+
     // @GetMapping("/profilecust")
     // public String profilecust() {
     //     return "profilecust";
