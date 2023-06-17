@@ -129,11 +129,31 @@ public class GettingStartedApplication {
     public String homeadmin() {
         return "admin/homeadmin";
     }
+
+    @GetMapping("/profileadmin")
+    public String profileadmin() {
+        return "admin/profileadmin";
+    }
+
+    // @GetMapping("/profilecust")
+    // public String profilecust() {
+    //     return "profilecust";
+    // }
     
     @GetMapping("/logout")
     public String logout(HttpSession session) {
        session.invalidate();
       return("redirect:/login");
+    }
+
+     @GetMapping("/feedback")
+    public String feedback() {
+        return "feedback";
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "about";
     }
 
     @GetMapping("/database")
