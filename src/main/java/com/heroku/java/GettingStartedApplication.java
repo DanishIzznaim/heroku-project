@@ -102,6 +102,11 @@ public class GettingStartedApplication {
         return "feedback";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (
