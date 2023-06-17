@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -46,18 +49,69 @@ public class GettingStartedApplication {
         return "signup";
     }
 
-    // @GetMapping("/login")
-    // public String login() {
-    //     return "login";
-    // }
 
     @GetMapping("/login") 
-    public String login(HttpSession session) { 
-        if(session.getAttribute("username") != null){ 
+    public String login(HttpSession session, Customer customer) { 
+        
+        if(session.getAttribute("username") != null ){ 
+            System.out.println(session.getAttribute("username"));
             return "customer/homecustomer"; 
         }else{ 
             return "login"; 
         } 
+    }
+    @PostMapping("/login") 
+    public String HomePage(HttpSession session, @ModelAttribute("login") Customer customer, User user, Model model, Employee emp) { 
+
+        try {
+            Connection connection = dataSource.getConnection();
+            final var statement = connection.createStatement(); 
+            String sql ="SELECT userid, username, password FROM users"; 
+            final var resultSet = statement.executeQuery(sql); 
+            
+
+            String returnPage = ""; 
+ 
+            while (resultSet.next()) { 
+                int userid = resultSet.getInt("userid");
+                String username = resultSet.getString("username"); 
+                String password = resultSet.getString("password");
+                String usertype = user.getUsertype();  
+                
+                //if they choose custoke
+                if (usertype.equals("customer")){
+                    if (username.equals(customer.getUsername()) && password.equals(customer.getPassword())) { 
+                    session.setAttribute("username",customer.getUsername());
+                    session.setAttribute("userid",userid);
+                    System.out.println("userid: "+userid);
+                    returnPage = "redirect:/homecustomer"; 
+                    break; 
+                } else { 
+                    returnPage = "/login"; 
+                } 
+
+                //if they choose employee
+                }
+                else if (usertype.equals("employee")){
+                    if (username.equals(emp.getUsername()) && password.equals(emp.getPassword())) { 
+                    session.setAttribute("username",customer.getUsername());
+                    returnPage = "redirect:/homeadmin"; 
+                    break; 
+                } else { 
+                    returnPage = "/login"; 
+                } 
+                }
+                else{
+                    System.out.println("Username does not match password");
+                }
+            }
+            return returnPage; 
+ 
+        } catch (Throwable t) { 
+            System.out.println("message : " + t.getMessage()); 
+            return "/login"; 
+        } 
+ 
     }
 
     @GetMapping("/homecustomer")
@@ -76,16 +130,11 @@ public class GettingStartedApplication {
         return "admin/homeadmin";
     }
     
-    // @GetMapping("/profilecust")
-    // public String profilecust(HttpSession session) {
-    //     if(session.getAttribute("username") != null){ 
-    //         System.out.println("Session username : " + session.getAttribute("username"));
-    //         return "profilecust";
-    //     }else{ 
-    //         System.out.println("Session expired or invalid");
-    //         return "login"; 
-    //     } 
-    // }
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+       session.invalidate();
+      return("redirect:/login");
+    }
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {

@@ -3,16 +3,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
+// import com.heroku.java.MODEL.User;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import jakarta.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.sql.*;
 // import java.text.SimpleDateFormat;
+// import java.util.ArrayList;
 
 @Controller
 public class customerController {
@@ -26,7 +27,6 @@ public class customerController {
     // public String login() {
     //     return "login";
     // }
-
     // @GetMapping("/signup")
     // public String signup() {
     //     return "signup";
@@ -34,21 +34,35 @@ public class customerController {
 
     //insert cust into database
     @PostMapping("/signup")
-    public String addAccount(HttpSession session, @ModelAttribute("signup")Customer customer) {
+    public String addAccount(HttpSession session, @ModelAttribute("signup")Customer customer, User user) {
     try {
       Connection connection = dataSource.getConnection();
-      String sql = "INSERT INTO customer (fullname, address, phonenum,icnumber,licensecard,username,password) VALUES (?,?,?,?,?,?,?)";
-      final var statement = connection.prepareStatement(sql);
+      String sql1= "INSERT INTO users (fullname, username, password) VALUES (?,?,?)";
+      final var statement1 = connection.prepareStatement(sql1);
+      statement1.setString(1, user.getName());
+      statement1.setString(2, user.getUsername());
+      statement1.setString(3, user.getPassword());
+      statement1.executeUpdate();
 
-      statement.setString(1, customer.getFullname());
-      statement.setString(2, customer.getAddress());
-      statement.setString(3, customer.getPhonenum());
-      statement.setString(4, customer.getIcnumber());
-      statement.setDate(5, customer.getLicensecard());
-      statement.setString(6, customer.getUsername());
-      statement.setString(7, customer.getPassword());
+    //   Get id from database for sql 2 from sql 1
+      String sql = "SELECT * FROM users where username=?";
+      final var stmt = connection.prepareStatement(sql);
+      stmt.setString(1, user.getUsername());
+      final var resultSet = stmt.executeQuery();
+      int id_db = 0;
+      while(resultSet.next()){
+        id_db = resultSet.getInt("userid");
+      }
 
-      statement.executeUpdate();
+      System.out.println("id database : " + id_db);
+      
+      String sql2= "INSERT INTO customer (userid,licensedate,icnumber,phonenum) VALUES (?, ?,?,?)";
+      final var statement2 = connection.prepareStatement(sql2);
+      statement2.setInt(1, id_db);
+      statement2.setDate(2, customer.getLicensedate());
+      statement2.setString(3, customer.getIcnumber());
+      statement2.setString(4, customer.getPhonenum());
+      statement2.executeUpdate();
 
       connection.close();
       return "redirect:/login";
@@ -67,101 +81,91 @@ public class customerController {
     }
 
   }
-  @PostMapping("/login") 
-    public String HomePage(HttpSession session, @ModelAttribute("login") Customer customer, Model model) { 
-        try (
-            Connection connection = dataSource.getConnection()) { 
-            final var statement = connection.createStatement(); 
-            String sql ="SELECT username, password FROM customer"; 
-            final var resultSet = statement.executeQuery(sql); 
- 
-            String returnPage = ""; 
- 
-            while (resultSet.next()) { 
-                String username = resultSet.getString("username"); 
-                String password = resultSet.getString("password");  
- 
-                if (username.equals(customer.getUsername()) && password.equals(customer.getPassword())) { 
-                    session.setAttribute("username",customer.getUsername());
-                    returnPage = "redirect:/homecustomer"; 
-                    break; 
-                } else { 
-                    returnPage = "/login"; 
-                } 
-            } 
-            connection.close();
-            return returnPage; 
- 
-        } catch (Throwable t) { 
-            System.out.println("message : " + t.getMessage()); 
-            return "/login"; 
-        } 
- 
-    }
+  
+        //view Account
         @GetMapping("/profilecust")
         public String viewProfile(HttpSession session, Customer customer, Model model) {
         String username = (String) session.getAttribute("username");
-
+        int userid = (int) session.getAttribute("userid");
         if (username != null) { 
-        try (Connection connection = dataSource.getConnection()) {
-            final var statement = connection.prepareStatement("SELECT fullname, address, phonenum, icnumber, licensecard, username, password FROM customer WHERE username = ? ");
-            statement.setString(1, username);
+        try {
+            Connection connection = dataSource.getConnection();
+            final var statement = connection.prepareStatement(
+                "SELECT users.fullname, users.username, users.password, customer.licensedate, customer.icnumber, customer.phonenum FROM users JOIN customer ON (users.userid = customer.userid) WHERE users.userid = ? ");
+            statement.setInt(1, userid);
             final var resultSet = statement.executeQuery();
 
+            // ArrayList <Customer> profilecust = new ArrayList<>();
             while(resultSet.next()){
-                String fullname = resultSet.getString("fullname");
-                String address = resultSet.getString("address");
-                String phonenum = resultSet.getString("phonenum");
-                String icnumber = resultSet.getString("icnumber");
-                Date licensecard = resultSet.getDate("licensecard");
+                String fname = resultSet.getString("fullname");
+                String usernamecust = resultSet.getString("username");
                 String password = resultSet.getString("password");
+                Date licensedate = resultSet.getDate("licensedate");
+                String icnumber = resultSet.getString("icnumber");
+                String phonenum = resultSet.getString("phonenum");
+                // System.out.println("userid from db: "+userid); -- debug
+                System.out.println("fullname from db: " +fname);
 
-                System.out.println("fullname from db: " + fullname);
-                Customer profilecust = new Customer(fullname, address, phonenum, icnumber, licensecard, username, password);
+                Customer profilecust = new Customer(fname, usernamecust, password, licensedate, icnumber, phonenum);
+
                 model.addAttribute("profilecust", profilecust);
+                System.out.println("fullname "+ profilecust.fname);
+                // Return the view name for displaying customer details --debug
                 System.out.println("Session profileCust : " + model.getAttribute("profilecust"));
-                // Return the view name for displaying customer details
-            }   
+                }   
                 return "profilecust";
-        } catch (SQLException e) {
+            } catch (SQLException e) {
             e.printStackTrace();
-        }
-        }
-        // Customer not found or username is null, handle accordingly (e.g., redirect to an error page)
-        return "error";
+            }
+            }else{
+                return "login";
+            }
+            return "login";
         }
 
         //Update Profile Customer
         @PostMapping("/updateProf") 
-        public String updateProfile(HttpSession session, @ModelAttribute("profilecust") Customer customer, Model model) { 
-            String username = customer.getUsername();
-            String password = customer.getPassword();
-            String fullname = customer.getFullname();
+        public String updateProfile(HttpSession session, @ModelAttribute("profilecust") Customer customer, Model model, User user) { 
+
+            String fullname = customer.getName();
             String phonenum = customer.getPhonenum();
             String icnumber = customer.getIcnumber();
-            String address =  customer.getAddress();
-            Date licensecard = customer.getLicensecard ();
-            try (
-            Connection connection = dataSource.getConnection()) { 
-            String sql = "UPDATE customer SET fullname=? ,address=?, phonenum=?, icnumber=? , licensecard=?, username=?,password=? WHERE username=?";
-            final var statement = connection.prepareStatement(sql);
-            // String fullname = customer.getFullname();
-            // String address = customer.getAddress();
-            // String phonenum = customer.getPhonenum();
-            // String icnumber = customer.getIcnumber();
-            // Date licensecard = customer.getLicensecard();
-            // String password = customer.getPassword();
+            Date licensedate = customer.getLicensedate();
+            String username = customer.getUsername();
+            String password = customer.getPassword();
+        
+            try { 
+            Connection connection = dataSource.getConnection();
+            String sql1 = "UPDATE users SET fullname=? ,username=?, password=? WHERE username=?";
+            final var statement = connection.prepareStatement(sql1);
 
             statement.setString(1, fullname);
-            statement.setString(2, address);
-            statement.setString(3, phonenum);
-            statement.setString(4, icnumber);
-            statement.setDate(5, licensecard);
-            statement.setString(6, username);
-            statement.setString(7, password);
-            statement.setString(8, username);
-
+            statement.setString(2, username);
+            statement.setString(3, password);
+            statement.setString(4, username);
             statement.executeUpdate();
+            System.out.println("debug= "+fullname+" "+username+" "+password);
+
+            String sql = "SELECT * FROM users where username=?";
+            final var stmt = connection.prepareStatement(sql);
+            stmt.setString(1, user.getUsername());
+            final var resultSet = stmt.executeQuery();
+            int id_db = 0;
+            while(resultSet.next()){
+            id_db = resultSet.getInt("userid");
+            }
+            System.out.println("id database : " + id_db);
+      
+            String sql2= "UPDATE customer SET licensedate=?, icnumber=?, phonenum=? WHERE userid=?";
+            final var statement2 = connection.prepareStatement(sql2);
+            // statement2.setInt(1, id_db);
+            statement2.setDate(1, licensedate);
+            statement2.setString(2, icnumber);
+            statement2.setString(3, phonenum);
+            statement2.setInt(4,id_db);
+            statement2.executeUpdate();
+            System.out.println("debug= "+licensedate+" "+icnumber+" "+phonenum);
+            statement2.executeUpdate();
                 
             String returnPage = "profilecust"; 
             return returnPage; 
@@ -169,44 +173,50 @@ public class customerController {
         } catch (Throwable t) { 
             System.out.println("message : " + t.getMessage()); 
             System.out.println("error");
-            return "/login"; 
+            return "redirect:/login"; 
         } 
  
     }
     //delete controller
-    @PostMapping("/deleteProf")
-    public String deleteProfile(HttpSession session, Model model) {
-    String username = (String) session.getAttribute("username");
+        @GetMapping("/deleteCust")
+        public String deleteProfileCust(HttpSession session, Customer customer,Model model) {
+            String username = (String) session.getAttribute("username");
+            int userid = (int) session.getAttribute("userid");
 
-    if (username != null) {
-        try (Connection connection = dataSource.getConnection()) {
-            final var statement = connection.prepareStatement("DELETE FROM customer WHERE username=?");
-            statement.setString(1, username);
+            if (username != null) {
+                try (Connection connection = dataSource.getConnection()) {
+                    // Delete customer record
+                    final var deleteCustomerStatement = connection.prepareStatement("DELETE FROM customer WHERE userid=?");
+                    deleteCustomerStatement.setInt(1, userid);
+                    int customerRowsAffected = deleteCustomerStatement.executeUpdate();
 
-            // Execute the delete statement
-            int rowsAffected = statement.executeUpdate();
+                    // Delete user record
+                    final var deleteUserStatement = connection.prepareStatement("DELETE FROM users WHERE userid=?");
+                    deleteUserStatement.setInt(1, userid);
+                    int userRowsAffected = deleteUserStatement.executeUpdate();
 
-            if (rowsAffected > 0) {
-                // Profile deleted successfully
-                // You can redirect to a success page or perform any other desired actions
-                return "redirect:/login";
-            } else {
-                // Profile not found or deletion failed
-                // You can redirect to an error page or perform any other desired actions
-                // return "deleteError";
-                System.out.println("delete fail");
+                    if (customerRowsAffected > 0 && userRowsAffected > 0) {
+                        // Deletion successful
+                        // You can redirect to a success page or perform any other desired actions
+                        session.invalidate();
+                        return "redirect:/login";
+                    } else {
+                        // Deletion failed
+                        // You can redirect to an error page or perform any other desired actions
+                        System.out.println("Delete Failed");
+                    }
+                } catch (SQLException e) {
+                    // Handle any potential exceptions (e.g., log the error, display an error page)
+                    e.printStackTrace();
+
+                    // Deletion failed
+                    // You can redirect to an error page or perform any other desired actions
+                    System.out.println("Error");
+                }
             }
-        } catch (SQLException e) {
-            // Handle any potential exceptions (e.g., log the error, display an error page)
-            e.printStackTrace();
+            // Username is null or deletion failed, handle accordingly (e.g., redirect to an error page)
             return "deleteError";
         }
-    }
 
-    // Username is null, handle accordingly (e.g., redirect to an error page)
-    return "deleteError";
-}
-
-
-
+    
 }
