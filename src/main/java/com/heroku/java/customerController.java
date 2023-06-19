@@ -15,7 +15,7 @@ import java.sql.*;
 // import java.text.SimpleDateFormat;
 
 @Controller
-public class customerController {
+public class customerController {   
     private final DataSource dataSource;
 
     @Autowired
