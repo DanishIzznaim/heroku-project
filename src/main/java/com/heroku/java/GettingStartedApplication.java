@@ -105,6 +105,11 @@ public class GettingStartedApplication {
     @GetMapping("/about")
     public String about() {
         return "about";
+    }    
+
+    @GetMapping("/addcar")
+    public String addcar() {
+        return "admin/addcar";
     }
 
     @GetMapping("/database")
