@@ -136,9 +136,20 @@ public class GettingStartedApplication {
         return "admin/profileadmin";
     }
 
+<<<<<<< HEAD
     @GetMapping("/viewStaff")
     public String viewStaff() {
         return "admin/viewstaff";
+=======
+    @GetMapping("/account")
+    public String account() {
+        return "admin/account";
+    }
+
+    @GetMapping("/custdetail")
+    public String custdetail() {
+        return "admin/custdetail";
+>>>>>>> 0ec9121d2f9f458d42f2c49f74076a1347502669
     }
 
     // @GetMapping("/profilecust")

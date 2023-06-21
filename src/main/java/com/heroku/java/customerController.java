@@ -16,7 +16,7 @@ import java.sql.*;
 // import java.util.ArrayList;
 
 @Controller
-public class customerController {
+public class customerController {   
     private final DataSource dataSource;
 
     @Autowired
