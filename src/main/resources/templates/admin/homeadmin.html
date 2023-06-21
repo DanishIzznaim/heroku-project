@@ -10,7 +10,7 @@
     <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">DZ EMPIRE RENTAL</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,9 +22,6 @@
                 <a class="nav-link" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="#">Feedback</a>
               </li>
               <li class="nav-item">
@@ -34,7 +31,7 @@
                 <a class="nav-link" href="#">Logout</a>
               </li>
               <li class="nav-item">
-                <img src="../../images/profile.png" style="width: 30px; height: 30px;">
+                <img src="images/profileadmin.png" style="width: 30px; height: 30px;">
               </li>
             </ul>
           </div>
@@ -42,20 +39,12 @@
       </nav>
 
       <!-- Start Side Bar--> 
-<<<<<<< HEAD
-    
-
-    <!--Page Content -->
-    <body style="background-color: lightgrey;">
-      <div id="sidebar" class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 position-fixed" style="height: 100%;"> 
-=======
     <div id="sidebar" 
-    class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 mt-7 position-fixed" 
+    class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 position-fixed" 
     style="height: 100%;"> 
->>>>>>> 0ec9121d2f9f458d42f2c49f74076a1347502669
       <ul class="nav nav-underline flex-column mb-auto" style="padding-left: 40px;"> 
           <h5 style="margin-top: 50px;">Menu</h5> 
-          <li><a th:href="@{/viewStaff}" 
+          <li><a th:href="@{/addstaff}" 
             class="nav-link text-black d-flex justify-content-start" 
             aria-current="page">
             <span class="material-symbols-outlined" 
@@ -120,11 +109,11 @@
     <!--Page Content -->
     <body background="images/backgroundadmin.avif">
       <div class="container" 
-      style="padding-left: 450px; margin-top: 40px;">
-        <h1>WELCOME ADMIN</h1>
+      style="padding-left: 450px;">
+        <h1 style="margin-top: 60px;">WELCOME ADMIN</h1>
         <div class="container" style="height: 100%;">
           
-              <div class="col-3" style="margin-right: 150px;">
+              <div class="col-4" style="margin-right: 150px;">
                 <img src="images/profileadmin.png" 
                 class="img-fluid rounded mt-150 ms-1; justify-content-center" 
                 style="width:100px; height: 100px; margin-left: 130px;">
@@ -133,7 +122,7 @@
                 <div class="card-body">
  
                 </div>
-               </div>
+              </div>
 
             <div class="container-fluid col-md-8 offset-1 ms-2 justify-content-center rounded p-4 mb-1" >
               <form>
@@ -143,75 +132,94 @@
                       th:object="${homeadmin}" 
                       class="form" -->
                       <div class="mb-3">
-                        <label for="adminid" class="form-label">Admin ID:</label>
+                        <label for="username" class="form-label">Username:</label>
                         <input type="text" 
                         class="form-control" 
-                        name="adminid"
-                        id="adminid">
+                        name="username"
+                        id="username">
                       </div>
 
                       <div class="mb-3">
-                        <label for="username" class="form-label">Name:</label>
+                        <label for="role" class="form-label">Roles:</label>
                         <input type="text" 
                         class="form-control" 
-                        name="name"
-                        id="name">
+                        name="role"
+                        id="role">
                       </div>
               </form>
-
-              <button type="submit" 
-              class="btn btn-primary justify-content-center"
-              style="margin-left: 80px;">View Profile</button>
-            
             </div>
-                   
-          
         </div>
+      </div>
     <!--End Page Content -->
-      
 
-        
-            <div class="row mb-3 mt-3 offset-2">
-              <p class="col-sm-3 text-center p-2 rounded" style="font-size: 20px; background-color:white">Roles</p>
-              <div class="col-sm-7 text-center"><!-- Added text-center class -->
-                <p class="fw-medium p-2" style="font-size: 20px; background-color:white;">Semibold weight text.</p>
-                <!-- th:value="${homeadmin.roles}" -->
-              </div>
-            </div>
+    <div class="container offset-3" style="height: 60%; width: 60%; margin-bottom: 10%;">
+      <div class="row">
+        <div class="col-md-6">
+          <h6>Number of Cars</h6>
+          <div class="chart-container">
+            <canvas id="pieChart"></canvas>
           </div>
         </div>
-
-        <div class="col-8 offset-3 justify-content-center">
-          <div class="row justify-content-evenly mt-4">
-            <div class="card col-3 me-5" style="background-color: bisque;">
-              <div class="col p-4">
-                <img>
-                <p>Total Customer</p>
-              </div>
-            </div>
-            <div class="card col-3 ms-5 me-5" style="background-color: bisque;">
-              <div class="col p-4">
-                <img>
-                <p>Total Rental Car</p>
-              </div>
-            </div>
-            <div class="card col-3 ms-5" style="background-color: bisque;">
-              <div class="col p-4">
-                <img>
-                <p>Car</p>
-              </div>
-            </div>
+        <div class="col-md-6">
+          <h6>Number of Rental Users by month</h6>
+          <div class="chart-container" style="height: 60%;">
+            <canvas id="barChart"></canvas>
           </div>
         </div>
-        
-     
-    </body>
+      </div>
+    </div>
+
     <footer class="py-3 bg-dark text-white d-flex align-content-end mt-3 fixed-bottom">
       <div class="container">
         <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
       </div>
     </footer>
-<script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script>
+      // Pie Chart Data
+      var pieData = {
+        labels: ['Compacts', 'Sedans', 'MPVs'],
+        datasets: [{
+          data: [35, 45, 20],
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        }]
+      };
+  
+      // Bar Chart Data
+      var barData = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Rentals',
+          data: [15, 12, 18, 10, 20, 17],
+          backgroundColor: '#36A2EB'
+        }]
+      };
+  
+      // Chart Options
+      var options = {
+        responsive: true,
+        maintainAspectRatio: false
+      };
+  
+      // Create the Pie Chart
+      var pieCtx = document.getElementById('pieChart').getContext('2d');
+      var pieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: pieData,
+        options: options
+      });
+  
+      // Create the Bar Chart
+      var barCtx = document.getElementById('barChart').getContext('2d');
+      var barChart = new Chart(barCtx, {
+        type: 'bar',
+        data: barData,
+        options: options
+      });
+    </script>
+</body>
 </html>
