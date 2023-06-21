@@ -42,15 +42,19 @@
       </nav>
 
       <!-- Start Side Bar--> 
-    <div id="sidebar" class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 mt-7 position-fixed" style="height: 100%;"> 
+    
+
+    <!--Page Content -->
+    <body style="background-color: lightgrey;">
+      <div id="sidebar" class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 position-fixed" style="height: 100%;"> 
       <ul class="nav nav-underline flex-column mb-auto" style="padding-left: 40px;"> 
           <h5 style="margin-top: 50px;">Menu</h5> 
-          <li><a th:href="@{/viewCustomer}" 
+          <li><a th:href="@{/viewStaff}" 
             class="nav-link text-black d-flex justify-content-start" 
             aria-current="page">
             <span class="material-symbols-outlined" 
             style="margin-right: 20px;">
-            shield_person</span>Admin</a>
+            shield_person</span>Staff</a>
          </li> 
 
           <li><a th:href="@{/viewCustomer}" 
@@ -107,65 +111,54 @@
     </div> 
     <!-- End Side Bar--> 
 
-    <!--Page Content -->
-    <body style="background-color: lightgrey;">
-      <div class="container" 
-      style="padding-left: 450px; margin-top: 70px;">
-        <h1>WELCOME ADMIN</h1>
-        <div class="container" style="height: 100%;">
-          
-            <div class="d-flex flex justify-content-center">
-              <div class="col-3" style="margin: 8%;">
-                <img src="images/defaultprofile.jpg" class="img-fluid rounded mt-3 ms-1" style="width:100%; height: 80%;;" >
+        <h1 class="offset-5 mt-5">WELCOME ADMIN</h1>
+
+        <div class="card col-8 offset-3">
+          <div class="card-body" style="background-color:burlywood;">
+            <div class="row mb-3 mt-3 offset-2">
+              <p class="col-sm-3 text-center p-2 rounded" style="font-size: 20px; background-color:white">Username</p>
+              <div class="col-sm-7 text-center"><!-- Added text-center class -->
+                <p class="fw-medium p-2" style="font-size: 20px; background-color: white;">Semibold weight text.</p>
+                <!-- th:value="${homeadmin.username}" -->
               </div>
-              <div class="col-md-5">
-                <div class="card-body">
-                  <div class="container-fluid mt-2 justify-content-center rounded p-2" style="background-color: blanchedalmond;">
-                    
-
-                    <!-- <form th:action="@{/profileadmin}" 
-                      method="post" 
-                      modelAttribute="homeadmin"
-                      th:object="${homeadmin}" 
-                      class="form">
-
-                      <div class="mb-3">
-                        <label for="username" class="form-label">Username:</label>
-                        <input type="text" 
-                        class="form-control" 
-                        name="username"
-                        th:value="(${homeadmin.username})"
-                        id="username">
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="password" class="form-label">Password:</label>
-                        <input type="text" 
-                        class="form-control" 
-                        name="password"
-                        tth:value="${homeadmin.password}"
-                        id="password">
-                      </div>
-                      </form> -->
-
-                      
-                  </div>
-                </div>
-               </div>
-
             </div>
-            <button type="submit" class="btn btn-primary">View Profile</button>
-            <button type="submit" class="btn btn-danger">Rent Car</button>
-                   
-          
-        </div>
-    <!--End Page Content -->
-      
-
         
-            
+            <div class="row mb-3 mt-3 offset-2">
+              <p class="col-sm-3 text-center p-2 rounded" style="font-size: 20px; background-color:white">Roles</p>
+              <div class="col-sm-7 text-center"><!-- Added text-center class -->
+                <p class="fw-medium p-2" style="font-size: 20px; background-color:white;">Semibold weight text.</p>
+                <!-- th:value="${homeadmin.roles}" -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-8 offset-3 justify-content-center">
+          <div class="row justify-content-evenly mt-4">
+            <div class="card col-3 me-5" style="background-color: bisque;">
+              <div class="col p-4">
+                <img>
+                <p>Total Customer</p>
+              </div>
+            </div>
+            <div class="card col-3 ms-5 me-5" style="background-color: bisque;">
+              <div class="col p-4">
+                <img>
+                <p>Total Rental Car</p>
+              </div>
+            </div>
+            <div class="card col-3 ms-5" style="background-color: bisque;">
+              <div class="col p-4">
+                <img>
+                <p>Car</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+     
     </body>
-    <footer class="py-3 bg-dark text-white d-flex align-content-end fixed-bottom mt-3">
+    <footer class="py-3 bg-dark text-white d-flex align-content-end mt-3 fixed-bottom">
       <div class="container">
         <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
       </div>

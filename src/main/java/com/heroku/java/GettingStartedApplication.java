@@ -50,6 +50,7 @@ public class GettingStartedApplication {
     }
 
 
+
     @GetMapping("/login") 
     public String login(HttpSession session, Customer customer) { 
         
@@ -133,6 +134,11 @@ public class GettingStartedApplication {
     @GetMapping("/profileadmin")
     public String profileadmin() {
         return "admin/profileadmin";
+    }
+
+    @GetMapping("/viewStaff")
+    public String viewStaff() {
+        return "admin/viewstaff";
     }
 
     // @GetMapping("/profilecust")
