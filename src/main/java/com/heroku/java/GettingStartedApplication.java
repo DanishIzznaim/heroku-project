@@ -183,9 +183,9 @@ public class GettingStartedApplication {
         return "about";
     }    
 
-    @GetMapping("/addcar")
-    public String addcar() {
-        return "admin/addcar";
+    @GetMapping("/addcarsedan")
+    public String addcarsedan() {
+        return "admin/addcarsedan";
     }
 
     @GetMapping("/database")
