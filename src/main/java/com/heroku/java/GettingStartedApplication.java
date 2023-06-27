@@ -188,6 +188,16 @@ public class GettingStartedApplication {
         return "admin/addcarsedan";
     }
 
+    @GetMapping("/addcarcompact")
+    public String addcarcompact() {
+        return "admin/addcarcompact";
+    }
+
+    @GetMapping("/addcarmpv")
+    public String addcarmpv() {
+        return "admin/addcarmpv";
+    }
+
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (
