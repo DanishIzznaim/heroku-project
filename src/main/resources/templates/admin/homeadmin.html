@@ -10,7 +10,7 @@
     <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">DZ EMPIRE RENTAL</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,9 +22,6 @@
                 <a class="nav-link" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="#">Feedback</a>
               </li>
               <li class="nav-item">
@@ -34,7 +31,7 @@
                 <a class="nav-link" href="#">Logout</a>
               </li>
               <li class="nav-item">
-                <img src="../../images/profile.png" style="width: 30px; height: 30px;">
+                <img src="images/profileadmin.png" style="width: 30px; height: 30px;">
               </li>
             </ul>
           </div>
@@ -47,12 +44,12 @@
       style="height: 100%;"> 
       <ul class="nav nav-underline flex-column mb-auto" style="padding-left: 40px;"> 
           <h5 style="margin-top: 50px;">Menu</h5> 
-          <li><a th:href="@{/viewCustomer}" 
+          <li><a th:href="@{/addstaff}" 
             class="nav-link text-black d-flex justify-content-start" 
             aria-current="page">
             <span class="material-symbols-outlined" 
             style="margin-right: 20px;">
-            shield_person</span>Admin</a>
+            shield_person</span>Staff</a>
          </li> 
 
           <li><a th:href="@{/viewCustomer}" 
@@ -157,7 +154,52 @@
         <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
       </div>
     </footer>
-<script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script>
+      // Pie Chart Data
+      var pieData = {
+        labels: ['Compacts', 'Sedans', 'MPVs'],
+        datasets: [{
+          data: [35, 45, 20],
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        }]
+      };
+  
+      // Bar Chart Data
+      var barData = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Rentals',
+          data: [15, 12, 18, 10, 20, 17],
+          backgroundColor: '#36A2EB'
+        }]
+      };
+  
+      // Chart Options
+      var options = {
+        responsive: true,
+        maintainAspectRatio: false
+      };
+  
+      // Create the Pie Chart
+      var pieCtx = document.getElementById('pieChart').getContext('2d');
+      var pieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: pieData,
+        options: options
+      });
+  
+      // Create the Bar Chart
+      var barCtx = document.getElementById('barChart').getContext('2d');
+      var barChart = new Chart(barCtx, {
+        type: 'bar',
+        data: barData,
+        options: options
+      });
+    </script>
+</body>
 </html>
