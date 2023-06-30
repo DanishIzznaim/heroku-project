@@ -75,16 +75,15 @@ public class GettingStartedApplication {
     public String homeadmin() {
         return "admin/homeadmin";
     }
-    
+
+    @GetMapping("/profileadmin")
+    public String profileadmin() {
+        return "admin/profileadmin";
+    }
+
     // @GetMapping("/profilecust")
-    // public String profilecust(HttpSession session) {
-    //     if(session.getAttribute("username") != null){ 
-    //         System.out.println("Session username : " + session.getAttribute("username"));
-    //         return "profilecust";
-    //     }else{ 
-    //         System.out.println("Session expired or invalid");
-    //         return "login"; 
-    //     } 
+    // public String profilecust() {
+    //     return "/profilecust";
     // }
 
     @GetMapping("/database")
