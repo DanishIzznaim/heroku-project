@@ -33,33 +33,106 @@
                 <a class="nav-link" href="#">Logout</a>
               </li>
               <li class="nav-item">
-                <img src="../../images/profile.png" style="width: 30px; height: 30px;">
+                <a th:href="@{/profilecust}">
+                  <img src="../../images/profile.png" style="width: 30px; height: 30px;">
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      <!-- <img src="images/header2c.jpg" class="img-fluid" alt="header1"> -->
-        <!-- <h3 class="mt-5 d-flex justify-content-center mb-3">BOOKING PAGE</h3> -->
-         <div class="booking-header d-flex flex-row justify-content-center">
-          <a th:href="@{/homecustomer}">
-            <img src="images/previous.png" width="50px" height="50px">
-          </a>
-          <h2>BOOKING PAGE</h2>
-         </div>
-         <!-- <div class="d-flex flex-row">
-          <img src="images/previous.png" width="70px">
-          <h3>BOOKING PAGE</h3>
-        </div> -->
-
-        <div class="container" style="height: 100%;">
-         <div class="card col-8 offset-2 mb-3 mt-5 align-items-center" style="background-color: #edbb91;">
-            <h3>SEDAN</h3>
-         </div> 
-        </div>
-
-
-
+      <div class="d-flex justify-content-start">
+        <a th:href="@{/homecustomer}">
+          <img src="images/previous.png" width="50px" height="50px"/>
+        </a>
+        <h1 class="col-lg-11 text-center">BOOKING PAGE</h1>
+      </div>
+      <div class="container" style="height: 100%;">
+        <div class="card col-12 mb-3 mt-5 align-items-center" style="background-color: #EF7A4E;">
+          <div class="d-flex flex justify-content-center">
+            <div class="col-4" style="margin: 8%;">
+              <img src="../../sedan/sedan4.jpg" class="img-fluid rounded-start mt-2 me-3" style="width:600px;height: 400px;">
+              <h4 class="mt-2">Price: RM130/DAY</h4>
+              <h4 class="mt-2">Condition:</h4>
+              <div>
+                <img src="../../images/star.png" width="20px" height="20px">
+                <img src="../../images/star.png" width="20px" height="20px">
+                <img src="../../images/star.png" width="20px" height="20px">
+                <img src="../../images/star.png" width="20px" height="20px">
+                <img src="../../images/star.png" width="20px" height="20px">
+                <img src="../../images/star.png" width="20px" height="20px">
+                <img src="../../images/star.png" width="20px" height="20px">
+                <img src="../../images/star (1).png" width="20px" height="20px">
+                <img src="../../images/star (1).png" width="20px" height="20px">
+                <img src="../../images/star (1).png" width="20px" height="20px">
+                <h4 class="d-inline-block">7/10</h4>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h1 class="text-capitalize">SEDAN</h1>
+                <div style="background-color: #4EC3EF;border-radius: 15px;">
+                  <h3 class="text-capitalize text-center mt-3">PERODUA BEZZA</h3>
+                </div>
+                  <form >
+                    <div class="row mt-4">
+                      <div class="col-md-3 text-center" style="background-color: #4EC3EF;">
+                        <h5 class="mt-2">DAY</h5>
+                      </div>
+                      <div class="col-auto">
+                        <input type="number" min="1" max="10" class="form-control">
+                      </div>                    
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-md-3 text-center" style="background-color: #4EC3EF;">
+                        <h5 class="mt-2">PICK-UP DATE</h5>
+                      </div>
+                      <div class="col-auto">
+                        <input type="date" class="form-control">
+                      </div>         
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-md-3 text-center" style="background-color: #4EC3EF;">
+                        <h5 class="mt-2">PICK-UP TIME</h5>
+                      </div>
+                      <div class="col-auto">
+                        <input type="time" class="form-control">
+                      </div>         
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-md-3 text-center" style="background-color: #4EC3EF;">
+                        <h5 class="mt-2">DROP-OFF DATE</h5>
+                      </div>
+                      <div class="col-auto">
+                        <input type="date" class="form-control">
+                      </div>         
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-md-3 text-center" style="background-color: #4EC3EF;">
+                        <h5 class="mt-2">DROP-OFF TIME</h5>
+                      </div>
+                      <div class="col-auto">
+                        <input type="time" class="form-control">
+                      </div>         
+                    </div>
+                    <div class="row mt-4">
+                      <div class="col-md-3 text-center" style="background-color: #4EC3EF;">
+                        <h5 class="mt-2">Price</h5>
+                      </div>
+                      <div class="col-auto">
+                        
+                      </div>  
+                    </div>
+                    <div class="mt-5">
+                      <button class="btn btn-warning" type="button">BOOK NOW</button>
+                      <button type="reset" value="Reset" class="btn btn-danger">CLEAR</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
       <footer class="py-3 bg-dark text-white col-12">
         <div class="container-fluid">
           <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
