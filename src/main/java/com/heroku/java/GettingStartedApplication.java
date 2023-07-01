@@ -203,6 +203,12 @@ public class GettingStartedApplication {
         return "admin/addcarmpv";
     }
 
+    @GetMapping("/payment")
+    public String payment() {
+        return "payment";
+    }
+    
+
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (
