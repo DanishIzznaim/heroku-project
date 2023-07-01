@@ -162,6 +162,11 @@ public class GettingStartedApplication {
         return "admin/custdetail";
     }
 
+     @GetMapping("/addcarform")
+    public String addcarform() {
+        return "admin/addcarform";
+    }
+
     // @GetMapping("/profilecust")
     // public String profilecust() {
     //     return "profilecust";
