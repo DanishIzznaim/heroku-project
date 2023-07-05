@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -59,6 +62,61 @@ public class GettingStartedApplication {
             return "login"; 
         } 
     }
+    @PostMapping("/login") 
+    public String HomePage(HttpSession session, @ModelAttribute("login") Customer customer, User user, Model model, Employee emp) { 
+
+        try {
+            Connection connection = dataSource.getConnection();
+            final var statement = connection.createStatement(); 
+            String sql ="SELECT userid, username, password, usertype FROM users"; 
+            final var resultSet = statement.executeQuery(sql); 
+            
+
+            String returnPage = ""; 
+ 
+            while (resultSet.next()) { 
+                int userid = resultSet.getInt("userid");
+                String username = resultSet.getString("username"); 
+                String password = resultSet.getString("password");
+                String usertype = resultSet.getString("usertype");  
+                
+                //if they choose customer
+                if (usertype.equals("customer")){
+                    if (username.equals(customer.getUsername()) && password.equals(customer.getPassword())) { 
+                    session.setAttribute("username",username);
+                    session.setAttribute("userid",userid);
+                    System.out.println("userid: "+userid);
+                    returnPage = "redirect:/homecustomer"; 
+                    break; 
+                } else { 
+                    returnPage = "/login"; 
+                } 
+  
+                //if they choose employee
+                }
+                else if (usertype.equals("employee")){
+                    if (username.equals(emp.getUsername()) && password.equals(emp.getPassword())) { 
+                    session.setAttribute("username",username);
+                    session.setAttribute("userid",userid);
+                    System.out.println("session username: "+username);
+                    returnPage = "redirect:/homeadmin"; 
+                    break; 
+                } else { 
+                    returnPage = "/login"; 
+                } 
+                }
+                else{
+                    System.out.println("Username does not match password");
+                }
+            }
+            return returnPage; 
+ 
+        } catch (Throwable t) { 
+            System.out.println("message : " + t.getMessage()); 
+            return "/login"; 
+        } 
+ 
+    }
 
     @GetMapping("/homecustomer")
     public String homecustomer(HttpSession session) {
@@ -85,7 +143,15 @@ public class GettingStartedApplication {
     // public String profilecust() {
     //     return "/profilecust";
     // }
-
+    @GetMapping("/custdetail")
+    public String custdetail() {
+        return "admin/custdetail";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+       session.invalidate();
+      return("redirect:/login");
+    }
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (

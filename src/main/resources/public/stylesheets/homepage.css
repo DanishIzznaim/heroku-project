@@ -14,9 +14,73 @@
 a.nav-link:hover{
     color:orangered !important;
 }
-div.col-3{
+
+.carousel-container {
+    max-width: 700px;
+    min-height: 70vh; /* Adjust the value as needed */
+    margin-bottom: 20px; /* Adjust the value as needed */
+}
+/* a[aria-current="page"] {
+    color:orangered !important;
+}
+a.nav-link.active{
+    color:orangered !important;
+} */
+/* div.col-3{
     transition: transform 0.2s ease;
 }
 div.col-3:hover{
     transform: translateY(-15px);
+} */
+/* .header-image-container {
+    position: relative;
+    height: auto;
 }
+
+img{
+    width: 100%;
+    height: auto;
+}
+
+.header-text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: black;
+    text-align: center;
+    text-shadow: 2px 2px 0 white;
+}
+.container-border {
+    border: 4px solid white;
+    margin: -400px 30px 80px;
+    padding: 20px;
+    position: relative;
+}
+.container-content {
+    display: flex;
+    width: auto;
+}
+.panel{
+    background-size: cover;
+    background-position:right;
+    background-repeat: no-repeat;
+    height: 30vh;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    flex: 0.5;
+    margin: 10px;
+    position: relative;
+    transition: flex 0.7s ease-in;
+}
+.panel img{
+    width: 70%;
+}
+
+.panel.active {
+    flex: 5;
+    transform: scale(1.10);
+} */
+
