@@ -80,42 +80,8 @@ public class customerController {
     }
 
   }
-<<<<<<< HEAD
-  @PostMapping("/login") 
-    public String HomePage(HttpSession session, @ModelAttribute("login") Customer customer, Model model) { 
-        try (
-            Connection connection = dataSource.getConnection()) { 
-            final var statement = connection.createStatement(); 
-            String sql ="SELECT username, password FROM customer"; 
-            final var resultSet = statement.executeQuery(sql); 
- 
-            String returnPage = ""; 
- 
-            while (resultSet.next()) { 
-                String username = resultSet.getString("username"); 
-                String password = resultSet.getString("password");  
- 
-                if (username.equals(customer.getUsername()) && password.equals(customer.getPassword())) { 
-                    session.setAttribute("username",customer.getUsername());
-                    returnPage = "redirect:/homecustomer"; 
-                    break; 
-                } else { 
-                    returnPage = "/login"; 
-                } 
-            } 
-            connection.close();
-            return returnPage; 
- 
-        } catch (Throwable t) { 
-            System.out.println("message : " + t.getMessage()); 
-            return "/login"; 
-        } 
- 
-    }
-=======
   
         //view Account
->>>>>>> 17c830b792c52ecb94e717a98071ffb9d0a9b78b
         @GetMapping("/profilecust")
         public String viewProfile(HttpSession session, Customer customer, Model model) {
         String username = (String) session.getAttribute("username");
@@ -253,16 +219,6 @@ public class customerController {
             // Username is null or deletion failed, handle accordingly (e.g., redirect to an error page)
             return "deleteError";
         }
-<<<<<<< HEAD
-    }
-
-    // Username is null, handle accordingly (e.g., redirect to an error page)
-    return "deleteError";
-}
-
-
-=======
->>>>>>> 17c830b792c52ecb94e717a98071ffb9d0a9b78b
 
     
 }
