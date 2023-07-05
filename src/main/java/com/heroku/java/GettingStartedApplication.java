@@ -1,8 +1,9 @@
 package com.heroku.java;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,18 +11,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
-
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Map;
-
+// import org.springframework.boot.SpringApplication;
+// import org.springframework.boot.autoconfigure.SpringBootApplication;
+// import org.springframework.context.annotation.Bean;
+// import javax.servlet.MultipartConfigElement;
+// @EnableMultipartConfig
 @SpringBootApplication
 @Controller
 public class GettingStartedApplication {
     private final DataSource dataSource;
 
-    @Autowired
     public GettingStartedApplication(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -67,7 +70,7 @@ public class GettingStartedApplication {
         try {
             Connection connection = dataSource.getConnection();
             final var statement = connection.createStatement(); 
-            String sql ="SELECT userid, username, password FROM users"; 
+            String sql ="SELECT userid, username, password, usertype FROM users"; 
             final var resultSet = statement.executeQuery(sql); 
             
 
@@ -77,12 +80,12 @@ public class GettingStartedApplication {
                 int userid = resultSet.getInt("userid");
                 String username = resultSet.getString("username"); 
                 String password = resultSet.getString("password");
-                String usertype = user.getUsertype();  
+                String usertype = resultSet.getString("usertype");  
                 
-                //if they choose custoke
+                //if they choose customer
                 if (usertype.equals("customer")){
                     if (username.equals(customer.getUsername()) && password.equals(customer.getPassword())) { 
-                    session.setAttribute("username",customer.getUsername());
+                    session.setAttribute("username",username);
                     session.setAttribute("userid",userid);
                     System.out.println("userid: "+userid);
                     returnPage = "redirect:/homecustomer"; 
@@ -90,12 +93,14 @@ public class GettingStartedApplication {
                 } else { 
                     returnPage = "/login"; 
                 } 
-
+  
                 //if they choose employee
                 }
                 else if (usertype.equals("employee")){
                     if (username.equals(emp.getUsername()) && password.equals(emp.getPassword())) { 
-                    session.setAttribute("username",customer.getUsername());
+                    session.setAttribute("username",username);
+                    session.setAttribute("userid",userid);
+                    System.out.println("session username: "+username);
                     returnPage = "redirect:/homeadmin"; 
                     break; 
                 } else { 
@@ -136,16 +141,16 @@ public class GettingStartedApplication {
         } 
     }
 
-    @GetMapping("/addstaff")
-    public String addstaffPage(HttpSession session) {
-        return "admin/addstaff";
-        // if(session.getAttribute("username") != null){ 
+    // @GetMapping("/listStaff")
+    // public String addstaffPage(HttpSession session) {
+    //     return "admin/listStaff";
+    //     // if(session.getAttribute("username") != null){ 
             
-        // }else{ 
-        //     System.out.println("Session expired or invalid");
-        //     return "login"; 
-        // } 
-    }
+    //     // }else{ 
+    //     //     System.out.println("Session expired or invalid");
+    //     //     return "login"; 
+    //     // } 
+    // }
 
     @GetMapping("/profileadmin")
     public String profileadmin() {
@@ -209,4 +214,5 @@ public class GettingStartedApplication {
     public static void main(String[] args) {
         SpringApplication.run(GettingStartedApplication.class, args);
     }
+    
 }
