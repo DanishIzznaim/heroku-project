@@ -22,8 +22,22 @@ public class customerController {
     public customerController(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    
-    
+    // @GetMapping("/signup")
+    // public String signup() {
+    //     return "signup";
+    // }
+    // @GetMapping("/login")
+    // public String login() {
+    //     return "login";
+    // }
+    // @GetMapping("/profilecust")
+    // public String profilecust() {
+    //     return "profilecust";
+    // }
+    // @GetMapping("/feedback")
+    // public String feedback() {
+    //     return "feedback";
+    // }
     //insert cust into database
     @PostMapping("/signup")
     public String addAccount(HttpSession session, @ModelAttribute("signup")Customer customer, User user) {
@@ -58,7 +72,6 @@ public class customerController {
 
       connection.close();
       return "redirect:/login";
-
     } catch (SQLException sqe) {
       System.out.println("Error Code = " + sqe.getErrorCode());
       System.out.println("SQL state = " + sqe.getSQLState());

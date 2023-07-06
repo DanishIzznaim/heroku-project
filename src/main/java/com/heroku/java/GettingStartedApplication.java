@@ -1,9 +1,8 @@
 package com.heroku.java;
 
-// import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,20 +10,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Map;
-// import org.springframework.boot.SpringApplication;
-// import org.springframework.boot.autoconfigure.SpringBootApplication;
-// import org.springframework.context.annotation.Bean;
-// import javax.servlet.MultipartConfigElement;
-// @EnableMultipartConfig
+
 @SpringBootApplication
 @Controller
 public class GettingStartedApplication {
     private final DataSource dataSource;
 
+    @Autowired
     public GettingStartedApplication(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -52,13 +49,14 @@ public class GettingStartedApplication {
         return "signup";
     }
 
-
+    // @GetMapping("/login")
+    // public String login() {
+    //     return "login";
+    // }
 
     @GetMapping("/login") 
-    public String login(HttpSession session, Customer customer) { 
-        
-        if(session.getAttribute("username") != null ){ 
-            System.out.println(session.getAttribute("username"));
+    public String login(HttpSession session) { 
+        if(session.getAttribute("username") != null){ 
             return "customer/homecustomer"; 
         }else{ 
             return "login"; 
@@ -71,9 +69,7 @@ public class GettingStartedApplication {
             Connection connection = dataSource.getConnection();
             final var statement = connection.createStatement(); 
             String sql ="SELECT userid, username, password, usertype FROM users"; 
-            final var resultSet = statement.executeQuery(sql); 
-            
-
+            final var resultSet = statement.executeQuery(sql);
             String returnPage = ""; 
  
             while (resultSet.next()) { 
@@ -91,7 +87,7 @@ public class GettingStartedApplication {
                     returnPage = "redirect:/homecustomer"; 
                     break; 
                 } else { 
-                    returnPage = "/login"; 
+                    returnPage = "login"; 
                 } 
   
                 //if they choose employee
@@ -104,7 +100,7 @@ public class GettingStartedApplication {
                     returnPage = "redirect:/homeadmin"; 
                     break; 
                 } else { 
-                    returnPage = "/login"; 
+                    returnPage = "login"; 
                 } 
                 }
                 else{
@@ -115,7 +111,7 @@ public class GettingStartedApplication {
  
         } catch (Throwable t) { 
             System.out.println("message : " + t.getMessage()); 
-            return "/login"; 
+            return "login"; 
         } 
  
     }
@@ -132,25 +128,9 @@ public class GettingStartedApplication {
 
     
     @GetMapping("/homeadmin")
-    public String homeadmin(HttpSession session) {
-        if(session.getAttribute("username") != null){ 
-            return "admin/homeadmin";
-        }else{ 
-            System.out.println("Session expired or invalid");
-            return "login"; 
-        } 
+    public String homeadmin() {
+        return "admin/homeadmin";
     }
-
-    // @GetMapping("/listStaff")
-    // public String addstaffPage(HttpSession session) {
-    //     return "admin/listStaff";
-    //     // if(session.getAttribute("username") != null){ 
-            
-    //     // }else{ 
-    //     //     System.out.println("Session expired or invalid");
-    //     //     return "login"; 
-    //     // } 
-    // }
 
     @GetMapping("/profileadmin")
     public String profileadmin() {
@@ -166,12 +146,6 @@ public class GettingStartedApplication {
     public String custdetail() {
         return "admin/custdetail";
     }
-
-    // @GetMapping("/profilecust")
-    // public String profilecust() {
-    //     return "profilecust";
-    // }
-    
     @GetMapping("/logout")
     public String logout(HttpSession session) {
        session.invalidate();
@@ -195,7 +169,6 @@ public class GettingStartedApplication {
             final var statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
             statement.executeUpdate("INSERT INTO ticks VALUES (now())");
-
             final var resultSet = statement.executeQuery("SELECT tick FROM ticks");
             final var output = new ArrayList<>();
             while (resultSet.next()) {
@@ -214,5 +187,4 @@ public class GettingStartedApplication {
     public static void main(String[] args) {
         SpringApplication.run(GettingStartedApplication.class, args);
     }
-    
 }
