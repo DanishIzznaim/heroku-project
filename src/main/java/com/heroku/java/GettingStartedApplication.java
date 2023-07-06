@@ -29,10 +29,10 @@ public class GettingStartedApplication {
         this.dataSource = dataSource;
     }
 
-    // @GetMapping("/index")
-    // public String index() {
-    //     return "index";
-    // }
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
 
     @GetMapping("/homepage")
     public String homepage() {
@@ -71,10 +71,8 @@ public class GettingStartedApplication {
             Connection connection = dataSource.getConnection();
             final var statement = connection.createStatement(); 
             String sql ="SELECT userid, username, password, usertype FROM users"; 
-            final var resultSet = statement.executeQuery(sql); 
-            
-
-            String returnPage = ""; 
+            final var resultSet = statement.executeQuery(sql);
+String returnPage = ""; 
  
             while (resultSet.next()) { 
                 int userid = resultSet.getInt("userid");
@@ -157,20 +155,9 @@ public class GettingStartedApplication {
         return "admin/profileadmin";
     }
 
-<<<<<<< HEAD
-    @GetMapping("/custdetail")
-    public String custdetail() {
-        return "admin/custdetail";
-    }
-
-    @GetMapping("/profilecust")
-    public String profilecust() {
-        return "/profilecust";
-=======
     @GetMapping("/account")
     public String account() {
         return "admin/account";
->>>>>>> 48e0d176c4edd0347b532f5883ae9c434c81a761
     }
 
     @GetMapping("/custdetail")
@@ -178,15 +165,10 @@ public class GettingStartedApplication {
         return "admin/custdetail";
     }
 
-     @GetMapping("/addcarform")
-    public String addcarform() {
-        return "admin/addcarform";
-    }
-
-     @GetMapping("/updatecar")
-    public String updatecar() {
-        return "admin/updatecar";
-    }
+    // @GetMapping("/profilecust")
+    // public String profilecust() {
+    //     return "profilecust";
+    // }
     
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -202,32 +184,7 @@ public class GettingStartedApplication {
     @GetMapping("/about")
     public String about() {
         return "about";
-    }    
-
-    @GetMapping("/addcarsedan")
-    public String addcarsedan() {
-        return "admin/addcarsedan";
     }
-
-    @GetMapping("/addcarcompact")
-    public String addcarcompact() {
-        return "admin/addcarcompact";
-    }
-
-    @GetMapping("/addcarmpv")
-    public String addcarmpv() {
-        return "admin/addcarmpv";
-    }
-
-    @GetMapping("/approval")
-    public String approval() {
-        return "admin/approval";
-    }
-
-    // @GetMapping("/profilecust")
-    // public String profilecust() {
-    //     return "profilecust";
-    // }
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
@@ -236,8 +193,7 @@ public class GettingStartedApplication {
             final var statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
             statement.executeUpdate("INSERT INTO ticks VALUES (now())");
-
-            final var resultSet = statement.executeQuery("SELECT tick FROM ticks");
+final var resultSet = statement.executeQuery("SELECT tick FROM ticks");
             final var output = new ArrayList<>();
             while (resultSet.next()) {
                 output.add("Read from DB: " + resultSet.getTimestamp("tick"));
