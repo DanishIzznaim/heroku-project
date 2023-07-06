@@ -22,15 +22,8 @@ public class customerController {
     public customerController(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    // @GetMapping("/login")
-    // public String login() {
-    //     return "login";
-    // }
-    // @GetMapping("/signup")
-    // public String signup() {
-    //     return "signup";
-    // }
-
+    
+    
     //insert cust into database
     @PostMapping("/signup")
     public String addAccount(HttpSession session, @ModelAttribute("signup")Customer customer, User user) {
