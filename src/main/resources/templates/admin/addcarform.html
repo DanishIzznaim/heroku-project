@@ -42,7 +42,9 @@
       </nav>
 
       <!-- Start Side Bar--> 
-    <div id="sidebar" class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 mt-7 position-fixed" style="height: 100%;"> 
+    <div id="sidebar" 
+      class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 mt-7 position-fixed" 
+      style="height: 100%;"> 
       <ul class="nav nav-underline flex-column mb-auto" style="padding-left: 40px;"> 
           <h5 style="margin-top: 50px;">Menu</h5> 
           <li><a th:href="@{/viewCustomer}" 
@@ -96,75 +98,61 @@
             code</span>Compact</a>
             
            </li>
-           
+      </ul>
     </div> 
     <!-- End Side Bar--> 
 
     <!--Page Content -->
-    <body background="images/backgroundadmin.avif"></body>
-    <div class="container-fluid "> 
-      <div class style="margin-left: 690px; margin-top: 10px;">
-      <h5>PROFILE</h5> 
-      </div>
+    <body background="images/backgroundadmin.avif">
 
-      <div class="row justify-content-center"> 
-      <div class="col-6"> 
-      <div class="card" style="border: solid 1px black; margin-left: 220px;"> 
-      <div class="card-body custom-form" style="background-color: lightblue;"> 
-        <form>
+        <h1 class="offset-5 mt-3">NEW CAR DETAILS</h1>
 
-          <div class="col-4">
-            <img src="images/defaultprofile.jpg" 
-            class="img-fluid rounded justify-content-center" 
-            style="width:50px; height: 50px; margin-left: 150px;" >
-            
+        <div class="card col-6 offset-4">
+
+          <div class="card-body" style="background-color: lightblue">
+
+            <form action="/add-car" method="post" enctype="multipart/form-data">
+              <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" class="form-control" id="image" name="image">
+              </div>
+
+              <div class="mb-3">
+                <label for="condition" class="form-label">Condition</label>
+                <select class="form-control" id="condition" name="condition">
+                  <option value=""></option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="price" class="form-label">Price (RM)</label>
+                <input type="number" class="form-control" id="price" name="price">
+              </div>
+
+              <div class="mb-3">
+                <label for="number_of_seats" class="form-label">Number of seats</label>
+                <input type="number" class="form-control" id="numberofseats" name="numberofseats">
+              </div>
+
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-success">Add Car</button>
+              </div>
+
+            </form>
           </div>
-
-          <div class="form-row mt-3"> 
-            <div class="form-group col-md-12"> 
-              <label for="adminid">Admin ID</label> 
-              <input type="text" class="form-control" id="name" name="adminid"> 
-            </div> 
-          </div>
-
-          <div class="form-row mt-3"> 
-            <div class="form-group col-md-12"> 
-              <label for="name">Name</label> 
-              <input type="text" class="form-control" id="name" name="name"> 
-            </div> 
-          </div> 
-
-          <div class="form-row mt-3"> 
-            <div class="form-group col-md-12"> 
-              <label for="username">Username</label> 
-              <input type="text" class="form-control" id="username" name="username"> 
-            </div> 
-          </div> 
-
-          <div class="form-row mt-3"> 
-            <div class="form-group col-md-12"> 
-              <label for="password">Password</label> 
-              <input type="text" class="form-control" id="password" name="password"> 
-            </div> 
-          </div> 
-          
-          <div class="form-group text-center"> 
-            <button type="reset" class="btn btn-primary" style="margin-top: 20px;">RESET</button> 
-            <button type="submit" class="btn btn-success" style="margin-top: 20px;">SAVE</button> 
-          </div> 
-        </form> 
-      </div> 
-      </div> 
-      </div> 
-      </div>
-    </div>
+        </div>
   </body>
-  <footer class="py-3 bg-dark text-white d-flex align-content-end fixed-bottom mt-2">
-    <div class="container">
-      <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
-    </div>
-  </footer>
-<script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+      <footer class="py-3 bg-dark text-white d-flex align-content-end fixed-bottom mt-2">
+        <div class="container">
+          <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
+        </div>
+      </footer>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </html>

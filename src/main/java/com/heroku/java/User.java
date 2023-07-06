@@ -5,16 +5,36 @@ public class User{
     public String username;
     public String password;
     public String usertype;
-    // public int userid;
+    // public int managerid;
+    public Integer userid;
 
 
 
-    public User(String fname, String username, String password, String usertype) {
+    public User(Integer userid, String fname, String username, String password, String usertype) {
+        this.userid = userid;
         this.fname = fname;
         this.username = username;
         this.password = password;
+        // this.managerid=managerid;
         this.usertype = usertype;
-        // this.userid = userid;
+        
+    }
+
+
+    public String getFname() {
+        return this.fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public int getUserid() {
+        return this.userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
 
@@ -51,13 +71,6 @@ public class User{
         this.usertype = usertype;
     }
 
-
-    // public int getUserid() {
-    //     return this.userid;
-    // }
-
-    // public void setUserid(int userid) {
-    //     this.userid = userid;
-    // }
+   
 
 }
