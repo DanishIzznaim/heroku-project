@@ -86,10 +86,10 @@ public class GettingStartedApplication {
                     session.setAttribute("username",username);
                     session.setAttribute("userid",userid);
                     System.out.println("userid: "+userid);
-                    returnPage = "redirect:/homecustomer"; 
+                    returnPage = "redirect:homecustomer"; 
                     break; 
                 } else { 
-                    returnPage = "/login"; 
+                    returnPage = "login"; 
                 } 
   
                 //if they choose employee
@@ -102,7 +102,7 @@ public class GettingStartedApplication {
                     returnPage = "redirect:/homeadmin"; 
                     break; 
                 } else { 
-                    returnPage = "/login"; 
+                    returnPage = "login"; 
                 } 
                 }
                 else{
