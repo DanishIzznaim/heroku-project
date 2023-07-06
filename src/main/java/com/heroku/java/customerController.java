@@ -58,7 +58,6 @@ public class customerController {
 
       connection.close();
       return "redirect:/login";
-
     } catch (SQLException sqe) {
       System.out.println("Error Code = " + sqe.getErrorCode());
       System.out.println("SQL state = " + sqe.getSQLState());
