@@ -113,7 +113,7 @@ public class GettingStartedApplication {
  
         } catch (Throwable t) { 
             System.out.println("message : " + t.getMessage()); 
-            return "/login"; 
+            return "login"; 
         } 
  
     }
