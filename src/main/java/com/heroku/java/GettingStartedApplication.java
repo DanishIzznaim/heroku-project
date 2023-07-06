@@ -70,7 +70,7 @@ public class GettingStartedApplication {
             final var statement = connection.createStatement(); 
             String sql ="SELECT userid, username, password, usertype FROM users"; 
             final var resultSet = statement.executeQuery(sql);
-String returnPage = ""; 
+            String returnPage = ""; 
  
             while (resultSet.next()) { 
                 int userid = resultSet.getInt("userid");
@@ -169,7 +169,7 @@ String returnPage = "";
             final var statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
             statement.executeUpdate("INSERT INTO ticks VALUES (now())");
-final var resultSet = statement.executeQuery("SELECT tick FROM ticks");
+            final var resultSet = statement.executeQuery("SELECT tick FROM ticks");
             final var output = new ArrayList<>();
             while (resultSet.next()) {
                 output.add("Read from DB: " + resultSet.getTimestamp("tick"));
