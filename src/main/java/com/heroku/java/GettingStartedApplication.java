@@ -39,9 +39,17 @@ public class GettingStartedApplication {
     public String sedan() {
         return "sedan";
     }
-    @GetMapping("/book")
-    public String book() {
-        return "book";
+    @GetMapping("/sedanbook")
+    public String sedanbook() {
+        return "sedanbook";
+    }
+    @GetMapping("/compactbook")
+    public String compactbook() {
+        return "compactbook";
+    }
+    @GetMapping("/mpvbook")
+    public String mpvbook() {
+        return "mpvbook";
     }
     
     @GetMapping("/signup")
