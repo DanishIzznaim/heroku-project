@@ -26,10 +26,10 @@ public class GettingStartedApplication {
         this.dataSource = dataSource;
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
+    // @GetMapping("/index")
+    // public String index() {
+    //     return "index";
+    // }
 
     @GetMapping("/homepage")
     public String homepage() {
@@ -166,11 +166,6 @@ public class GettingStartedApplication {
     public String addcarform() {
         return "admin/addcarform";
     }
-
-    // @GetMapping("/profilecust")
-    // public String profilecust() {
-    //     return "profilecust";
-    // }
     
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -203,11 +198,15 @@ public class GettingStartedApplication {
         return "admin/addcarmpv";
     }
 
-    @GetMapping("/payment")
-    public String payment() {
-        return "payment";
+    @GetMapping("/approval")
+    public String approval() {
+        return "admin/approval";
     }
-    
+
+    // @GetMapping("/profilecust")
+    // public String profilecust() {
+    //     return "profilecust";
+    // }
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
