@@ -180,7 +180,7 @@ public class GettingStartedApplication {
 
      @GetMapping("/feedback")
     public String feedback() {
-        return "feedback";
+        return "feedback"; 
     }
 
     @GetMapping("/about")
