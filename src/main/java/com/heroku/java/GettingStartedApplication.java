@@ -69,10 +69,8 @@ public class GettingStartedApplication {
             Connection connection = dataSource.getConnection();
             final var statement = connection.createStatement(); 
             String sql ="SELECT userid, username, password, usertype FROM users"; 
-            final var resultSet = statement.executeQuery(sql); 
-            
-
-            String returnPage = ""; 
+            final var resultSet = statement.executeQuery(sql);
+String returnPage = ""; 
  
             while (resultSet.next()) { 
                 int userid = resultSet.getInt("userid");
@@ -139,10 +137,11 @@ public class GettingStartedApplication {
         return "admin/profileadmin";
     }
 
-    // @GetMapping("/profilecust")
-    // public String profilecust() {
-    //     return "/profilecust";
-    // }
+    @GetMapping("/account")
+    public String account() {
+        return "admin/account";
+    }
+
     @GetMapping("/custdetail")
     public String custdetail() {
         return "admin/custdetail";
@@ -152,6 +151,17 @@ public class GettingStartedApplication {
        session.invalidate();
       return("redirect:/login");
     }
+
+     @GetMapping("/feedback")
+    public String feedback() {
+        return "feedback";
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (
@@ -159,8 +169,7 @@ public class GettingStartedApplication {
             final var statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
             statement.executeUpdate("INSERT INTO ticks VALUES (now())");
-
-            final var resultSet = statement.executeQuery("SELECT tick FROM ticks");
+final var resultSet = statement.executeQuery("SELECT tick FROM ticks");
             final var output = new ArrayList<>();
             while (resultSet.next()) {
                 output.add("Read from DB: " + resultSet.getTimestamp("tick"));
