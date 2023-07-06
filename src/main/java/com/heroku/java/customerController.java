@@ -22,6 +22,7 @@ public class customerController {
     public customerController(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+<<<<<<< HEAD
     // @GetMapping("/login")
     // public String login() {
     //     return "login";
@@ -31,6 +32,24 @@ public class customerController {
     //     return "signup";
     // }
 
+=======
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+    @GetMapping("/profilecust")
+    public String profilecust() {
+        return "profilecust";
+    }
+    @GetMapping("/feedback")
+    public String feedback() {
+        return "feedback";
+    }
+>>>>>>> 4a8f4e4 (latest apis)
     //insert cust into database
     @PostMapping("/signup")
     public String addAccount(HttpSession session, @ModelAttribute("signup")Customer customer, User user) {
