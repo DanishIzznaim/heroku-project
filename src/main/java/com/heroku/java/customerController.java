@@ -1,5 +1,5 @@
 package com.heroku.java;
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -19,19 +19,25 @@ import java.sql.*;
 public class customerController {   
     private final DataSource dataSource;
 
-    @Autowired
     public customerController(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    // @GetMapping("/login")
-    // public String login() {
-    //     return "login";
-    // }
-    // @GetMapping("/signup")
-    // public String signup() {
-    //     return "signup";
-    // }
-
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+    @GetMapping("/profilecust")
+    public String profilecust() {
+        return "profilecust";
+    }
+    @GetMapping("/feedback")
+    public String feedback() {
+        return "feedback";
+    }
     //insert cust into database
     @PostMapping("/signup")
     public String addAccount(HttpSession session, @ModelAttribute("signup")Customer customer, User user) {
@@ -43,7 +49,7 @@ public class customerController {
       statement1.setString(2, user.getUsername());
       statement1.setString(3, user.getPassword());
       statement1.executeUpdate();
-
+  
     //   Get id from database for sql 2 from sql 1
       String sql = "SELECT * FROM users where username=?";
       final var stmt = connection.prepareStatement(sql);
@@ -91,29 +97,32 @@ public class customerController {
         try {
             Connection connection = dataSource.getConnection();
             final var statement = connection.prepareStatement(
-                "SELECT users.fullname, users.username, users.password, customer.licensedate, customer.icnumber, customer.phonenum FROM users JOIN customer ON (users.userid = customer.userid) WHERE users.userid = ? ");
+                "SELECT users.userid,users.fullname, users.username, users.password,users.usertype, customer.licensedate, customer.icnumber, customer.phonenum FROM users JOIN customer ON (users.userid = customer.userid) WHERE users.userid = ? ");
             statement.setInt(1, userid);
             final var resultSet = statement.executeQuery();
 
             // ArrayList <Customer> profilecust = new ArrayList<>();
             while(resultSet.next()){
+                
                 String fname = resultSet.getString("fullname");
                 String usernamecust = resultSet.getString("username");
                 String password = resultSet.getString("password");
+                // int managerid = resultSet.getInt("managerid");
+                String usertype =resultSet.getString("usertype");
                 Date licensedate = resultSet.getDate("licensedate");
                 String icnumber = resultSet.getString("icnumber");
                 String phonenum = resultSet.getString("phonenum");
                 // System.out.println("userid from db: "+userid); -- debug
                 System.out.println("fullname from db: " +fname);
 
-                Customer profilecust = new Customer(fname, usernamecust, password, licensedate, icnumber, phonenum);
+                Customer profilecust = new Customer(userid,fname, usernamecust, password,usertype, licensedate, icnumber, phonenum);
 
                 model.addAttribute("profilecust", profilecust);
                 System.out.println("fullname "+ profilecust.fname);
                 // Return the view name for displaying customer details --debug
                 System.out.println("Session profileCust : " + model.getAttribute("profilecust"));
                 }   
-                return "profilecust";
+                return "customer/profilecust";
             } catch (SQLException e) {
             e.printStackTrace();
             }
@@ -165,9 +174,9 @@ public class customerController {
             statement2.setInt(4,id_db);
             statement2.executeUpdate();
             System.out.println("debug= "+licensedate+" "+icnumber+" "+phonenum);
-            statement2.executeUpdate();
+         
                 
-            String returnPage = "profilecust"; 
+            String returnPage = "customer/profilecust"; 
             return returnPage; 
  
         } catch (Throwable t) { 

@@ -11,8 +11,8 @@ public class Customer extends User {
 
     // Constructors
     
-    public Customer(String fullname, String username, String password, Date licensedate, String icnumber, String phonenum) {
-        super(fullname, username, password, phonenum); // Call the superclass constructor with parameters
+    public Customer(Integer userid, String fullname, String username, String password, String usertype, Date licensedate, String icnumber, String phonenum) {
+        super(userid, fullname, username, password,usertype); // Call the superclass constructor with parameters
         this.licensedate = licensedate;
         this.icnumber = icnumber;
         this.phonenum = phonenum;

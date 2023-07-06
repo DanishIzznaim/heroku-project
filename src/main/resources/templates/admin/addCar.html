@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/dz.png">
-    <title>Update Car</title>
+    <title>Create Staff</title>
     <link rel="stylesheet" href="stylesheets/admin.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -31,7 +31,7 @@
                 <a class="nav-link" href="#">Contact</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Logout</a>
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
               </li>
               <li class="nav-item">
                 <img src="images/profileadmin.png" style="width: 30px; height: 30px;">
@@ -51,7 +51,7 @@
               <ul class="nav nav-underline flex-column mb-auto" style="padding-left: 40px;"> 
                   <h5 style="margin-top: 50px;">Menu</h5> 
                   <li><a th:href="@{/listStaff}"
-                    class="nav-link text-black justify-content-start" >
+                    class="nav-link d-flex justify-content-start" >
                     
                     <span class="material-symbols-outlined" 
                     style="margin-right: 20px;">
@@ -104,44 +104,69 @@
                 <a th:href="@{/viewSedan}" class="btn btn-dark">
                   <i class="bi bi-arrow-left-circle-fill"></i> Go Back
                 </a>
-                <div class="card col-12 mt-2 p-3">
-                  <h2 class="text-center">Update Car</h2>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <img th:src="${car.imageSrc}" alt="Car Image" style="width: 300px; height: 200px;margin-left: 80px;margin-top: 50px;">
-                    </div>
-                    <div class="col-md-6">
-                      <form th:action="@{/updateCar}" method="post" th:object="${cars}" modelAttribute="cars" class="p-2">
-                        <input type="hidden" name="carid" th:value="${car.carid}">
-                        
-                        <div class="form-group">
-                            <label for="carName">Car Name</label>
-                            <input type="text" class="form-control" name="carname" th:value="${car.carname}">
+                <div class="card col-12 mt-2">
+                  <div class="card-body">
+                    <h2 class="text-center">Create Car</h2>
+                    <form th:action="@{/addCar}" 
+                    method="post" 
+                    enctype="multipart/form-data" 
+                    modelAttribute = "car"
+                    class="row g-3">
+                      <!-- Rest of the form content -->
+                      <div class="col-md-6">
+                        <label for="cartype" class="form-label">Car Type:</label>
+                        <select name="cartype" id="cartype" class="form-control" required>
+                          <option value="Sedan">Sedan</option>
+                          <option value="MPV">MPV</option>
+                          <option value="Compact">Compact</option>
+                        </select>
+                      </div>
+                      
+                      <div class="col-md-6">
+                        <label for="carname" class="form-label">Car Name:</label>
+                        <input type="text" 
+                        name="carname"
+                        id="carname" 
+                        placeholder="Saga 2002" 
+                        class="form-control" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="carcondition" class="form-label">Car Condition:</label>
+                        <input type="text" 
+                        name="condition" 
+                        id="condition"
+                        placeholder="*/10" 
+                        class="form-control" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="carprice" class="form-label">Car Price:</label>
+                        <input type="text" 
+                        name="carprice" 
+                        id="carprice" 
+                        placeholder="Example : 100"
+                        class="form-control" required>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                          <label for="carimage" class="form-label me-2">Car Image:</label>
+                          <div class="position-relative">
+                            <input type="file" name="carimage" id="carimage" class="form-control" required>
+                            <button type="button" id="deleteImage" class="btn btn-link delete-icon"><i class="bi bi-trash"></i></button>
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label for="carType">Car Type</label>
-                            <input type="text" class="form-control" name="cartype" th:value="${car.cartype}">
-                        </div>
-                        <div class="form-group">
-                            <label for="carCondition">Car Condition</label>
-                            <input type="text" class="form-control" name="condition" th:value="${car.condition}">
-                        </div>
-                        <div class="form-group">
-                            <label for="carPrice">Car Price</label>
-                            <input type="text" class="form-control" name="carprice" th:value="${car.carprice}">
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+                        <div id="imagePreview"></div>
+                      </div>
+                      <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Add Car</button>
+                      </div>
                     </form>
-                    </div>
                   </div>
-                
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </div>
-
-      
     
         
         <footer class="py-3 bg-dark text-white col-12 fixed-bottom">
@@ -153,5 +178,37 @@
     <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script>
+      var fileInput = document.getElementById("carimage");
+      var deleteButton = document.getElementById("deleteImage");
+      var imagePreview = document.getElementById("imagePreview");
+    
+      fileInput.addEventListener("change", function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+    
+        reader.onloadend = function() {
+          var img = document.createElement("img");
+          img.src = reader.result;
+          img.classList.add("img-thumbnail");
+          imagePreview.innerHTML = "";
+          imagePreview.appendChild(img);
+          deleteButton.style.display = "inline";
+        }
+    
+        if (file) {
+          reader.readAsDataURL(file);
+        } else {
+          imagePreview.innerHTML = "";
+          deleteButton.style.display = "none";
+        }
+      });
+    
+      deleteButton.addEventListener("click", function() {
+        fileInput.value = null;
+        imagePreview.innerHTML = "";
+        deleteButton.style.display = "none";
+      });
+    </script>
 </body>
 </html>
