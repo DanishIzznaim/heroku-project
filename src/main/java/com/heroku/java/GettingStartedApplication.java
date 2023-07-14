@@ -167,10 +167,15 @@ public class GettingStartedApplication {
         return "admin/custdetail";
     }
 
-    // @GetMapping("/profilecust")
-    // public String profilecust() {
-    //     return "profilecust";
-    // }
+     @GetMapping("/addcarform")
+    public String addcarform() {
+        return "admin/addcarform";
+    }
+
+     @GetMapping("/updatecar")
+    public String updatecar() {
+        return "admin/updatecar";
+    }
     
     @GetMapping("/logout")
     public String logout(HttpSession session) {
