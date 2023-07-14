@@ -188,6 +188,8 @@ public class GettingStartedApplication {
         return "about";
     }
 
+    
+
     @GetMapping("/database")
     String database(Map<String, Object> model) {
         try (
