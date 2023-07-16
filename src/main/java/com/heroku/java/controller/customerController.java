@@ -58,7 +58,7 @@ public class customerController {
             } else {
                 return "login";
             }
-            return "/customer/profilecust";
+            return "customer/profilecust";
         }
 
         //Update Profile Customer
