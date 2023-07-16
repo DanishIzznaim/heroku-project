@@ -5,48 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/dz.png">
     <title>Welcome</title>
-    <link rel="stylesheet" href="stylesheets/homepage.css">
+    <link rel="stylesheet" th:href="@{stylesheets/homepage.css}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css}">
-    <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <link th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+    <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js}"></script>
   </head>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">DZ EMPIRE RENTAL</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="d-flex justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" th:href="@{/homecustomer}">Home</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" th:href="@{logout}">Logout</a>
+            </li>
+          <li class="nav-item">
+              <a th:href="@{/rentaldetailC}">
+                <img
+                  src="images/car.png"
+                  style="width: 30px; height: 30px; cursor: pointer"
+                />
+              </a>
+            </li>
+          <li class="nav-item">
+            <a th:href="@{/profilecust}">
+              <img
+                src="images/customer.png"
+                style="width: 30px; height: 30px; cursor: pointer"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">DZ EMPIRE RENTAL</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="d-flex justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" th:href="@{/homecustomer}">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Feedback</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
-              </li>
-              <li class="nav-item">
-                <a th:href="@{/profilecust}">
-                  <img src="images/customer.png" style="width: 30px; height: 30px; cursor: pointer;">
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
       <img src="images/header2c.jpg" class="img-fluid" alt="header1">
       <div class="container-fluid" style="background-color:#F39D7D; padding: 10px;justify-content: center;">
         <h1 class="text-center">DZ EMPIRE CAR RENTAL</h1>
@@ -56,42 +64,41 @@
             your favorite tunes playing and miles of open road ahead has to be the ideal start to any adventure. 
             The sheer diversity of landscapes and cultures within Selangor, Malaysia alone makes for myriad
             tour opportunities,no matter what kind of journey you’re after.</p>
-          <div class="d-flex justify-content-center align-items-center">
-            <div class="carousel-container d-flex ">
-              <div id="carouselExampleIndicators" class="carousel slide">
-                <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                  <a th:href="@{/sedanbook}">
-                    <div class="carousel-item active">
-                      <img src="images/sedanhome.jpg" width="800px" height="400px" class="d-block w-100" alt="...">
-                      <div class="carousel-caption d-none d-md-block ">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
+
+            <section class="search-sec" style="margin-top: 150px;">
+              <div class="container">
+                  <form th:action="@{/searchCars}" method="post">
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <div class="row">
+                                <div class="col" style="height: 100%">
+                                  <input type="number" name="day" id="dayInput" class="form-control search-slt" placeholder="Enter Day"required>
+                                </div>
+                                <div class="col" style="height: 100%">
+                                    <input type="date" name="datestart" id="dateStartInput" placeholder="Enter Start Rent Date" onchange="calculateEndDate()"required>
+                                </div>
+                                <div class="col" style="height: 100%">
+                                    <input type="date" name="dateend" id="dateEndInput" readonly >
+                                </div>
+                                  <div class="col" style="height: 100%">
+                                      <select name="cartype" class="form-control search-slt" id="exampleFormControlSelect1">
+                                          <option>Select Vehicle</option>
+                                          <option  value="Sedan">Sedan</option>
+                                          <option  value="Compact">Compact</option>
+                                          <option  value="MPV">MPV</option>
+                                      </select>
+                                  </div>
+                                  <div class="col" style="height: 100%">
+                                      <button type="submit" class="btn btn-danger wrn-btn">Search</button>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
-                    </div>
-                  </a>
-                  <div class="carousel-item">
-                    <img src="images/compacthome.jpg" width="800px" height="400px"  class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="images/mpvhome.jpg" width="800px" height="400px" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
+                  </form>
               </div>
-            </div>
-          </div>
+          </section>
+          
+          
             
         <!--  end maincontainer   -->
       </div> 
@@ -101,5 +108,20 @@
         </div>
       </footer> 
    </body>
-  
+
+   <script>
+    function calculateEndDate() {
+      var dayInput = document.getElementById("dayInput");
+      var dateStartInput = document.getElementById("dateStartInput");
+      var dateEndInput = document.getElementById("dateEndInput");
+      
+      if (dayInput.value && dateStartInput.value) {
+        var startDate = new Date(dateStartInput.value);
+        var numberOfDays = parseInt(dayInput.value);
+        var endDate = new Date(startDate.getTime() + (numberOfDays * 24 * 60 * 60 * 1000));
+        
+        dateEndInput.value = endDate.toISOString().split("T")[0];
+      }
+    }
+  </script>
 </html>

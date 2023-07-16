@@ -1,4 +1,4 @@
-package com.heroku.java;
+package com.heroku.java.bean;
 
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,10 +9,10 @@ public class Cars {
     public String carname;
     public String condition;
     public double carprice;
-    // public byte[] carimage;
+    public byte[] carimagebyte;
     public MultipartFile carimage;
-    String imageSrc;
-    String carprice2dp;
+    public String imageSrc;
+    public String carprice2dp;
 
     
 
@@ -36,7 +36,7 @@ public class Cars {
         this.carprice2dp = carprice2dp;
     }
 
-    public int getCarid() {
+    public Integer getCarid() {
         return this.carid;
     }
 
@@ -82,6 +82,15 @@ public class Cars {
 
     public void setCarimage(MultipartFile carimage) {
         this.carimage = carimage;
+    }
+
+
+    public byte[] getCarimagebyte() {
+        return this.carimagebyte;
+    }
+
+    public void setCarimagebyte(byte[] carimagebyte) {
+        this.carimagebyte = carimagebyte;
     }
 
     //constructor to get imageSrc from file carimage
