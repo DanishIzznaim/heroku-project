@@ -131,15 +131,15 @@ public class GettingStartedApplication {
     }
 
     
-    @GetMapping("/homeadmin")
-    public String homeadmin(HttpSession session) {
-        if(session.getAttribute("username") != null){ 
-            return "admin/homeadmin";
-        }else{ 
-            System.out.println("Session expired or invalid");
-            return "login"; 
-        } 
-    }
+    // @GetMapping("/homeadmin")
+    // public String homeadmin(HttpSession session) {
+    //     if(session.getAttribute("username") != null){ 
+    //         return "admin/homeadmin";
+    //     }else{ 
+    //         System.out.println("Session expired or invalid");
+    //         return "login"; 
+    //     } 
+    // }
 
     // @GetMapping("/listStaff")
     // public String addstaffPage(HttpSession session) {
@@ -155,6 +155,11 @@ public class GettingStartedApplication {
     @GetMapping("/profileadmin")
     public String profileadmin() {
         return "admin/profileadmin";
+    }
+
+    @GetMapping("/profilecust")
+    public String profilecust() {
+        return "profilecust";
     }
 
     @GetMapping("/account")
@@ -188,12 +193,25 @@ public class GettingStartedApplication {
         return "feedback";
     }
 
+     @GetMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
+
     @GetMapping("/about")
     public String about() {
         return "about";
     }
 
-    
+    @GetMapping("/updatefeedback")
+    public String updatefeedback() {
+        return "updatefeedback";
+    }
+
+     @GetMapping("/homeadmin")
+    public String homeadmin() {
+        return "admin/homeadmin";
+    }
 
     @GetMapping("/database")
     String database(Map<String, Object> model) {
