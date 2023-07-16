@@ -25,6 +25,7 @@ public class LoginDAO {
                 int rowCount = resultSet.getInt(1);
                 return rowCount > 0;
             }
+            connection.close();
         } catch (SQLException e) {
             throw e;
         }
@@ -42,6 +43,7 @@ public class LoginDAO {
                 int rowCount = resultSet.getInt(1);
                 return rowCount > 0;
             }
+            connection.close();
         } catch (SQLException e) {
             throw e;
         }

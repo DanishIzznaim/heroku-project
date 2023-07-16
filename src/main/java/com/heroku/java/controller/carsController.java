@@ -172,7 +172,7 @@ public class carsController {
     public String deleteCar(@RequestParam("carid") int carid) {
         CarDAO carDAO = new CarDAO(dataSource);
         boolean success = carDAO.deleteCar(carid);
-        if (success) {
+        if (success) {  
             return "redirect:/viewSedan";
         } else {
             return "car-not-found";

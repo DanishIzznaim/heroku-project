@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.heroku.java.DAO.CarDAO;
@@ -157,6 +158,43 @@ public class rentalController {
         } catch (Exception e) {
             System.out.println("Error retrieving rental details: " + e.getMessage());
             return "redirect:/";
+        }
+    }
+
+    @GetMapping("/viewBooking")
+    public String viewBooking(Model model) {
+        try {
+            RentalDAO rentalDAO = new RentalDAO(dataSource);
+            List<Rental> rentals = rentalDAO.getAllRentals();
+
+            model.addAttribute("rentals", rentals);
+
+            return "admin/viewBooking";
+        } catch (SQLException e) {
+            // Handle exceptions or errors
+            model.addAttribute("error", "Error retrieving rentals: " + e.getMessage());
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/updateBooking")
+    public String updateBooking(@RequestParam("rentid") int rentid, 
+    @RequestParam("returndate") Date returndate, @RequestParam("statusrent") String statusrent, Model model) {
+        try {
+            RentalDAO rentalDAO = new RentalDAO(dataSource);
+            Rental existingRental = rentalDAO.getRentbyId(rentid);
+            if (existingRental == null) {
+                throw new IllegalArgumentException("Rental record not found.");
+            }
+            existingRental.setReturndate(returndate);
+            existingRental.setStatusrent(statusrent);
+            rentalDAO.updateRental(existingRental);
+            model.addAttribute("rental", existingRental);
+            return "redirect:/viewBooking";
+        } catch (Exception e) {
+            // Handle exceptions or errors
+            model.addAttribute("error", "Error updating booking: " + e.getMessage());
+            return "redirect:/error";
         }
     }
 

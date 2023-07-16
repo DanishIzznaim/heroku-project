@@ -30,6 +30,7 @@ public class PaymentDAO {
             if (resultSet.next()) {
                 paymentId = resultSet.getInt("paymentid");
             }
+            connection.close();
         } catch (SQLException e) {
             throw new SQLException("Error adding payment: " + e.getMessage());
         }
@@ -56,6 +57,7 @@ public class PaymentDAO {
             PreparedStatement statement2 = connection.prepareStatement(sql2);
             statement2.setInt(1,paymentId);
             statement2.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             throw new SQLException("Error adding payment: " + e.getMessage());
         }

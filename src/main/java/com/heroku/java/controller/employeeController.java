@@ -92,7 +92,7 @@ public class employeeController {
         return "redirect:/listStaff"; // Replace with the appropriate redirect URL after updating the staff details
     }
 
-    @GetMapping("/deleteStaff")
+    @PostMapping("/deleteStaff")
     public String deleteStaff(@RequestParam("id") int employeeId) {
         try {
             EmployeeDAO employeeDAO = new EmployeeDAO(dataSource);

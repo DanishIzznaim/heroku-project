@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -35,7 +37,7 @@ public class RentalDAO {
                 rentid = parentId;
                 System.out.println("rentid : " + rentid);
             }
-
+            connection.close();
         }catch (SQLException e) {
             System.out.println("Error add Rental: " + e.getMessage());
         }
@@ -63,6 +65,7 @@ public class RentalDAO {
                 rental.setCarid(rs.getInt("carid"));
                 rental.setCustomerid(rs.getInt("customerid"));
             }
+            conn.close();
         }catch (SQLException e) {
             System.out.println("Error add Rental: " + e.getMessage());
         }
@@ -89,10 +92,54 @@ public class RentalDAO {
                 double totalRentPrice = resultSet.getDouble("totalrentprice");
                 rental = new Rental(day, rentId, carId, customerId,dateStart, dateEnd, statusRent, totalRentPrice);
             }
+            connection.close();
         } catch (SQLException e) {
             throw new SQLException("Error retrieving rental details: " + e.getMessage());
         }
         return rental;
     }
+
+    public List<Rental> getAllRentals() throws SQLException {
+    List<Rental> rentals = new ArrayList<>();
+
+    try (Connection connection = dataSource.getConnection()) {
+        String sql = "SELECT * FROM rental order by rentid";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Rental rental = new Rental();
+            rental.setRentid(resultSet.getInt("rentid"));
+            rental.setDay(resultSet.getInt("day"));
+            rental.setDatestart(resultSet.getDate("datestart"));
+            rental.setDateend(resultSet.getDate("dateend"));
+            rental.setReturndate(resultSet.getDate("returndate"));
+            rental.setStatusrent(resultSet.getString("statusrent"));
+            rental.setTotalrentprice(resultSet.getDouble("totalrentprice"));
+            rental.setCarid(resultSet.getInt("carid"));
+            rental.setCustomerid(resultSet.getInt("customerid"));
+
+            rentals.add(rental);
+        }
+        connection.close();
+    } catch (SQLException e) {
+        throw new SQLException("Error retrieving rentals: " + e.getMessage());
+    }
+
+    return rentals;
+}
+
+public void updateRental(Rental rental) throws SQLException {
+    try (Connection connection = dataSource.getConnection()) {
+        String sql = "UPDATE rental SET returndate = ?, statusrent = ? WHERE rentid = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setDate(1, rental.getReturndate());
+        statement.setString(2, rental.getStatusrent());
+        statement.setInt(3, rental.getRentid());
+        statement.executeUpdate();
+    } catch (SQLException e) {
+        throw new SQLException("Error updating rental: " + e.getMessage());
+    }
+}
     
 }

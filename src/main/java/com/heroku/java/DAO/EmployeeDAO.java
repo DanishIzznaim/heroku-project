@@ -33,6 +33,7 @@ public class EmployeeDAO {
             statement.setString(6, employee.getEmprole());
 
             statement.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -59,6 +60,7 @@ public class EmployeeDAO {
 
                 employees.add(employee);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -86,6 +88,7 @@ public class EmployeeDAO {
                 employee.setPhonenumE(resultSet.getInt("phonenumE"));
                 employee.setManagerid(resultSet.getInt("managerid"));
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -108,6 +111,7 @@ public class EmployeeDAO {
             statement.setInt(6, employee.getUserid());
 
             statement.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -121,6 +125,7 @@ public class EmployeeDAO {
             statement.setInt(1, employeeId);
 
             statement.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -145,7 +150,7 @@ public class EmployeeDAO {
                 Employee employee = new Employee(employeeid, fullname, usernameEmp,password,emprole,phonenumE,managerid);
                 return employee;
             }
-
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -172,6 +177,9 @@ public class EmployeeDAO {
             Customer customer = new Customer(customerid, custname, username,null,licensedate,icnumber,phonenumC);
             customers.add(customer);
         }
+        connection.close();
+    } catch (SQLException e) {
+            e.printStackTrace();
     }
     
     return customers;

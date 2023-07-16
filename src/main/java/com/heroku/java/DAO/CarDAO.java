@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.heroku.java.bean.Cars;
 
 public class CarDAO {
-     private DataSource dataSource; // Assuming you have a DataSource instance
+    private DataSource dataSource; // Assuming you have a DataSource instance
 
     public CarDAO(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -32,6 +32,7 @@ public class CarDAO {
             statement.setDouble(4, car.getCarprice());
             statement.setBytes(5, car.getCarimagebyte());
             statement.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -44,89 +45,93 @@ public class CarDAO {
             String sql = "SELECT carid, cartype, carname, condition, carprice, carimage FROM cars WHERE cartype = 'Sedan'";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            
+
             while (resultSet.next()) {
                 int carid = resultSet.getInt("carid");
                 String cartype = resultSet.getString("cartype");
                 String carname = resultSet.getString("carname");
                 String condition = resultSet.getString("condition");
                 double carprice = resultSet.getDouble("carprice");
-                
+
                 byte[] carimageBytes = resultSet.getBytes("carimage");
                 String base64Image = Base64.getEncoder().encodeToString(carimageBytes);
                 String imageSrc = "data:image/jpeg;base64," + base64Image;
                 String carprice2dp = String.format("%.2f", carprice);
-                
+
                 Cars car = new Cars(carid, cartype, carname, condition, carprice, null, imageSrc, carprice2dp);
                 cars.add(car);
+
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
         }
-        
+
         return cars;
     }
 
     public ArrayList<Cars> getMPVCars() throws SQLException {
         ArrayList<Cars> cars = new ArrayList<>();
-        
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "SELECT carid, cartype, carname, condition, carprice, carimage FROM cars WHERE cartype = 'MPV'";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            
+
             while (resultSet.next()) {
                 int carid = resultSet.getInt("carid");
                 String cartype = resultSet.getString("cartype");
                 String carname = resultSet.getString("carname");
                 String condition = resultSet.getString("condition");
                 double carprice = resultSet.getDouble("carprice");
-                
+
                 byte[] carimageBytes = resultSet.getBytes("carimage");
                 String base64Image = Base64.getEncoder().encodeToString(carimageBytes);
                 String imageSrc = "data:image/jpeg;base64," + base64Image;
                 String carprice2dp = String.format("%.2f", carprice);
-                
+
                 Cars car = new Cars(carid, cartype, carname, condition, carprice, null, imageSrc, carprice2dp);
                 cars.add(car);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
         }
-        
+
         return cars;
     }
 
     public ArrayList<Cars> getCompactCars() throws SQLException {
         ArrayList<Cars> cars = new ArrayList<>();
-        
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "SELECT carid, cartype, carname, condition, carprice, carimage FROM cars WHERE cartype = 'Compact'";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            
+
             while (resultSet.next()) {
                 int carid = resultSet.getInt("carid");
                 String cartype = resultSet.getString("cartype");
                 String carname = resultSet.getString("carname");
                 String condition = resultSet.getString("condition");
                 double carprice = resultSet.getDouble("carprice");
-                
+
                 byte[] carimageBytes = resultSet.getBytes("carimage");
                 String base64Image = Base64.getEncoder().encodeToString(carimageBytes);
                 String imageSrc = "data:image/jpeg;base64," + base64Image;
                 String carprice2dp = String.format("%.2f", carprice);
-                
+
                 Cars car = new Cars(carid, cartype, carname, condition, carprice, null, imageSrc, carprice2dp);
                 cars.add(car);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
         }
-        
+
         return cars;
     }
 
@@ -137,24 +142,25 @@ public class CarDAO {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, carid);
             ResultSet resultSet = statement.executeQuery();
-    
+
             if (resultSet.next()) {
                 String cartype = resultSet.getString("cartype");
                 String carname = resultSet.getString("carname");
                 String condition = resultSet.getString("condition");
                 double carprice = resultSet.getDouble("carprice");
-                System.out.println("carprice: "+carprice);
+                System.out.println("carprice: " + carprice);
                 byte[] carimageBytes = resultSet.getBytes("carimage");
                 String base64Image = Base64.getEncoder().encodeToString(carimageBytes);
                 String imageSrc = "data:image/jpeg;base64," + base64Image;
-    
+
                 car = new Cars(carid, cartype, carname, condition, carprice, null, imageSrc, null);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
         }
-    
+
         return car;
     }
 
@@ -185,7 +191,9 @@ public class CarDAO {
 
             // execute update
             int rowsAffected = statement.executeUpdate();
+            connection.close();
             return rowsAffected > 0;
+
         } catch (SQLException sqe) {
             System.out.println("Error Code = " + sqe.getErrorCode());
             System.out.println("SQL state = " + sqe.getSQLState());
@@ -203,6 +211,7 @@ public class CarDAO {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, carid);
             int rowsAffected = statement.executeUpdate();
+            connection.close();
             return rowsAffected > 0;
         } catch (SQLException sqe) {
             System.out.println("Error Code = " + sqe.getErrorCode());
@@ -215,16 +224,15 @@ public class CarDAO {
         return false;
     }
 
-
     public List<Cars> searchAvailableCars(int day, Date datestart, Date dateend, String carType) throws SQLException {
         List<Cars> availableCars = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "SELECT c.carid, c.cartype, c.carname, c.condition, c.carprice, c.carimage " +
-                         "FROM cars c " +
-                         "WHERE c.cartype = ? AND c.carid NOT IN (" +
-                         "    SELECT r.carid FROM rental r WHERE r.datestart <= ? AND r.dateend >= ?" +
-                         ")";
+                    "FROM cars c " +
+                    "WHERE c.cartype = ? AND c.carid NOT IN (" +
+                    "    SELECT r.carid FROM rental r WHERE r.datestart <= ? AND r.dateend >= ?" +
+                    ")";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, carType);
             statement.setDate(2, datestart);
@@ -241,17 +249,15 @@ public class CarDAO {
                 String base64Image = Base64.getEncoder().encodeToString(carimageBytes);
                 String imageSrc = "data:image/jpeg;base64," + base64Image;
                 String carprice2dp = String.format("%.2f", carprice);
-                System.out.println("cartype: "+cartype);
-                Cars car = new Cars(carid, cartype, carname, condition, carprice, null, imageSrc,carprice2dp);
+                System.out.println("cartype: " + cartype);
+                Cars car = new Cars(carid, cartype, carname, condition, carprice, null, imageSrc, carprice2dp);
                 availableCars.add(car);
             }
+            connection.close();
         } catch (Exception e) {
             System.out.println("E message: " + e.getMessage());
         }
         return availableCars;
     }
 
-    
 }
-
-

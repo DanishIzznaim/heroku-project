@@ -37,6 +37,7 @@ public class CustomerDAO {
             int generatedId = generatedKeys.getInt(1);
             customer.setUserid(generatedId);
         }
+            connection.close();
             return customer;
         } catch (SQLException e) {
             // Handle any exceptions or errors that occurred during the database operation
@@ -66,7 +67,7 @@ public class CustomerDAO {
     
                 return customer;
             }
-    
+            connection.close();
             return null; // Return null if the customer is not found
         } catch (SQLException e) {
             // Handle any exceptions or errors that occurred during the database operation
@@ -88,7 +89,7 @@ public class CustomerDAO {
             statement.setString(7, customer.getUsername());
     
             statement.executeUpdate();
-    
+            connection.close();
             return customer;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -104,6 +105,7 @@ public class CustomerDAO {
                 statement.setString(1, username);
     
                 statement.executeUpdate();
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw e;
