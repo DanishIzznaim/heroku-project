@@ -134,7 +134,7 @@ public class carsController {
                     model.addAttribute("car", car);
                 }
 
-                return "admin/updateCar";
+                return "admin/updatecar";
             } catch (SQLException sqe) {
                 System.out.println("Error Code = " + sqe.getErrorCode());
                 System.out.println("SQL state = " + sqe.getSQLState());
