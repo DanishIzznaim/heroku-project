@@ -28,7 +28,7 @@ public class employeeController {
     
     @GetMapping("/addStaff")
     public String addstaffPage(HttpSession session) {
-        return "admin/addStaff";
+        return "admin/addstaff";
         // if(session.getAttribute("username") != null){ 
             
         // }else{ 
