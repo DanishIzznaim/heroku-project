@@ -35,7 +35,7 @@
               <a class="nav-link" aria-current="page" th:href="@{/homecustomer}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="@{/logout}">Logout</a>
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
               </li>
             <li class="nav-item">
                 <a th:href="@{/rentaldetail}">
@@ -58,7 +58,7 @@
       </div>
     </nav>
     
-    <div class="col-10 p-3" style="margin-left: 80px;">
+    <!-- <div class="col-10 p-3" style="margin-left: 80px;">
       <div class="card p-3">
         <h3><u>Rental Detail</u></h3>
         <div class="row">
@@ -68,15 +68,41 @@
             <h4>Car Type: <span th:text="${car.cartype}"></span></h4>
           </div>
           <div class="col-md-6">
-            <h4>Day: <span th:text="${rent.day}"></span></h4>
-            <h4>Date Start: <span th:text="${rent.datestart}"></span></h4>
-            <h4>Date End: <span th:text="${rent.dateend}"></span></h4>
-            <h4>Status: <span th:text="${rent.statusrent}"></span></h4>
-            <h4>Total Rent Price: <span th:text="${rent.totalrentprice}"></span></h4>
+            <h4>Day: <span th:text="${rental.day}"></span></h4>
+            <h4>Date Start: <span th:text="${rental.datestart}"></span></h4>
+            <h4>Date End: <span th:text="${rental.dateend}"></span></h4>
+            <h4>Status: <span th:text="${rental.statusrent}"></span></h4>
+            <h4>Total Rent Price: <span th:text="${rental.totalrentprice}"></span></h4>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+    <div class="col-10 p-3" style="margin-left: 80px;">
+      <div class="card p-3" th:unless="${car != null and rental != null}">
+          <!-- Check if a booking (car) and rental details are not present -->
+          <h3><u>No Booking Yet</u></h3>
+      </div>
+      <div class="card p-3" th:if="${car != null and rental != null}">
+          <!-- Check if a booking (car) and rental details are present -->
+          <h3><u>Rental Detail</u></h3>
+          <div class="row">
+              <div class="col-md-6">
+                  <img th:src="${car.imageSrc}" alt="Car Image" class="img-fluid" />
+                  <h4>Car Name: <span th:text="${car.carname}"></span></h4>
+                  <h4>Car Type: <span th:text="${car.cartype}"></span></h4>
+              </div>
+              <div class="col-md-6">
+                  <h4>Day: <span th:text="${rental.day}"></span></h4>
+                  <h4>Date Start: <span th:text="${rental.datestart}"></span></h4>
+                  <h4>Date End: <span th:text="${rental.dateend}"></span></h4>
+                  <h4>Status: <span th:text="${rental.statusrent}"></span></h4>
+                  <h4>Total Rent Price: <span th:text="${rental.totalrentprice}"></span></h4>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  
 
 
     <footer class="py-3 bg-dark text-white col-12 fixed-bottom">

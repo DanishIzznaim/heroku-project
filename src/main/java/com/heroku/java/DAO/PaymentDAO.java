@@ -1,12 +1,15 @@
 package com.heroku.java.DAO;
 
 import java.sql.Connection;
+// import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 
 import javax.sql.DataSource;
 import com.heroku.java.bean.Payment;
+// import com.heroku.java.bean.Rental;
 
 public class PaymentDAO {
     private DataSource dataSource;
@@ -64,5 +67,36 @@ public class PaymentDAO {
         return paymentId;
     }
 
-    
+    public Payment getPaymentbyPaymentId(int rentid) throws SQLException{
+        Payment payment = null;
+        try{
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT * FROM payment WHERE rentid = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, rentid);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int paymentid = resultSet.getInt("paymentid");
+                Double payamount = resultSet.getDouble("payamount");
+                String paymentmethod = resultSet.getString("paymentmethod");
+                byte[] paymentbyte = resultSet.getBytes("paymentreceipt");
+                String imageSrc = null;  // Default to null if paymentreceipt is null
+                if (paymentbyte != null) {
+                String base64Image = Base64.getEncoder().encodeToString(paymentbyte);
+                imageSrc = "data:image/jpeg;base64," + base64Image;
+                }
+                String paystatus = resultSet.getString("paystatus");
+                int rentpid = resultSet.getInt("rentid");
+                
+                payment = new Payment(paymentid,payamount,paymentmethod,imageSrc,paystatus,rentpid);
+            }
+            
+            connection.close();
+
+        }catch (SQLException e) {
+            throw new SQLException("Error adding payment: " + e.getMessage());
+        }
+        return payment;
+    }
 }

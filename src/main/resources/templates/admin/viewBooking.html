@@ -156,17 +156,23 @@
       <div class="offset-2 justify-content-evenly align-items-center col-9">
           <table class="table table-striped text-center">
             <tr>
-              <th>Rental ID</th>
+              <th>Rent ID</th>
               <th>Day</th>
               <th>Date Start</th>
               <th>Date End</th>
+              <th>Return Date</th>
               <th>Total Rent Price</th>
-              <th>Car ID</th>
-              <th>Customer ID</th>
+              <th>Status</th>
+              <th>Receipt</th>
+              <th>Save</th>
               <!-- <th>Action</th> -->
             </tr>
             <!-- Loop through the rentals list -->
             <tr th:each="rental : ${rentals}">
+              <!-- <td th:text="${customers[rentalIndex].custname}">
+              </td> -->
+              <!-- <td th:text="${customer.custname}">
+              </td> -->
               <td th:text="${rental.rentid}">
               </td>
               <td th:text="${rental.day}">
@@ -175,12 +181,26 @@
               </td>
               <td th:text="${rental.dateend}">
               </td>
-              <td th:text="${rental.totalrentprice}">    
-              </td>
-              <td th:text="${rental.carid}">           
-              </td>
-              <td th:text="${rental.customerid}">       
-              </td>
+              <form method="post" action="/saveRental">
+                <input type="hidden" name="rentid" th:value="${rental.rentid}" />
+                <td>
+                  <input type="date" name="returndate" th:value="${rental.returndate}" placeholder="Enter Return Date" />
+                </td>
+                <td th:text="${rental.totalrentprice}">    
+                </td>
+                <td>
+                  <select name="statusrent">
+                    <option th:value="'Booked'" th:text="'Booked'" th:selected="${rental.statusrent == 'Booked'}"/>
+                    <option th:value="'Finished'" th:text="'Finished'" th:selected="${rental.statusrent == 'Finished'}" />
+                  </select>
+                </td>
+                <td>
+                  <a class="btn btn-primary" th:href="@{/viewReceipt(rentid=${rental.rentid})}" role="button">View</a>
+                </td>
+                <td>
+                  <button type="submit" class="p-1 btn btn-primary">Save</button>
+                </td>
+              </form>
             </tr>
           </table>
       </div>

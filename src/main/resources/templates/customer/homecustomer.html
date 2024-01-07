@@ -65,20 +65,20 @@
             The sheer diversity of landscapes and cultures within Selangor, Malaysia alone makes for myriad
             tour opportunities,no matter what kind of journey you’re after.</p>
 
-            <section class="search-sec" style="margin-top: 150px;">
+            <!-- <section class="search-sec" style="margin-top: 150px;">
               <div class="container">
                   <form th:action="@{/searchCars}" method="post">
                       <div class="row">
                           <div class="col-lg-12">
                               <div class="row">
                                 <div class="col" style="height: 100%">
-                                  <input type="number" name="day" id="dayInput" class="form-control search-slt" placeholder="Enter Day"required>
-                                </div>
-                                <div class="col" style="height: 100%">
                                     <input type="date" name="datestart" id="dateStartInput" placeholder="Enter Start Rent Date" onchange="calculateEndDate()"required>
                                 </div>
                                 <div class="col" style="height: 100%">
                                     <input type="date" name="dateend" id="dateEndInput" readonly >
+                                </div>
+                                <div class="col" style="height: 100%">
+                                  <input type="number" name="day" id="dayInput" class="form-control search-slt" placeholder="Enter Day"required>
                                 </div>
                                   <div class="col" style="height: 100%">
                                       <select name="cartype" class="form-control search-slt" id="exampleFormControlSelect1">
@@ -96,8 +96,42 @@
                       </div>
                   </form>
               </div>
-          </section>
-          
+          </section> -->
+          <section class="search-sec" style="margin-top: 150px;">
+            <div class="container">
+                <form th:action="@{/searchCars}" method="post" onsubmit="return validateForm()">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col" style="height: 100%">
+                                    <input type="date" name="datestart" id="dateStartInput" placeholder="Enter Start Rent Date"  required>
+                                </div>
+                                <div class="col" style="height: 100%">
+                                    <input type="date" name="dateend" id="dateEndInput" required>
+                                </div>
+                                <div class="col" style="height: 100%">
+                                    <input type="number" name="day" id="dayInput" class="form-control search-slt" placeholder="Enter Day" readonly required>
+                                </div>
+                                <div class="col" style="height: 100%">
+                                    <select name="cartype" class="form-control search-slt" id="exampleFormControlSelect1">
+                                        <option>Select Vehicle</option>
+                                        <option value="Sedan">Sedan</option>
+                                        <option value="Compact">Compact</option>
+                                        <option value="MPV">MPV</option>
+                                    </select>
+                                </div>
+                                <div class="col" style="height: 100%">
+                                    <button type="submit" class="btn btn-danger wrn-btn">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+           
+        </section>
+        
           
             
         <!--  end maincontainer   -->
@@ -108,8 +142,89 @@
         </div>
       </footer> 
    </body>
-
    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get today's date in the format YYYY-MM-DD
+        var today = new Date().toISOString().split('T')[0];
+
+        // Set the minimum value for the start date input to today
+        document.getElementById("dateStartInput").min = today;
+
+        // Add an event listener to the start date input to update the day input and set the minimum value for the end date
+        document.getElementById("dateStartInput").addEventListener("input", function () {
+            // Get the selected start date
+            var startDate = new Date(this.value);
+
+            // Set the minimum value for the end date input to the day after the selected start date
+            var nextDay = new Date(startDate);
+            nextDay.setDate(startDate.getDate() + 1);
+            document.getElementById("dateEndInput").min = nextDay.toISOString().split('T')[0];
+
+            // Get the selected end date
+            var endDate = new Date(document.getElementById("dateEndInput").value);
+
+            // Calculate the difference in days
+            var timeDifference = endDate - startDate;
+            var daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+            // Update the day input value
+            document.getElementById("dayInput").value = daysDifference;
+
+            // Display a pop-up message if daysDifference is negative
+            if (daysDifference < 0) {
+                alert("Date entered is not applicable.");
+                // You can also add additional logic here, such as clearing the end date input or taking corrective action.
+            }
+        });
+
+        // Add an event listener to the end date input to update the day input
+        document.getElementById("dateEndInput").addEventListener("input", function () {
+            // Get the selected start date
+            var startDate = new Date(document.getElementById("dateStartInput").value);
+
+            // Get the selected end date
+            var endDate = new Date(this.value);
+
+            // Calculate the difference in days
+            var timeDifference = endDate - startDate;
+            var daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+            // Update the day input value
+            document.getElementById("dayInput").value = daysDifference;
+
+            // Display a pop-up message if daysDifference is negative
+            if (daysDifference < 0) {
+                alert("Date entered is not applicable. Please enter Proper Date");
+                // You can also add additional logic here, such as clearing the end date input or taking corrective action.
+            }
+        });
+    });
+
+    // Function to validate the form (you can customize this based on your needs)
+    function validateForm() {
+        var daysDifference = parseInt(document.getElementById("dayInput").value);
+
+        // Check if daysDifference is negative
+        if (daysDifference < 0) {
+        // Display an alert or any other message to inform the user
+        alert("Date entered is not applicable.");
+    
+        // Return false to prevent form submission
+        return false;
+        }
+
+      // Add additional validation logic here if needed
+
+      // Return true if the form is valid
+        return true;
+    }
+</script>
+
+
+
+
+
+   <!-- <script>
     function calculateEndDate() {
       var dayInput = document.getElementById("dayInput");
       var dateStartInput = document.getElementById("dateStartInput");
@@ -123,5 +238,5 @@
         dateEndInput.value = endDate.toISOString().split("T")[0];
       }
     }
-  </script>
+  </script> -->
 </html>

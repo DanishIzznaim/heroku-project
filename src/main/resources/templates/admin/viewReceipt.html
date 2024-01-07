@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="images/dz.png" />
-    <title>List Employee</title>
+    <title>List Rental</title>
     <link rel="stylesheet" href="stylesheets/admin.css" />
     <link
       rel="stylesheet"
@@ -64,8 +64,8 @@
     <!-- Start Side Bar-->
     <div
       id="sidebar"
-      class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 position-fixed"
-      style="height: 120%"
+      class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 position-absolute"
+      style="height: 200%"
     >
       <ul
         class="nav nav-underline flex-column mb-auto"
@@ -145,128 +145,23 @@
     <!-- End Side Bar-->
     <!-- Card Right-->
     <div class="container-fluid" style="width: 87%">
-      <h3 class="offset-2" style="margin-top: 2%">
-        Staff List
-        <a href="/addStaff">
-          <i
-            class="bi bi-plus-circle-fill"
-            style="vertical-align: middle; margin-left: 60%"
-          ></i>
-          Add Staff
-        </a>
-      </h3>
+      <h3 class="offset-2" style="margin-top: 2%">Status Payment</h3>
+    </div>
+    <div th:if="${payment.imageSrc != null}" style="margin-left: 250px;">
+        <div class="col-6" style="width:70%">
+          <img th:src="${payment.imageSrc}" alt="Receipt Image" />
+        </div>
+    </div>
+      <div class="card row col-9" style="margin-left: 250px; margin-top: 30px;">
+        <div class="col-md-6">
+            <p th:text="'Payment ID: ' + ${payment.paymentid}"></p>
+            <p th:text="'Pay Amount: ' + ${payment.payamount}"></p>
+            <p th:text="'Payment Method: ' + ${payment.paymentmethod}"></p>
+          </div>
     </div>
 
-    <div
-      name="staffTable"
-      class="d-flex flex-wrap justify-content-evenly align-items-center"
-    >
-      <!-- Iterate over the employee list and display each employee in a card -->
-      <div class="offset-2 justify-content-evenly align-items-center col-9">
-        <table class="table table-striped text-center">
-          <thead>
-            <tr>
-              <th scope="col">Employee ID</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Username</th>
-              <th scope="col">Employee Role</th>
-              <th scope="col">Phone Number</th>
-              <th scope="col">Manager ID</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Use Thymeleaf loop to iterate over the employees -->
-            <tr th:each="employee: ${employees}">
-              <form action="/deleteStaff" method="post">
-                <input th:value="${employee.userid}" name="id" hidden/>
-                <td th:text="${employee.userid}"></td>
-                <td th:text="${employee.fullname}"></td>
-                <td th:text="${employee.username}"></td>
-                <td th:text="${employee.emprole}"></td>
-                <td th:text="${employee.phonenumE}"></td>
-                <td th:text="${employee.managerid}"></td>
-                <td>
-                  <a
-                    th:href="@{'/updateStaff?id=' + ${employee.userid}}"
-                    class="btn btn-primary"
-                    >Update</a
-                  >
-                  <!-- <a class="dropdown-item" th:data-id="${patients.pId}"
-                               data-toggle="modal" data-target="#deleteModal">Delete</a> -->
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    th:data-bs-target="'#exampleModal-' + ${employee.userid}"
-                  >
-                    Delete
-                  </button>
-                </td>
-                <div
-                  class="modal fade"
-                  th:id="'exampleModal-' + ${employee.userid}"
-                  tabindex="-1"
-                  role="dialog"
-                  aria-labelledby="deleteModalLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">
-                          Delete Employee
-                        </h5>
-                        <button
-                          type="button"
-                          class="close"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                        >
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <p>Are you sure you want to delete this employee?</p>
-                      </div>
-                      <div class="modal-footer">
-                        <button
-                          type="button"
-                          class="btn btn-secondary"
-                          data-dismiss="modal"
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          id="deleteButton"
-                          class="btn btn-danger"
-                          type="submit"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
 
-    <!-- <script>
-            $(document).ready(function() {
-                $('#deleteModal').on('show.bs.modal', function(event) {
-                    var button = $(event.relatedTarget); // Button that triggered the modal
-                    var userId = button.data('id'); // Extract the userid from data-id attribute
-                    var deleteButton = $('#deleteButton'); // Delete button in the modal
-        
-                    // Update the href attribute of the delete button to include the userid
-                    deleteButton.attr('href', '/deleteStaff?id=' + userId);
-                });
-            });
-        </script> -->
+    
     <footer class="py-3 bg-dark text-white col-12 fixed-bottom">
       <div class="container-fluid">
         <p class="m-0 text-center">
@@ -275,17 +170,6 @@
       </div>
     </footer>
 
-    <!-- <script>
-      $(document).ready(function () {
-        $("#deleteModal").on("show.bs.modal", function (event) {
-          var button = $(event.relatedTarget);
-          var userId = button.data("id");
-          var deleteButton = $("#deleteButton");
-
-          deleteButton.attr("href", "/deleteStaff?userid=" + userId);
-        });
-      });
-    </script> -->
 
     <script
       th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}"

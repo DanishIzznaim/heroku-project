@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.heroku.java.DAO.CustomerDAO;
 import com.heroku.java.bean.Customer;
 
+
 // import com.heroku.java.MODEL.User;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 // import java.text.SimpleDateFormat;
 // import java.util.ArrayList;
+
 
 @Controller
 public class customerController {   

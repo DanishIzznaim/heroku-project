@@ -66,16 +66,16 @@
     <body style="background-color: #f39d7d">
       <div
         class="justify-content-center align-items-center"
-        style="margin-top: 20px; padding: 10px"
+        style="margin-top: 20px; padding: 10px;"
       >
-        <h1 class="text-center">Payment</h1>
+        <h1 class="text-center" >Payment</h1>
         <div class="row col-10">
-          <div class="col-6">
-            <div class="card p-3 rounded" style="width: 400px; height: 300px">
+          <div class="col-6" style="margin-top: 50px;">
+            <div class="card p-4 rounded" style="width: 400px; height: 300px">
               <img
                 th:src="${car.imageSrc}"
                 class="img-fluid rounded"
-                style="width: 300px; height: 200px"
+                style="width: 500px; height: 300px"
               />
             </div>
           </div>
@@ -110,14 +110,14 @@
                   required
                 >
                   <option value="">Select Payment Method</option>
-                  <option value="Online Transaction">Upload Receipt</option>
+                  <option value="Online Transaction">Online Transaction</option>
                   <option value="Cash">Cash</option>
                 </select>
               </div>
               <div id="receiptUpload">
                 <div class="mb-3">
                   <label for="paymentreceipt" class="form-label"
-                    >Proof of Payment:</label
+                    >Receipt (PDF):</label
                   >
                   <input
                     type="file"

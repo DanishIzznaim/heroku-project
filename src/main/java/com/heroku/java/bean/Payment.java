@@ -31,6 +31,16 @@ public class Payment {
     }
 
 
+    public Payment(int paymentid, Double payamount, String paymentmethod, String imageSrc,String paystatus, int rentid) {
+    this.paymentid = paymentid;
+    this.payamount = payamount;
+    this.paymentmethod = paymentmethod;
+    this.imageSrc = imageSrc;
+    this.paystatus = paystatus;
+    this.rentid = rentid;
+    }
+
+
     public int getRentid() {
         return this.rentid;
     }
