@@ -88,6 +88,7 @@
                 class="form-control"
                 name="carname"
                 th:value="${car.carname}"
+                disabled
               />
             </div>
             <div class="mb-3">
@@ -172,56 +173,57 @@
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"
     ></script>
+    
     <script>
-      // Function to calculate price based on selected day
-      function calculatePrice() {
-        var dayInput = document.getElementById("dayInput").value;
-        var priceInput = document.getElementById("priceInput").value;
-        var totalInput = document.getElementById("totalInput");
-        var carprice = parseFloat(priceInput);
-        console.log(priceInput);
-        console.log(dayInput);
-        console.log(dayInput.value != "");
+      document.addEventListener("DOMContentLoaded", function () {
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementById("datestartInput").min = today;
 
-        if (dayInput.value != "") {
-          var days = parseFloat(dayInput.value);
-          var totalPrice = carprice * dayInput;
-          console.log(totalPrice);
-          totalInput.value = totalPrice;
-        } else {
-          totalInput.value = carprice.toFixed(2);
+        document.getElementById("datestartInput").addEventListener("input", function () {
+            var startDate = new Date(this.value);
+            var nextDay = new Date(startDate);
+            nextDay.setDate(startDate.getDate() + 1);
+            document.getElementById("dateendInput").min = nextDay.toISOString().split('T')[0];
+
+            updateDaysAndTotalPrice();
+        });
+
+        document.getElementById("dateendInput").addEventListener("input", updateDaysAndTotalPrice);
+
+        document.getElementById("dayInput").addEventListener("input", updateTotalPrice);
+
+        function updateDaysAndTotalPrice() {
+            var startDate = new Date(document.getElementById("datestartInput").value);
+            var endDate = new Date(document.getElementById("dateendInput").value);
+            var timeDifference = endDate - startDate;
+            var daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+            document.getElementById("dayInput").value = daysDifference;
+
+            updateTotalPrice();
         }
-      }
 
-      // Function to adjust the date range based on selected start date
-      function adjustDateRange() {
-        var datestartInput = document.getElementById("datestartInput");
-        var dateendInput = document.getElementById("dateendInput");
-        var dayInput = document.getElementById("dayInput");
+        function updateTotalPrice() {
+            var dayInput = document.getElementById("dayInput").value;
+            var priceInput = document.getElementById("priceInput").value;
+            var totalInput = document.getElementById("totalInput");
+            var carprice = parseFloat(priceInput);
 
-        if (datestartInput.value && dayInput.value && !isNaN(dayInput.value)) {
-          var startDate = new Date(datestartInput.value);
-          var days = parseFloat(dayInput.value);
-          var endDate = new Date(
-            startDate.getTime() + (days - 1) * 24 * 60 * 60 * 1000
-          );
-          dateendInput.value = endDate.toISOString().slice(0, 10);
-        } else {
-          dateendInput.value = "";
+            // Check if dayInput is a valid number
+            var days = parseFloat(dayInput);
+
+            // Calculate the total price using the latest number of days
+            var totalPrice = isNaN(days) ? 0 : carprice * days;
+
+            totalInput.value = totalPrice.toFixed(2);
         }
-      }
 
-      // Add event listeners to call the functions on input change
-      document
-        .getElementById("dayInput")
-        .addEventListener("input", calculatePrice);
-      document
-        .getElementById("datestartInput")
-        .addEventListener("input", adjustDateRange);
+        // Initial update when the page loads
+        updateDaysAndTotalPrice();
+});
 
-      // Initial calculations on page load
-      calculatePrice();
-      adjustDateRange();
-    </script>
-  </body>
+    
+</script>
+  
+</body>
 </html>

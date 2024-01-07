@@ -12,10 +12,29 @@ public class Rental {
     public Double totalrentprice;
     public int customerid;
     public int carid;
+    public int employeeId;
 
+    // private Customer customer;
     public Rental() {
     }
 
+    // public Customer getCustomer() {
+    //     return customer;
+    // }
+
+
+    public Rental(Integer rentid, int day, Date datestart, Date dateend, Date returndate, String statusrent, Double totalrentprice, int customerid, int carid, int employeeId) {
+        this.rentid = rentid;
+        this.day = day;
+        this.datestart = datestart;
+        this.dateend = dateend;
+        this.returndate = returndate;
+        this.statusrent = statusrent;
+        this.totalrentprice = totalrentprice;
+        this.customerid = customerid;
+        this.carid = carid;
+        this.employeeId = employeeId;
+    }    
 
     public Rental(Integer rentid, int day, Date datestart, Date dateend, Date returndate, String statusrent, Double totalrentprice) {
         this.rentid = rentid;
@@ -113,6 +132,14 @@ public class Rental {
 
     public void setCarid(int carid) {
         this.carid = carid;
+    }
+
+    public int getEmployeeId(){
+        return this.employeeId;
+    }
+
+    public void setEmployeeId(int employeeId){
+        this.employeeId = employeeId;
     }
 
 }

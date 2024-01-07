@@ -119,4 +119,20 @@ public class paymentController {
         }
     }
 
+    @GetMapping("/viewReceipt")
+    public String viewReceipt(@RequestParam("rentid") int rentid, Model model, HttpSession session) throws SQLException {
+    try{
+        PaymentDAO paymentDAO = new PaymentDAO(dataSource);
+        Payment payment = paymentDAO.getPaymentbyPaymentId(rentid);
+        
+        //save all the details in payment
+    
+        model.addAttribute("payment", payment);
+        return "admin/viewReceipt";
+    } catch (SQLException e) {
+    e.printStackTrace();
+    return "redirect:/";
+    }
+        
+    }
 }
