@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 
 import com.heroku.java.DAO.CarDAO;
+import com.heroku.java.DAO.CustomerDAO;
 import com.heroku.java.DAO.PaymentDAO;
 import com.heroku.java.DAO.RentalDAO;
 import com.heroku.java.bean.Cars;
+import com.heroku.java.bean.Customer;
 import com.heroku.java.bean.Payment;
 import com.heroku.java.bean.Rental;
 
@@ -119,4 +122,51 @@ public class paymentController {
         }
     }
 
+    @GetMapping("/viewReceipt")
+    public String viewReceipt(@RequestParam("rentid") int rentid, Model model, HttpSession session) throws SQLException {
+    try{
+        PaymentDAO paymentDAO = new PaymentDAO(dataSource);
+        Payment payment = paymentDAO.getPaymentbyPaymentId(rentid);
+        model.addAttribute("payment", payment);
+        int paymentid = payment.getPaymentid();
+        Payment payment2 = paymentDAO.getCashbyPaymentId(paymentid);
+        model.addAttribute("cash", payment2);
+
+        RentalDAO rentalDAO = new RentalDAO(dataSource);
+        Rental rental = rentalDAO.getRentbyId(rentid);
+        int customerId = rental.getCustomerid();
+        int carid = rental.getCarid();
+        model.addAttribute("rental", rental);
+
+        CustomerDAO customerDAO = new CustomerDAO(dataSource);
+        Customer customer = customerDAO.getCustomerByID(customerId);
+        model.addAttribute("customer", customer);
+
+        CarDAO carDAO = new CarDAO(dataSource);
+        Cars car = carDAO.getCarById(carid);
+        model.addAttribute("car", car);
+        return "admin/viewReceipt";
+    } catch (SQLException e) {
+    e.printStackTrace();
+    return "redirect:/";
+    }
+        
+    }
+
+    @PostMapping("/updatePayment")
+    public String updateCashPayment(@RequestParam(name = "cashreceivedate", required = false) Date cashReceiveDate,
+                                    @RequestParam("paystatus") String payStatus, int paymentid,
+                                    Model model) {
+        PaymentDAO paymentDAO = new PaymentDAO(dataSource);
+        Payment payment;
+        try {
+            payment = paymentDAO.updatePayment(payStatus,paymentid);
+            payment = paymentDAO.updateCash(cashReceiveDate, paymentid);
+            model.addAttribute("payment", payment);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return "redirect:/viewBooking";
+    }
 }

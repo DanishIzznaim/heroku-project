@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -111,5 +113,90 @@ public class CustomerDAO {
                 throw e;
             }
         }
+
+    public List<Customer> getAllCustomers() throws SQLException {
+    List<Customer> customers = new ArrayList<>();
+
+    try (Connection connection = dataSource.getConnection()) {
+        String sql = "SELECT * FROM customer order by customerid";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Customer customer = new Customer();
+            customer.setFullname(resultSet.getString("custname"));
+            customer.setUserid(resultSet.getInt("customerid"));
+            customer.setUsername(resultSet.getString("username"));
+            customer.setLicensedate(resultSet.getDate("licensedate"));
+            customer.setIcnumber(resultSet.getString("icnumber"));
+            customer.setPhonenumC(resultSet.getInt("phonenumc"));
+            
+
+            customers.add(customer);
+        }
+        connection.close();
+    } catch (SQLException e) {
+        throw new SQLException("Error retrieving rentals: " + e.getMessage());
+    }
+
+    return customers;
+}
+
+    public List<Customer> searchCustomersByName(String name) throws SQLException{
+    List<Customer> customers = new ArrayList<>();
+
+    try (Connection connection = dataSource.getConnection()) {
+        String sql = "SELECT * FROM customer WHERE custname LIKE ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, "%" + name + "%");
+            
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Customer customer = new Customer();
+                    customer.setFullname(resultSet.getString("custname"));
+                    customer.setUserid(resultSet.getInt("customerid"));
+                    customer.setUsername(resultSet.getString("username"));
+                    customer.setLicensedate(resultSet.getDate("licensedate"));
+                    customer.setIcnumber(resultSet.getString("icnumber"));
+                    customer.setPhonenumC(resultSet.getInt("phonenumc"));
+
+                    customers.add(customer);
+                }
+            }
+        }
+    } catch (SQLException e) {
+        throw new SQLException("Error retrieving customer: " + e.getMessage());
+    }
+    return customers;
+    }
+
+    public Customer getCustomerByID(int customerid) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "SELECT * FROM customer WHERE customerid = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, customerid);
     
+            ResultSet resultSet = statement.executeQuery();
+    
+            if (resultSet.next()) {
+                Customer customer = new Customer();
+                customer.setUserid(resultSet.getInt("customerid"));
+                customer.setFullname(resultSet.getString("custname"));
+                customer.setUsername(resultSet.getString("username"));
+                customer.setPassword(resultSet.getString("password"));
+                customer.setLicensedate(resultSet.getDate("licensedate"));
+                customer.setIcnumber(resultSet.getString("icnumber"));
+                customer.setPhonenumC(resultSet.getInt("phonenumc"));
+                // Set any other properties of the Customer object based on the ResultSet
+    
+                return customer;
+            }
+            connection.close();
+            return null; // Return null if the customer is not found
+        } catch (SQLException e) {
+            // Handle any exceptions or errors that occurred during the database operation
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }

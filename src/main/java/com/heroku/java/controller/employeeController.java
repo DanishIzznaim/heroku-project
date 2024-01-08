@@ -3,6 +3,8 @@ package com.heroku.java.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.heroku.java.DAO.CustomerDAO;
 import com.heroku.java.DAO.EmployeeDAO;
 import com.heroku.java.bean.Customer;
 import com.heroku.java.bean.Employee;
@@ -128,4 +130,24 @@ public class employeeController {
         return "index";
     }
 }
+
+    @GetMapping("/searchCustomer")
+    public String searchCustomer(@RequestParam(name = "searchValue", required = false) String searchValue, Model model) {
+        try {
+            // Perform the search based on the searchValue
+            CustomerDAO customerDAO = new CustomerDAO(dataSource);
+            List<Customer> searchResults = customerDAO.searchCustomersByName(searchValue);
+    
+            // Add the search results and the searchValue to the model
+            model.addAttribute("customers", searchResults);
+            model.addAttribute("searchValue", searchValue);
+        } catch (SQLException e) {
+            // Handle the SQLException, log it, or rethrow it as a RuntimeException if needed
+            e.printStackTrace(); // You may want to log the exception instead
+            // You can also redirect to an error page or handle it in a way that makes sense for your application
+            model.addAttribute("error", "An error occurred during the search: " + e.getMessage());
+        }
+    // Return the view name to display the search results
+    return "admin/listCustomer";
+    }
 }

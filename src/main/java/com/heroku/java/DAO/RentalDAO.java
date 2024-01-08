@@ -141,5 +141,41 @@ public void updateRental(Rental rental) throws SQLException {
         throw new SQLException("Error updating rental: " + e.getMessage());
     }
 }
-    
+   public void saveReturnDateStatus(Rental rental)throws SQLException {
+    try (Connection connection = dataSource.getConnection()) {
+        String sql = "UPDATE rental SET returndate = ?, statusrent = ?, employeeid = ? WHERE rentid = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setDate(1, rental.getReturndate());
+        statement.setString(2, rental.getStatusrent());
+        statement.setInt(3, rental.getEmployeeId());
+        statement.setInt(4, rental.getRentid());
+        statement.executeUpdate();
+    } catch (SQLException e) {
+        throw new SQLException("Error updating rental: " + e.getMessage());
+    }
+  } 
+
+    public List<Rental> getBookedDates() throws SQLException{
+    List<Rental> rentals = new ArrayList<>();
+    try (Connection connection = dataSource.getConnection()) {
+        String sql = "SELECT datestart, dateend FROM RENTAL";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            Rental rental = new Rental();
+            rental.setDatestart(resultSet.getDate("datestart"));
+            rental.setDateend(resultSet.getDate("dateend"));
+
+            rentals.add(rental);
+        }
+        connection.close();
+        
+        } catch (SQLException e) {
+            throw new SQLException("Error updating rental: " + e.getMessage());
+        }
+        return rentals;
+    } 
+
 }
+

@@ -145,80 +145,54 @@
     <!-- End Side Bar-->
     <!-- Card Right-->
     <div class="container-fluid" style="width: 87%">
-      <h3 class="offset-2" style="margin-top: 2%">Rental List</h3>
+        <div class="row">
+          <div class="col-4">
+            <a th:href="@{/viewBooking}" class="btn btn-dark" style="margin-top: 2%; margin-left:150px;">
+              <i class="bi bi-arrow-left-circle-fill"></i> Go Back
+            </a>
+          </div>
+          <div class="col-7">
+            <h3 class="offset-2" style="margin-top: 2%">View Payment</h3>
+          </div>
+        </div>
+    </div>
+    <div th:if="${payment.imageSrc != null}" style="margin-left: 250px;">
+        <div class="col-6" style="width:70%">
+          <img th:src="${payment.imageSrc}" alt="Receipt Image" style="height: 50%; width: 50%; border-radius: 15px;" />
+        </div>
+    </div>
+      <div class="card row col-9" style="margin-left: 250px; margin-top: 30px;">
+        <div class="col-12">
+            <p th:text="'Payment ID: ' + ${payment.paymentid}"></p>
+            <p th:text="'Customer Name: ' + ${customer.fullname}"></p>
+            <p th:text="'Car Type: ' + ${car.cartype}"></p> 
+            <p th:text="'Car Name: ' + ${car.carname}"></p>
+            <p th:text="'Number of Day Rent: ' + ${rental.day}"></p>
+            <p th:text="'Pay Amount: ' + ${payment.payamount}"></p>
+            <p th:text="'Payment Method: ' + ${payment.paymentmethod}"></p>
+            <form th:action="@{/updatePayment}" method="post">
+                <input type="hidden" th:value="${payment.paymentid}" name="paymentid">
+                <div>
+                    <label>Date for Receive Payment (IF Cash):</label>
+                    <input type="date" name="cashreceivedate" th:value="${cash != null ? cash.cashreceivedate : ''}" style="margin-left: 20px;"
+                    th:disabled="${payment.paymentmethod == 'Online Transaction'}">
+                </div>
+                <div>
+                    <label>Payment Status:</label>
+                    <select name="paystatus" style="margin-left: 20px;margin-top: 15px; ">
+                        <option th:value="'Approved'" th:text="'Approved'" th:selected="${payment.paystatus == 'Approved'}">Approved</option>
+                        <option th:value="'Not Yet Paid'" th:selected="${payment.paystatus == null}">Not Yet Paid</option>
+                        <option th:value="'Denied'" th:selected="${payment.paystatus == 'Denied'}">Denied</option>
+                    </select>
+                </div> 
+                <br>
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 20px;">Submit</button>
+            </form>
+          </div>
     </div>
 
-    <div
-      name="staffTable"
-      class="d-flex flex-wrap justify-content-evenly align-items-center"
-    >
-      <!-- Iterate over the employee list and display each employee in a card -->
-      <div class="offset-2 justify-content-evenly align-items-center col-9">
-          <table class="table table-striped text-center">
-            <tr>
-              <th>Rent ID</th>
-              <th>Day</th>
-              <th>Date Start</th>
-              <th>Date End</th>
-              <th>Return Date</th>
-              <th>Total Rent Price</th>
-              <th>Status</th>
-              <th>Payment</th>
-              <th>Save</th>
-              <!-- <th>Action</th> -->
-            </tr>
-            <!-- Loop through the rentals list -->
-            <tr th:each="rental : ${rentals}">
-              <!-- <td th:text="${customers[rentalIndex].custname}">
-              </td> -->
-              <!-- <td th:text="${customer.custname}">
-              </td> -->
-              <td th:text="${rental.rentid}">
-              </td>
-              <td th:text="${rental.day}">
-              </td>
-              <td th:text="${rental.datestart}">
-              </td>
-              <td th:text="${rental.dateend}">
-              </td>
-              <form method="post" th:action="@{/saveRental}">
-                <input type="hidden" name="rentid" th:value="${rental.rentid}" />
-                <td>
-                  <input type="date" name="returndate" th:value="${rental.returndate}" placeholder="Enter Return Date" />
-                </td>
-                <td th:text="${rental.totalrentprice}">    
-                </td>
-                <td>
-                  <select name="statusrent">
-                    <option th:value="'Booked'" th:text="'Booked'" th:selected="${rental.statusrent == 'Booked'}"/>
-                    <option th:value="'Finished'" th:text="'Finished'" th:selected="${rental.statusrent == 'Finished'}" />
+
     
-                  </select>
-                </td>
-                <td>
-                  <a class="btn btn-primary" th:href="@{/viewReceipt(rentid=${rental.rentid})}" role="button">View</a>
-                </td>
-                <td>
-                  <button type="submit" class="p-1 btn btn-primary">Save</button>
-                </td>
-              </form>
-            </tr>
-          </table>
-      </div>
-    </div>
-
-    <!-- <script>
-            $(document).ready(function() {
-                $('#deleteModal').on('show.bs.modal', function(event) {
-                    var button = $(event.relatedTarget); // Button that triggered the modal
-                    var userId = button.data('id'); // Extract the userid from data-id attribute
-                    var deleteButton = $('#deleteButton'); // Delete button in the modal
-        
-                    // Update the href attribute of the delete button to include the userid
-                    deleteButton.attr('href', '/deleteStaff?id=' + userId);
-                });
-            });
-        </script> -->
     <footer class="py-3 bg-dark text-white col-12 fixed-bottom">
       <div class="container-fluid">
         <p class="m-0 text-center">
@@ -227,17 +201,6 @@
       </div>
     </footer>
 
-    <!-- <script>
-      $(document).ready(function () {
-        $("#deleteModal").on("show.bs.modal", function (event) {
-          var button = $(event.relatedTarget);
-          var userId = button.data("id");
-          var deleteButton = $("#deleteButton");
-
-          deleteButton.attr("href", "/deleteStaff?userid=" + userId);
-        });
-      });
-    </script> -->
 
     <script
       th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}"
