@@ -145,18 +145,49 @@
     <!-- End Side Bar-->
     <!-- Card Right-->
     <div class="container-fluid" style="width: 87%">
-      <h3 class="offset-2" style="margin-top: 2%">Status Payment</h3>
+        <div class="row">
+          <div class="col-4">
+            <a th:href="@{/viewBooking}" class="btn btn-dark" style="margin-top: 2%; margin-left:150px;">
+              <i class="bi bi-arrow-left-circle-fill"></i> Go Back
+            </a>
+          </div>
+          <div class="col-7">
+            <h3 class="offset-2" style="margin-top: 2%">View Payment</h3>
+          </div>
+        </div>
     </div>
     <div th:if="${payment.imageSrc != null}" style="margin-left: 250px;">
         <div class="col-6" style="width:70%">
-          <img th:src="${payment.imageSrc}" alt="Receipt Image" />
+          <img th:src="${payment.imageSrc}" alt="Receipt Image" style="height: 50%; width: 50%; border-radius: 15px;" />
         </div>
     </div>
       <div class="card row col-9" style="margin-left: 250px; margin-top: 30px;">
-        <div class="col-md-6">
+        <div class="col-12">
             <p th:text="'Payment ID: ' + ${payment.paymentid}"></p>
+            <p th:text="'Customer Name: ' + ${customer.fullname}"></p>
+            <p th:text="'Car Type: ' + ${car.cartype}"></p> 
+            <p th:text="'Car Name: ' + ${car.carname}"></p>
+            <p th:text="'Number of Day Rent: ' + ${rental.day}"></p>
             <p th:text="'Pay Amount: ' + ${payment.payamount}"></p>
             <p th:text="'Payment Method: ' + ${payment.paymentmethod}"></p>
+            <form th:action="@{/updatePayment}" method="post">
+                <input type="hidden" th:value="${payment.paymentid}" name="paymentid">
+                <div>
+                    <label>Date for Receive Payment (IF Cash):</label>
+                    <input type="date" name="cashreceivedate" th:value="${cash != null ? cash.cashreceivedate : ''}" style="margin-left: 20px;"
+                    th:disabled="${payment.paymentmethod == 'Online Transaction'}">
+                </div>
+                <div>
+                    <label>Payment Status:</label>
+                    <select name="paystatus" style="margin-left: 20px;margin-top: 15px; ">
+                        <option th:value="'Approved'" th:text="'Approved'" th:selected="${payment.paystatus == 'Approved'}">Approved</option>
+                        <option th:value="'Not Yet Paid'" th:selected="${payment.paystatus == null}">Not Yet Paid</option>
+                        <option th:value="'Denied'" th:selected="${payment.paystatus == 'Denied'}">Denied</option>
+                    </select>
+                </div> 
+                <br>
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 20px;">Submit</button>
+            </form>
           </div>
     </div>
 

@@ -41,6 +41,12 @@ public class Payment {
     }
 
 
+    public Payment(int paymentid, Date cashreceivedate) {
+        this.paymentid = paymentid;
+        this.cashreceivedate = cashreceivedate;
+    }
+
+
     public int getRentid() {
         return this.rentid;
     }

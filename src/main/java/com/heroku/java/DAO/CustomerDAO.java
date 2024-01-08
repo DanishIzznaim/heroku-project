@@ -169,4 +169,34 @@ public class CustomerDAO {
     }
     return customers;
     }
+
+    public Customer getCustomerByID(int customerid) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            String sql = "SELECT * FROM customer WHERE customerid = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, customerid);
+    
+            ResultSet resultSet = statement.executeQuery();
+    
+            if (resultSet.next()) {
+                Customer customer = new Customer();
+                customer.setUserid(resultSet.getInt("customerid"));
+                customer.setFullname(resultSet.getString("custname"));
+                customer.setUsername(resultSet.getString("username"));
+                customer.setPassword(resultSet.getString("password"));
+                customer.setLicensedate(resultSet.getDate("licensedate"));
+                customer.setIcnumber(resultSet.getString("icnumber"));
+                customer.setPhonenumC(resultSet.getInt("phonenumc"));
+                // Set any other properties of the Customer object based on the ResultSet
+    
+                return customer;
+            }
+            connection.close();
+            return null; // Return null if the customer is not found
+        } catch (SQLException e) {
+            // Handle any exceptions or errors that occurred during the database operation
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }

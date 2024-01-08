@@ -163,7 +163,7 @@
               <th>Return Date</th>
               <th>Total Rent Price</th>
               <th>Status</th>
-              <th>Receipt</th>
+              <th>Payment</th>
               <th>Save</th>
               <!-- <th>Action</th> -->
             </tr>
@@ -181,7 +181,7 @@
               </td>
               <td th:text="${rental.dateend}">
               </td>
-              <form method="post" action="/saveRental">
+              <form method="post" th:action="@{/saveRental}">
                 <input type="hidden" name="rentid" th:value="${rental.rentid}" />
                 <td>
                   <input type="date" name="returndate" th:value="${rental.returndate}" placeholder="Enter Return Date" />
@@ -192,6 +192,7 @@
                   <select name="statusrent">
                     <option th:value="'Booked'" th:text="'Booked'" th:selected="${rental.statusrent == 'Booked'}"/>
                     <option th:value="'Finished'" th:text="'Finished'" th:selected="${rental.statusrent == 'Finished'}" />
+    
                   </select>
                 </td>
                 <td>

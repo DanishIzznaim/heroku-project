@@ -1,6 +1,7 @@
 package com.heroku.java.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 // import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,8 @@ import java.sql.SQLException;
 import java.util.Base64;
 
 import javax.sql.DataSource;
+
+// import com.heroku.java.bean.Customer;
 import com.heroku.java.bean.Payment;
 // import com.heroku.java.bean.Rental;
 
@@ -90,6 +93,64 @@ public class PaymentDAO {
                 int rentpid = resultSet.getInt("rentid");
                 
                 payment = new Payment(paymentid,payamount,paymentmethod,imageSrc,paystatus,rentpid);
+            }
+            
+            connection.close();
+
+        }catch (SQLException e) {
+            throw new SQLException("Error adding payment: " + e.getMessage());
+        }
+        return payment;
+    }
+
+    public Payment updatePayment(String paystatus, int paymentid) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            Payment payment = new Payment();
+            String sql = "UPDATE payment SET paystatus=? WHERE paymentid=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, paystatus);
+            statement.setInt(2, paymentid);
+    
+            statement.executeUpdate();
+            connection.close();
+            return payment;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public Payment updateCash(Date cashreceivedate, int paymentid) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            Payment payment = new Payment();
+            String sql = "UPDATE cashpayment SET cashreceivedate=? WHERE paymentid=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setDate(1, cashreceivedate);
+            statement.setInt(2, paymentid);
+    
+            statement.executeUpdate();
+            connection.close();
+            return payment;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public Payment getCashbyPaymentId(int paymentid) throws SQLException{
+        Payment payment = null;
+        try{
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT * FROM cashpayment WHERE paymentid = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, paymentid);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int paymentid2 = resultSet.getInt("paymentid");
+                Date cashreceivedate = resultSet.getDate("cashreceivedate");
+                
+                payment = new Payment(paymentid2,cashreceivedate);
             }
             
             connection.close();
