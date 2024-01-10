@@ -168,18 +168,43 @@ public class carsController {
         }
 
 
-    @GetMapping("/deleteCar")
-    public String deleteCar(@RequestParam("carid") int carid, Model model) {
-        CarDAO carDAO = new CarDAO(dataSource);
-        boolean success = carDAO.deleteCar(carid);
-        System.out.println("sucess value: "+ success);
-        // if (!success) {  
-        //     model.addAttribute("carNotDeleted", true);
-        //     System.out.println("not success!");
-        //     return "redirect:/viewSedan";
-        //     // return "admin/viewSedan";
-        // }
-         return "redirect:/viewSedan?success=" + String.valueOf(success);
-    }
+    // @GetMapping("/deleteCar")
+    // public String deleteCar(@RequestParam("carid") int carid, Model model) {
+    //     CarDAO carDAO = new CarDAO(dataSource);
+    //     boolean success = carDAO.deleteCar(carid);
+    //     System.out.println("sucess value: "+ success);
+    //     //get details car by id
+    //     //if cartype = sedan, go to page viewSedan,
+    //     //if cartype = compact, go to page viewCompact,
+    //     //if cartype = mpv, go to page viewMpv
+    //      return "redirect:/viewSedan?success=" + String.valueOf(success);
+    // }
       
+    @GetMapping("/deleteCar")
+    public String deleteCar(@RequestParam("carid") int carid, Model model) throws SQLException {
+    CarDAO carDAO = new CarDAO(dataSource);
+    boolean success = carDAO.deleteCar(carid);
+    System.out.println("success value: " + success);
+
+    
+        // If deletion is successful, get details of the car by id
+        Cars car = carDAO.getCarById(carid);
+
+        if (car != null) {
+            String carType = car.getCartype();
+
+            // Redirect based on car type
+            if ("sedan".equalsIgnoreCase(carType)) {
+               return "redirect:/viewSedan?success=" + String.valueOf(success);
+            } else if ("compact".equalsIgnoreCase(carType)) {
+                return "redirect:/viewCompact?success=" + String.valueOf(success);
+            } else if ("mpv".equalsIgnoreCase(carType)) {
+                return "redirect:/viewMpv?success=" + String.valueOf(success);
+            }
+        }
+    
+
+    // If there was an issue or car type is unknown, redirect to a default page
+    return "redirect:/defaultPage?success=" + String.valueOf(success);
+    }
 }

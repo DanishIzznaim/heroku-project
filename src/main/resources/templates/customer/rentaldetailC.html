@@ -78,7 +78,7 @@
       </div>
     </div> -->
     <div class="col-10 p-3" style="margin-left: 80px;">
-      <div class="card p-3" th:unless="${car != null and rental != null}">
+      <div class="card p-3"  th:if="${noBooking}">
           <!-- Check if a booking (car) and rental details are not present -->
           <h3><u>No Booking Yet</u></h3>
       </div>
