@@ -169,14 +169,17 @@ public class carsController {
 
 
     @GetMapping("/deleteCar")
-    public String deleteCar(@RequestParam("carid") int carid) {
+    public String deleteCar(@RequestParam("carid") int carid, Model model) {
         CarDAO carDAO = new CarDAO(dataSource);
         boolean success = carDAO.deleteCar(carid);
-        if (success) {  
-            return "redirect:/viewSedan";
-        } else {
-            return "car-not-found";
-        }
+        System.out.println("sucess value: "+ success);
+        // if (!success) {  
+        //     model.addAttribute("carNotDeleted", true);
+        //     System.out.println("not success!");
+        //     return "redirect:/viewSedan";
+        //     // return "admin/viewSedan";
+        // }
+         return "redirect:/viewSedan?success=" + String.valueOf(success);
     }
       
 }
