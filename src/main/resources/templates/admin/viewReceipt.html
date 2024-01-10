@@ -173,18 +173,18 @@
             <form th:action="@{/updatePayment}" method="post">
                 <input type="hidden" th:value="${payment.paymentid}" name="paymentid">
                 <div>
-                    <label>Date for Receive Payment (IF Cash):</label>
-                    <input type="date" name="cashreceivedate" th:value="${cash != null ? cash.cashreceivedate : ''}" style="margin-left: 20px;"
-                    th:disabled="${payment.paymentmethod == 'Online Transaction'}">
-                </div>
-                <div>
-                    <label>Payment Status:</label>
-                    <select name="paystatus" style="margin-left: 20px;margin-top: 15px; ">
-                        <option th:value="'Approved'" th:text="'Approved'" th:selected="${payment.paystatus == 'Approved'}">Approved</option>
-                        <option th:value="'Not Yet Paid'" th:selected="${payment.paystatus == null}">Not Yet Paid</option>
-                        <option th:value="'Denied'" th:selected="${payment.paystatus == 'Denied'}">Denied</option>
-                    </select>
-                </div> 
+                  <label>Date for Receive Payment (IF Cash):</label>
+                  <input type="date" name="cashreceivedate" th:value="${cash != null ? cash.cashreceivedate : ''}" style="margin-left: 20px;"
+                  th:required="(${payment.paymentmethod == 'Cash'})" th:disabled="${payment.paymentmethod == 'Online Transaction'}">
+              </div>
+              <div>
+                  <label>Payment Status:</label>
+                  <select name="paystatus" style="margin-left: 20px;margin-top: 15px; " th:required>
+                      <option th:value="'Approved'" th:text="'Approved'" th:selected="${payment.paystatus == 'Approved'}">Approved</option>
+                      <option th:value="'Not Yet Paid'" th:selected="${payment.paystatus == null}">Not Yet Paid</option>
+                      <option th:value="'Denied'" th:selected="${payment.paystatus == 'Denied'}">Denied</option>
+                  </select>
+              </div>
                 <br>
                 <button type="submit" class="btn btn-primary" style="margin-top: 10px; margin-bottom: 20px;">Submit</button>
             </form>

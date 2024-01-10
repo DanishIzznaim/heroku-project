@@ -86,15 +86,18 @@
                  class="form-control"  
                  id="InputUsername"  
                  placeholder="000000-00-0000"
+                 pattern="\d{6}-\d{2}-\d{4}"
+                 min="0"
                  aria-describedby="usernameHelp"  
                  name="icnumber"> 
               </div> 
               <div class="col"> 
                 <label for="InputPhonenum">Phone Number</label> 
                 <input type="number" 
-                 placeholder="012-3456789" 
+                 placeholder="0123456789" 
                  class="form-control"  
-                 id="InputPhonenum"  
+                 id="InputPhonenum"
+                 min="0"  
                  name="phonenumC" required> 
               </div> 
  
