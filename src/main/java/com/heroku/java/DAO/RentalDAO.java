@@ -177,5 +177,30 @@ public void updateRental(Rental rental) throws SQLException {
         return rentals;
     } 
 
+    public Rental getLatestRentalByCustId(int customerId) throws SQLException {
+       Rental rental = null;
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT * FROM rental WHERE customerid = ? ORDER BY rentid DESC LIMIT 1";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, customerId);
+            ResultSet resultSet = statement.executeQuery();
+    
+            if (resultSet.next()) {
+                int day = resultSet.getInt("day");
+                int rentId = resultSet.getInt("rentid");
+                int carId = resultSet.getInt("carid");
+                Date dateStart = resultSet.getDate("datestart");
+                Date dateEnd = resultSet.getDate("dateend");
+                String statusRent = resultSet.getString("statusrent");
+                double totalRentPrice = resultSet.getDouble("totalrentprice");
+                rental = new Rental(day, rentId, carId, customerId,dateStart, dateEnd, statusRent, totalRentPrice);
+            }
+            connection.close();
+        } catch (SQLException e) {
+            throw new SQLException("Error retrieving rental details: " + e.getMessage());
+        }
+        return rental;
+    }
 }
 
