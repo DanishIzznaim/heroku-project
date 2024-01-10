@@ -207,12 +207,17 @@ public class CarDAO {
 
     public boolean deleteCar(int carid) {
         try (Connection connection = dataSource.getConnection()) {
+            // Check if the car is currently rented
+            if (isCarRented(connection, carid)) {
+                System.out.println("Cannot delete the car because it is currently rented.");
+                return false;
+            }
             String sql = "DELETE FROM cars WHERE carid = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, carid);
-            int rowsAffected = statement.executeUpdate();
-            connection.close();
-            return rowsAffected > 0;
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, carid);
+                int rowsAffected = statement.executeUpdate();
+                return rowsAffected > 0;
+            }
         } catch (SQLException sqe) {
             System.out.println("Error Code = " + sqe.getErrorCode());
             System.out.println("SQL state = " + sqe.getSQLState());
@@ -220,6 +225,20 @@ public class CarDAO {
             sqe.printStackTrace();
         } catch (Exception e) {
             System.out.println("E message: " + e.getMessage());
+        }
+        return false;
+    }
+
+    private boolean isCarRented(Connection connection, int carid) throws SQLException {
+        String rentalCheckSql = "SELECT COUNT(*) FROM rental WHERE carid = ? AND statusrent = 'Booked'";
+        try (PreparedStatement rentalCheckStatement = connection.prepareStatement(rentalCheckSql)) {
+            rentalCheckStatement.setInt(1, carid);
+            try (ResultSet resultSet = rentalCheckStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int rentalCount = resultSet.getInt(1);
+                    return rentalCount > 0;
+                }
+            }
         }
         return false;
     }
