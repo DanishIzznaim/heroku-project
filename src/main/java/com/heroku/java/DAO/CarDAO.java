@@ -279,4 +279,36 @@ public class CarDAO {
         return availableCars;
     }
 
+    public boolean isCarAvailableForDates (int carid, Date startDate, Date endDate, String statusrent){
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT COUNT(*) FROM rental " +
+                     "WHERE carid = ? " +
+                     "AND statusrent = 'Booked' " +
+                     "AND ((datestart <= ? AND dateend >= ?) OR " +
+                     "(datestart >= ? AND dateend <= ?) OR " +
+                     "(datestart <= ? AND dateend >= ?))";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, carid);
+            // statement.setString(2, statusrent);
+            statement.setDate(2,startDate);
+            statement.setDate(3,endDate);
+            statement.setDate(4, startDate);
+            statement.setDate(5, endDate);
+            statement.setDate(6, startDate);
+            statement.setDate(7, endDate);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count == 0;
+            }
+            
+        } catch (Exception e) {
+             System.out.println("E message: " + e.getMessage());
+        }
+        return false;
+    }
+
 }

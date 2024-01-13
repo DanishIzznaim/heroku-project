@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +28,6 @@ import com.heroku.java.bean.Rental;
 
 import jakarta.servlet.http.HttpSession;
 // import org.springframework.web.bind.annotation.RequestBody;
-
 
 // import jakarta.servlet.http.HttpSession;
 @Controller
@@ -54,7 +55,8 @@ public class rentalController {
             model.addAttribute("availableCars", availableCars);
 
             if (availableCars.isEmpty()) {
-                model.addAttribute("noAvailableCarsMessage", "Sorry, There is no available cars for the specified date and type.");
+                model.addAttribute("noAvailableCarsMessage",
+                        "Sorry, There is no available cars for the specified date and type.");
             } else {
                 model.addAttribute("availableCars", availableCars);
             }
@@ -65,7 +67,6 @@ public class rentalController {
             return "redirect:/";
         }
     }
-
 
     @GetMapping("/rentalform")
     public String showRentalForm(@RequestParam("carid") int carid,
@@ -112,24 +113,31 @@ public class rentalController {
     }
 
     @GetMapping("/rentaldetailC")
-    public String showRentalDetail(HttpSession session, Model model){
+    public String showRentalDetail(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
-        try{
+        try {
             CustomerDAO customerDAO = new CustomerDAO(dataSource);
             Customer customerDetails = customerDAO.getCustomerByUsername(username);
 
             int customerId = customerDetails.getUserid();
             RentalDAO rentalDAO = new RentalDAO(dataSource);
-            Rental rentalDetails = rentalDAO.getRentbyCustId(customerId);// by customerid,will retrieve the day,datestart,dateend,statusrent,totalrentprice
-            
-            if (rentalDetails == null) {
+            Rental rentalDetails = rentalDAO.getLatestRentalByCustId(customerId);// by customerid,will retrieve the
+                                                                         // day,datestart,dateend,statusrent,totalrentprice
+            String statusrent = rentalDetails.getStatusrent();
+
+            if("Finished".equals(statusrent) || rentalDetails == null){
                 model.addAttribute("noBooking", true);
                 return "customer/rentaldetailC";
             }
 
+            // if (rentalDetails == null) {
+            //     model.addAttribute("noBooking", true);
+            //     return "customer/rentaldetailC";
+            // }
+
             int carId = rentalDetails.getCarid();
             CarDAO carDAO = new CarDAO(dataSource);
-            Cars carDetails = carDAO.getCarById(carId);//by id it will retrieve the car image,carname,cartype   
+            Cars carDetails = carDAO.getCarById(carId);// by id it will retrieve the car image,carname,cartype
 
             model.addAttribute("car", carDetails);
             model.addAttribute("customer", customerDetails);
@@ -161,8 +169,8 @@ public class rentalController {
     }
 
     @GetMapping("/updateBooking")
-    public String updateBooking(@RequestParam("rentid") int rentid, 
-    @RequestParam("returndate") Date returndate, @RequestParam("statusrent") String statusrent, Model model) {
+    public String updateBooking(@RequestParam("rentid") int rentid,
+            @RequestParam("returndate") Date returndate, @RequestParam("statusrent") String statusrent, Model model) {
         try {
             RentalDAO rentalDAO = new RentalDAO(dataSource);
             Rental existingRental = rentalDAO.getRentbyId(rentid);
@@ -183,11 +191,11 @@ public class rentalController {
 
     @PostMapping("/saveRental")
     public String saveRental(@RequestParam("returndate") Date returnDate,
-             @RequestParam("rentid") int rentid,
-             @RequestParam("statusrent") String statusRent, Model model, HttpSession session) {
-        
+            @RequestParam("rentid") int rentid,
+            @RequestParam("statusrent") String statusRent, Model model, HttpSession session) {
+
         String username = (String) session.getAttribute("username");
-        
+
         try {
             EmployeeDAO employeeDAO = new EmployeeDAO(dataSource);
             Employee employeeDetails = employeeDAO.getEmployeeByUsername(username);
@@ -200,7 +208,7 @@ public class rentalController {
             rental.setReturndate(returnDate);
             rental.setStatusrent(statusRent);
             rentalDAO.saveReturnDateStatus(rental);
-        
+
             return "redirect:/viewBooking";
         } catch (Exception e) {
             // Handle exceptions or errors
@@ -208,19 +216,26 @@ public class rentalController {
             return "redirect:/error";
         }
     }
-    
 
     @GetMapping("/getBookedDates")
-    public List<Rental> getBookedDates() {
+    public String getBookedDates() {
         RentalDAO rentalDAO = new RentalDAO(dataSource);
         try {
-            return rentalDAO.getBookedDates();
+
+            System.out.println("test date" + rentalDAO.getBookedDates());
+            java.util.Iterator<Rental> iterator = rentalDAO.getBookedDates().iterator();
+            while (iterator.hasNext()) {
+                Rental element = iterator.next();
+                System.out.println("Element: " + element);
+            }
+            return "redirect:/login";
+
         } catch (SQLException e) {
             e.printStackTrace();
-            return List.of();
+            return "redirect:/login";
         }
     }
 
+
     
 }
-
