@@ -80,73 +80,39 @@
             </div>
           </div>
           <div class="col-6">
-            <form
-              th:action="@{/payment}"
-              th:method="post"
-              enctype="multipart/form-data"
-              th:modelAttribute="payment"
-              style="margin-bottom: 60px"
-            >
-                <input type="hidden" name="rentid" th:value="${rental.rentid}" />
+            <form th:action="@{/payment}" th:method="post" enctype="multipart/form-data" th:modelAttribute="payment" style="margin-bottom: 60px">
+              <input type="hidden" name="rentid" th:value="${rental.rentid}" />
               <div class="mb-3">
-                
-                <label for="amount" class="form-label">Total Amount:</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="paymentamount"
-                  name="payamount"
-                  th:value="${rental.totalrentprice}"
-                />
+                  <label for="amount" class="form-label">Total Amount:</label>
+                  <input type="text" class="form-control" id="paymentamount" name="payamount" th:value="${rental.totalrentprice}" />
               </div>
               <div class="mb-3">
-                <label for="paymentMethod" class="form-label"
-                  >Payment Method:</label
-                >
-                <select
-                  class="form-select"
-                  id="paymentmethod"
-                  name="paymentmethod"
-                  required
-                >
-                  <option value="">Select Payment Method</option>
-                  <option value="Online Transaction">Online Transaction</option>
-                  <option value="Cash">Cash</option>
-                </select>
+                  <label for="paymentMethod" class="form-label">Payment Method:</label>
+                  <select class="form-select" id="paymentmethod" name="paymentmethod" required>
+                      <option value="">Select Payment Method</option>
+                      <option value="Online Transaction">Online Transaction</option>
+                      <option value="Cash">Cash</option>
+                  </select>
               </div>
-              <div id="receiptUpload">
+              <div id="receiptUpload" style="display: none;">
                 <div class="mb-3">
-                  <label for="paymentreceipt" class="form-label"
-                    >Receipt (PDF):</label
-                  >
-                  <input
-                    type="file"
-                    class="form-control"
-                    id="paymentreceipt"
-                    name="paymentreceipt"
-                  />
+                    <label for="paymentreceipt" class="form-label">Receipt (PNG/JPEG):</label>
+                    <input type="file" class="form-control" id="paymentreceipt" name="paymentreceipt" required>
                 </div>
                 <div class="mb-3">
-                  <label for="filePreview" class="form-label">Preview:</label>
-                  <img
-                    id="filePreview"
-                    alt="File Preview"
-                    style="max-width: 50%"
-                  />
+                    <label for="filePreview" class="form-label">Preview:</label>
+                    <img id="filePreview" alt="File Preview" style="max-width: 50%">
                 </div>
               </div>
-
               <div class="text-center">
-                <h4>Bank Name: CIMB BANK</h4>
-                <h4>Account Name: ACCIO.CO</h4>
-                <h4>Account Number: 7636497701</h4>
+                  <h4>Bank Name: CIMB BANK</h4>
+                  <h4>Account Name: ACCIO.CO</h4>
+                  <h4>Account Number: 7636497701</h4>
               </div>
               <div class="text-center mt-3">
-                <button type="submit" class="btn btn-primary">
-                  Proceed Payment
-                </button>
+                  <button type="submit" class="btn btn-primary" id="proceedPaymentBtn">Proceed Payment</button>
               </div>
-            </form>
+          </form>
           </div>
         </div>
       </div>
@@ -159,17 +125,58 @@
         </div>
       </footer>
 
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script>
         $("#paymentreceipt").change(function () {
-          var file = this.files[0];
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            $("#filePreview").attr("src", e.target.result);
-          };
-          reader.readAsDataURL(file);
+            var file = this.files[0];
+            var reader = new FileReader();
+    
+            reader.onload = function (e) {
+                $("#filePreview").attr("src", e.target.result);
+                enablePaymentButton(); // Enable the button after successful upload
+            };
+    
+            if (file) {
+                var fileName = file.name.toLowerCase();
+                if (fileName.endsWith('.png') || fileName.endsWith('.jpeg') || fileName.endsWith('.jpg')) {
+                    reader.readAsDataURL(file);
+                } else {
+                    alert('Please upload a PNG or JPEG file.');
+                    document.querySelector('#paymentreceipt').value = ''; // Clear the file input
+                    document.querySelector('#filePreview').src = '#';
+                    enablePaymentButton(); // Disable the button for invalid formats
+                }
+            }
+        });
+    
+        function enablePaymentButton() {
+            const paymentMethod = document.getElementById('paymentmethod');
+            const paymentReceipt = document.getElementById('paymentreceipt');
+            const proceedPaymentBtn = document.getElementById('proceedPaymentBtn');
+    
+            if (paymentMethod.value === 'Online Transaction' && paymentReceipt.files.length > 0) {
+                proceedPaymentBtn.removeAttribute('disabled');
+            } else {
+                proceedPaymentBtn.setAttribute('disabled', 'disabled');
+            }
+        }
+    
+        document.getElementById('paymentmethod').addEventListener('change', function () {
+            const receiptUpload = document.getElementById('receiptUpload');
+            const paymentReceipt = document.getElementById('paymentreceipt');
+            const proceedPaymentBtn = document.getElementById('proceedPaymentBtn');
+    
+            if (this.value === 'Online Transaction') {
+                receiptUpload.style.display = 'block';
+                paymentReceipt.setAttribute('required', 'required');
+                enablePaymentButton(); // Enable/disable based on current status
+            } else {
+                receiptUpload.style.display = 'none';
+                paymentReceipt.removeAttribute('required');
+                proceedPaymentBtn.removeAttribute('disabled'); // Enable the button for other payment methods
+            }
         });
       </script>
+    
     </body>
   </html>
 </html>
