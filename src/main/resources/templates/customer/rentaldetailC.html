@@ -13,8 +13,7 @@
       crossorigin="anonymous"
     />
   </head>
-  <body
-    style="background-color: #f39d7d;">
+  <body style="background-color: #f39d7d">
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">DZ EMPIRE RENTAL</a>
@@ -32,19 +31,21 @@
         <div class="d-flex justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" th:href="@{/homecustomer}">Home</a>
+              <a class="nav-link" aria-current="page" th:href="@{/homecustomer}"
+                >Home</a
+              >
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
-              </li>
+              <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </li>
             <li class="nav-item">
-                <a th:href="@{/rentaldetail}">
-                  <img
-                    src="images/car.png"
-                    style="width: 30px; height: 30px; cursor: pointer"
-                  />
-                </a>
-              </li>
+              <a th:href="@{/rentaldetailC}">
+                <img
+                  src="images/car.png"
+                  style="width: 30px; height: 30px; cursor: pointer"
+                />
+              </a>
+            </li>
             <li class="nav-item">
               <a th:href="@{/profilecust}">
                 <img
@@ -57,7 +58,7 @@
         </div>
       </div>
     </nav>
-    
+
     <!-- <div class="col-10 p-3" style="margin-left: 80px;">
       <div class="card p-3">
         <h3><u>Rental Detail</u></h3>
@@ -77,10 +78,10 @@
         </div>
       </div>
     </div> -->
-    <div class="col-10 p-3" style="margin-left: 80px;">
-      <div class="card p-3"  th:if="${noBooking}">
-          <!-- Check if a booking (car) and rental details are not present -->
-          <h3><u>No Booking Yet</u></h3>
+    <div class="col-10 p-3" style="margin-left: 80px">
+      <div class="card p-3" th:if="${noBooking}">
+        <!-- Check if a booking (car) and rental details are not present -->
+        <h3><u>No Booking Yet</u></h3>
       </div>
       <div class="card p-3" th:unless="${noBooking}">
           <!-- Check if a booking (car) and rental details are present -->
@@ -102,11 +103,25 @@
                 <h6>If you want to cancel, Please call this Hotline Number: 0127182525</h6>
             </div>
           </div>
-      </div>
-  </div>
-  
-  
+          <div class="col-md-6">
+            <h4>Day: <span th:text="${rental.day}"></span></h4>
+            <h4>Date Start: <span th:text="${rental.datestart}"></span></h4>
+            <h4>Date End: <span th:text="${rental.dateend}"></span></h4>
+            <h4>Status: <span th:text="${rental.statusrent}"></span></h4>
+            <h4>
+              Total Rent Price: <span th:text="${rental.totalrentprice}"></span>
+            </h4>
+            <h4>
+              Payment Method: <span th:text="${payment.paymentmethod}"></span>
+            </h4>
 
+            <div th:if="${payment.paymentmethod == 'Cash'}">
+              <button type="button" class="btn btn-danger">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer class="py-3 bg-dark text-white col-12 fixed-bottom">
       <div class="container-fluid">

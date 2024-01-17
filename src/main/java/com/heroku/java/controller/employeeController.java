@@ -30,7 +30,7 @@ public class employeeController {
     
     @GetMapping("/addStaff")
     public String addstaffPage(HttpSession session) {
-        return "admin/addStaff";
+        return "admin/addstaff";
         // if(session.getAttribute("username") != null){ 
             
         // }else{ 
@@ -43,11 +43,11 @@ public class employeeController {
     try {
         EmployeeDAO employeeDAO = new EmployeeDAO(dataSource);
         employeeDAO.addEmployee(employee);
-        return "redirect:/homeadmin"; 
+        return "redirect:/listStaff"; 
     } catch (Exception e) {
         e.printStackTrace();
         // Handle the exception or display an error message as per your requirement
-        return "error";
+        return "admin/homeadmin";
     }
 }
 

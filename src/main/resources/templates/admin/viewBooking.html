@@ -169,43 +169,52 @@
             </tr>
             <!-- Loop through the rentals list -->
             <tr th:each="rental : ${rentals}">
-              <!-- <td th:text="${customers[rentalIndex].custname}">
-              </td> -->
-              <!-- <td th:text="${customer.custname}">
-              </td> -->
-              <td th:text="${rental.rentid}">
-              </td>
-              <td th:text="${rental.day}">
-              </td>
-              <td th:text="${rental.datestart}">
-              </td>
-              <td th:text="${rental.dateend}">
-              </td>
+              <!-- Rental information -->
+              <td th:text="${rental.rentid}"></td>
+              <td th:text="${rental.day}"></td>
+              <td th:text="${rental.datestart}"></td>
+              <td th:text="${rental.dateend}"></td>
               <form method="post" th:action="@{/saveRental}">
+                <!-- Hidden input for rent ID -->
                 <input type="hidden" name="rentid" th:value="${rental.rentid}" />
+                <!-- Input for return date -->
                 <td>
-                  <input type="date" name="returndate" th:value="${rental.returndate}" placeholder="Enter Return Date" />
+                  <input type="date" name="returndate" th:value="${rental.returndate}" min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required placeholder="Enter Return Date" />
                 </td>
-                <td th:text="${rental.totalrentprice}">    
-                </td>
+                <!-- Display total rent price -->
+                <td th:text="${rental.totalrentprice}"></td>
+                <!-- Select status -->
                 <td>
                   <select name="statusrent">
-                    <option th:value="'Booked'" th:text="'Booked'" th:selected="${rental.statusrent == 'Booked'}"/>
-                    <option th:value="'Finished'" th:text="'Finished'" th:selected="${rental.statusrent == 'Finished'}" />
-    
+                    <option th:value="'Booked'" th:text="'Booked'" th:selected="${rental.statusrent == 'Booked'}"></option>
+                    <option th:value="'Finished'" th:text="'Finished'" th:selected="${rental.statusrent == 'Finished'}"></option>
                   </select>
                 </td>
+                <!-- View receipt button -->
                 <td>
                   <a class="btn btn-primary" th:href="@{/viewReceipt(rentid=${rental.rentid})}" role="button">View</a>
                 </td>
+                <!-- Save button -->
                 <td>
                   <button type="submit" class="p-1 btn btn-primary">Save</button>
                 </td>
               </form>
             </tr>
           </table>
-      </div>
-    </div>
+          
+          <script>
+            // Disable dates before the current date in the date picker
+            window.onload = function() {
+              const dateInputs = document.querySelectorAll('input[type="date"]');
+              const today = new Date().toISOString().split('T')[0];
+              for (const dateInput of dateInputs) {
+                dateInput.setAttribute('min', today);
+              }
+            };
+          </script>
+          
+        </div>
+  </div>
 
     <!-- <script>
             $(document).ready(function() {

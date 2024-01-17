@@ -210,10 +210,12 @@
                           class="form-control"
                           name="cartype"
                           th:value="${car.cartype}"
+                          readonly
+                          style="background-color: #f2f2f2; cursor: not-allowed;"
                         />
                       </div>
                       <div class="form-group">
-                        <label for="carCondition">Car Condition</label>
+                        <label for="carCondition">Car Condition (*/10)</label>
                         <input
                           type="text"
                           class="form-control"
@@ -229,6 +231,7 @@
                           name="carprice"
                           th:value="${car.carprice}"
                         />
+                        
                       </div>
                       <div class="form-group">
                         <label for="carimage" class="form-label me-2"
@@ -247,7 +250,7 @@
                             id="deleteImage"
                             class="btn btn-link delete-icon"
                           >
-                            <i class="bi bi-trash"></i>
+                            <i class="bi bi-trash"></i> 
                           </button>
                         </div>
 
