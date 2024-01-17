@@ -1,5 +1,7 @@
 package com.heroku.java.bean;
 
+import java.sql.Date;
+
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,8 +15,25 @@ public class Cars {
     public MultipartFile carimage;
     public String imageSrc;
     public String carprice2dp;
-
+    public Date datestart;
+    public Date dateend;
     
+
+    public Date getDatestart() {
+        return this.datestart;
+    }
+
+    public void setDatestart(Date datestart) {
+        this.datestart = datestart;
+    }
+
+    public Date getDateend() {
+        return this.dateend;
+    }
+
+    public void setDateend(Date dateend) {
+        this.dateend = dateend;
+    }
 
     public Cars(Integer carid, String cartype, String carname, String condition, double carprice, MultipartFile carimage, String imageSrc,String carprice2dp) {
         this.carid = carid;

@@ -206,24 +206,28 @@ public class carsController {
 
     @GetMapping("/checkAvailabilityDate")
     public String checkAvailabilityDate(
-            @RequestParam("carId") int carId, @RequestParam("startDate") Date startDate, @RequestParam("day") int day,
-            @RequestParam("endDate") Date endDate, @RequestParam("statusrent") String statusrent,Model model) {
+            @RequestParam("carid") int carId, @RequestParam("datestart") Date startDate, @RequestParam("day") int day,
+            @RequestParam("dateend") Date endDate, @RequestParam("statusrent") String statusrent,Model model) throws SQLException {
         try {
             // Check availability based on chosen dates
-            boolean isAvailable = checkCarAvailability(carId, startDate, endDate, statusrent);
+            boolean isAvailable = checkCarAvailability(carId, startDate, endDate);
             System.out.println("isAvailable value: "+isAvailable);
-
+            // model.addAttribute("car", car);
+            model.addAttribute("datestart", startDate);
+            model.addAttribute("dateend", endDate);
+            model.addAttribute("day", day);
             return "redirect:/rentalform?isAvailable=" + String.valueOf(isAvailable) + "&carid=" + carId + "&datestart=" +startDate+ "&dateend="+ endDate+ "&day="+day;
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             System.out.println("Error checking availability: " + e.getMessage());
             return "redirect:/"; // Redirect to the home page or handle the error accordingly
         }
     }
 
-    private boolean checkCarAvailability(int carId, Date startDate, Date endDate, String statusrent) {
+    private boolean checkCarAvailability(int carId, Date startDate, Date endDate) {
         try {
             CarDAO carDAO = new CarDAO(dataSource);
-            return carDAO.isCarAvailableForDates(carId, startDate, endDate,statusrent);
+            return carDAO.isCarAvailableForDates(carId, startDate, endDate);
         } catch (Exception e) {
             System.out.println("Error checking car availability: " + e.getMessage());
             return false;

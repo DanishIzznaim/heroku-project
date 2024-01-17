@@ -104,7 +104,7 @@
                 name="day"
                 id="dayInput"
                 th:value="${day}"
-                required
+                disabled
               />
             </div>
             <div class="mb-3">
@@ -115,7 +115,7 @@
                 id="datestartInput"
                 name="datestart"
                 th:value="${datestart}"
-                required
+                disabled
               />
             </div>
             <div class="mb-3">
@@ -126,7 +126,7 @@
                 id="dateendInput"
                 name="dateend"
                 th:value="${dateend}"
-                required
+                disabled
               />
             </div>
             <div class="mb-3">
@@ -144,18 +144,26 @@
                 id="totalInput"
                 class="form-control"
                 name="totalrentprice"
-                readonly
+                disabled
               />
             </div>
+            <div class="mb-3">
+              <p>*if you want to change new date, Please click this button</p>
+              <a class="btn btn-primary" th:href="@{/homecustomer}">Search New Date</a>
+            </div>
             <div class="mt-5 mb-5 text-center">
-              <a
+              <!-- <a
                 class="btn btn-primary col-10"
-                th:href="@{/checkAvailabilityDate(carId=${car.carid}, startDate=${datestart}, endDate=${dateend}, statusrent=${statusrent},day=${day})}"
+                th:href="@{/checkAvailabilityDate(carid=${car.carid}, datestart=${datestart}, dateend=${dateend}, statusrent=${statusrent},day=${day})}"
                 role="button"
                 style="margin-bottom: 20px"
                 >Check Availability</a
+              > -->
+              <button
+                id="payNowButton"
+                class="btn btn-warning col-10"
+                type="submit"
               >
-              <button id="payNowButton" class="btn btn-warning col-10" type="submit" disabled>
                 Pay Now
               </button>
             </div>
@@ -201,7 +209,7 @@
           <!-- Account successfully created -->
         </div>
       </div>
-    </div> 
+    </div>
 
     <script
       th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}"
@@ -218,6 +226,7 @@
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"
     ></script>
+
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
