@@ -181,15 +181,17 @@ public class carsController {
     @GetMapping("/deleteCar")
     public String deleteCar(@RequestParam("carid") int carid, Model model) throws SQLException {
         CarDAO carDAO = new CarDAO(dataSource);
+        Cars carbaru = carDAO.getCarById(carid);
+        String carType = carbaru.getCartype();
         boolean success = carDAO.deleteCar(carid);
         System.out.println("success value: " + success);
 
         // If deletion is successful, get details of the car by id
-        Cars car = carDAO.getCarById(carid);
-
-        if (car != null) {
-            String carType = car.getCartype();
-
+        // Cars car = carDAO.getCarById(carid);
+        System.out.println("carbaru: "+ carbaru);
+        if (carbaru != null) {
+            
+            carType = carbaru.getCartype();
             // Redirect based on car type
             if ("sedan".equalsIgnoreCase(carType)) {
                 return "redirect:/viewSedan?success=" + String.valueOf(success);
