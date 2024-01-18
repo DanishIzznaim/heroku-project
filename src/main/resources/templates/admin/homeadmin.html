@@ -8,40 +8,41 @@
     <link rel="stylesheet" href="stylesheets/homepage.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+      .sticky-sidebar {
+        position: fixed;
+        height: 100%;
+      }
+    </style>
   </head>
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">DZ EMPIRE RENTAL</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="d-flex justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Feedback</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
-              </li>
-              <li class="nav-item">
-                <img src="images/profileadmin.png" style="width: 30px; height: 30px;">
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <!-- Start Side Bar--> 
-    <div id="sidebar" 
-      class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 mt-7 position-fixed" 
-      style="height: 100%;"> 
-      <ul class="nav nav-underline flex-column mb-auto" style="padding-left: 40px;"> 
+  <nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">DZ EMPIRE RENTAL</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="d-flex justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" th:href="@{/homeadmin}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/logout}">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a th:href="@{/profileadmin}">
+              <img src="images/profileadmin.png" style="width: 30px; height: 30px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+      
+    <!--Page Content -->
+    <body style="background-color: #F39D7D;">
+      <div id="sidebar" class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 fixed-top" style="height:120%; margin-top: 56px; position:absolute;">
+    <ul class="nav nav-underline flex-column mb-auto position-fixed" style="padding-left: 40px;"> 
           <h5 style="margin-top: 50px;">Menu</h5> 
           <li><a th:href="@{/listStaff}" 
             class="nav-link text-black d-flex justify-content-start" 
@@ -71,90 +72,87 @@
             <span class="material-symbols-outlined" 
             style="margin-right: 20px;">
             local_taxi</span>Car</a>
+           </li>
 
+           <li>
             <a th:href="@{/viewSedan}" 
             class="nav-link text-black d-flex justify-content-start" 
             aria-current="page">
             <span class="material-symbols-outlined" 
             style="margin-right: 40px;">
             code</span>Sedan</a>
+          </li>
 
+          <li>
             <a th:href="@{/viewMpv}" 
             class="nav-link text-black d-flex justify-content-start" 
             aria-current="page">
             <span class="material-symbols-outlined" 
             style="margin-right: 40px;">
             code</span>MPV</a>
-
+          </li>
+          <li>
             <a th:href="@{/viewCompact}" 
             class="nav-link text-black d-flex justify-content-start"
             aria-current="page">
             <span class="material-symbols-outlined" 
             style="margin-right: 40px;">
             code</span>Compact</a>
+          </li>  
             
-           </li>
+           
       </ul>
     </div> 
-    <!-- End Side Bar--> 
+     <!-- End Side Bar  -->
 
-    <!--Page Content -->
-    <body background="images/backgroundadmin.avif">
-
-        <h1 class="offset-5 mt-5">WELCOME ADMIN</h1>
-
-        <div class="card col-8 offset-3">
-          <div class="card-body" style="background-color: lightblue">
-            <div class="row mb-3 mt-3 offset-2">
-              <p class="col-sm-3 text-center p-2 rounded" style="font-size: 20px; background-color:white">Username</p>
-              <div class="col-sm-7 text-center"><!-- Added text-center class -->
-                <p class="fw-medium p-2" style="font-size: 20px; background-color: white;">Semibold weight text.</p>
-                <!-- th:value="${homeadmin.username}" -->
+      <div class="container" 
+        style="padding-left: 350px;">
+        <h1 style="margin-top: 40px;">WELCOME ADMIN</h1>
+        <div class="container" style="height: 100%;">
+          
+              <div class="col-4" style="margin-right: 150px;">
+                <img src="images/profileadmin.png" 
+                class="img-fluid rounded mt-150 ms-1; justify-content-center" 
+                style="width:100px; height: 100px; margin-left: 130px;">
               </div>
-            </div>
-        
-            <div class="row mb-3 mt-3 offset-2">
-              <p class="col-sm-3 text-center p-2 rounded" style="font-size: 20px; background-color:white">Roles</p>
-              <div class="col-sm-7 text-center"><!-- Added text-center class -->
-                <p class="fw-medium p-2" style="font-size: 20px; background-color:white;">Semibold weight text.</p>
-                <!-- th:value="${homeadmin.roles}" -->
+              <div class="col-md-5">
+                <div class="card-body">
+ 
+                </div>
               </div>
+
+            <div class="container-fluid col-md-8 offset-1 ms-1 justify-content-center rounded p-4 mb-1" >
+              
             </div>
+        </div>
+      </div>
+    <!--End Page Content -->
+
+    <div class="container offset-3" style="height: 60%; width: 60%; margin-bottom: 10%;">
+      <div class="row">
+        <div class="col-md-6">
+          <h6>Number of Cars</h6>
+          <div class="chart-container">
+            <canvas id="pieChart"></canvas>
           </div>
         </div>
-
-        <div class="col-8 offset-3 justify-content-center">
-          <div class="row justify-content-evenly mt-4">
-            <div class="card col-3 me-5" style="background-color: lightblue;">
-              <div class="col p-4">
-                <img>
-                <p>Total Customer</p>
-              </div>
-            </div>
-            <div class="card col-3 ms-5 me-5" style="background-color: lightblue;">
-              <div class="col p-4">
-                <img>
-                <p>Total Rental Car</p>
-              </div>
-            </div>
-            <div class="card col-3 ms-5" style="background-color: lightblue;">
-              <div class="col p-4 ms-5">
-                <img>
-                <p>Car</p>
-              </div>
-            </div>
+        <div class="col-md-6">
+          <h6>Number of Rental Users by month</h6>
+          <div class="chart-container" style="height: 60%;">
+            <canvas id="barChart"></canvas>
           </div>
         </div>
-    </body>
-  </body>
-  <!--End Page Content -->
-    <footer class="py-3 bg-dark text-white d-flex align-content-end fixed-bottom mt-3">
+      </div>
+    </div>
+
+    <footer class="py-3 bg-dark text-white d-flex align-content-end mt-3 fixed-bottom">
       <div class="container">
         <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -200,5 +198,5 @@
         options: options
       });
     </script>
-</body>
+
 </html>

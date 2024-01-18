@@ -7,13 +7,6 @@
     <title>Home</title>
     <link rel="stylesheet" href="stylesheets/homepage.css">
     <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <style>
-      body {
-        background-image: url('https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700462385.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
-    </style>
     <body>
         <!-- navigation bar -->
         <nav class="navbar navbar-expand-lg">
@@ -44,92 +37,8 @@
             </div>
         </nav>
         
-        <!-- card feedback -->
-        <div class="card container-fluid justify-content-center" style="width: 35rem; margin-top: 3%;">
-          <div class="card-body mt-2" style="margin: 20px;">
-
-            <!-- 1st feedback -->
-            <div class="card mb-3">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img th:src="@{images/feedback/1stfeed.jpg}" class="img-fluid rounded">
-                </div>
-                <div class="col-md-8 justify-content-center" style="background-color: antiquewhite;">
-                  <div class="card-body">
-                    <h5 class="card-title justify-content-between">Apis Wafi</h5>
-                    <p class="card-text text-center">Everything was good with my trip, I am very glad to rent the car again</p>
-                    <p class="card-text text-center"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 2nd feedback -->
-            <div class="card mb-3">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img th:src="@{images/feedback/2ndfeed.jpg}" class="img-fluid rounded-start">
-                </div>
-                <div class="col-md-8" style="background-color: antiquewhite;">
-                  <div class="card-body">
-                    <h5 class="card-title">Danish Izz</h5>
-                    <p class="card-text">All went very smoothly during booking, pick-up and return of the car</p>
-                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 3rd feedback -->
-            <div class="card mb-3">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img th:src="@{images/feedback/3rdfeed.jpg}" class="img-fluid rounded-start">
-                </div>
-                <div class="col-md-8" style="background-color: antiquewhite;">
-                  <div class="card-body">
-                    <h5 class="card-title">Haris Jamal</h5>
-                    <p class="card-text">I'm extremely surprised and impressed with the quality of service</p>
-                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-                <div class="form-group">
-                    <textarea class="form-control" 
-                    id="feedback" 
-                    placeholder="Enter your feedback"></textarea>
-                    <button type="submit" class="btn btn-primary col-md-5 offset-3" id="submitFeedbackButton">Submit Feedback</button>
-                    
-                    
-                
-                </div>
-               
-
-            <!-- <div class="card-body col-md-8 offset-5 justify-content-center">
-              <a href="#" class="btn btn-primary">Enter Feedback Here !</a> 
-            </div> -->
-
-          </div>
-        </div>
-
-        <footer class="py-3 bg-dark text-white col-12">
-          <div class="container-fluid">
-            <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
-          </div>
-        </footer>
-    </body>
-    <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-  </html>
-
-        <!-- <div class="card-body col-md-4 offset-5">
-          <a href="#" class="btn btn-primary">Enter your feedback</a> 
-        </div> -->
-
-        <!-- <div class="container-fluid" style="background-color:#F39D7D"></div>
+        <!-- frame gambar feedback -->
+        <div class="container-fluid" style="background-color:#F39D7D"></div>
         <div class="col justify-content-center container-fluid">
             <div class="col-3"style="background-color: #301959; border: radius 10px;">
                 <p class="text-center mt-3" style="color:white; font-size: 20px;">Hafiz Wafi</p>
@@ -143,19 +52,19 @@
                 <p class="text-center mt-3" style="color:white; font-size: 20px;">Haris</p>
                 <img class="container-fluid" style="border-radius: 10px;"src="images/compacthome.jpg">
             </div>
-        <form action="" method="" class="form"></form> -->
+        <form action="" method="" class="form"></form>
          
             
 
-      <!-- <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+      <script th:src="@{https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js}" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
       <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js}" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
       <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   
-      <footer class="px-2 bg-dark text-white d-flex align-content-end fixed-bottom">
+      <footer class="py-3 bg-dark text-white d-flex align-content-end fixed-bottom">
         <div class="container">
           <p class="m-0 text-center">Copyright &copy; 2023 <a href="#">DZ EMPIRE CAR RENTAL</a></p>
         </div>
       </footer>     
       </body>
   
-  </html> -->
+  </html>

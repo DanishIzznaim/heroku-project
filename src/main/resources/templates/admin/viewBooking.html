@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="images/dz.png" />
-    <title>List Employee</title>
+    <title>List Rental</title>
     <link rel="stylesheet" href="stylesheets/admin.css" />
     <link
       rel="stylesheet"
@@ -64,8 +64,8 @@
     <!-- Start Side Bar-->
     <div
       id="sidebar"
-      class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 position-fixed"
-      style="height: 120%"
+      class="d-flex flex-column flex-shrink-0 text-black bg-white col-2 position-absolute"
+      style="height: 200%"
     >
       <ul
         class="nav nav-underline flex-column mb-auto"
@@ -145,16 +145,7 @@
     <!-- End Side Bar-->
     <!-- Card Right-->
     <div class="container-fluid" style="width: 87%">
-      <h3 class="offset-2" style="margin-top: 2%">
-        Staff List
-        <a href="/addStaff">
-          <i
-            class="bi bi-plus-circle-fill"
-            style="vertical-align: middle; margin-left: 60%"
-          ></i>
-          Add Staff
-        </a>
-      </h3>
+      <h3 class="offset-2" style="margin-top: 2%">Rental List</h3>
     </div>
 
     <div
@@ -163,96 +154,67 @@
     >
       <!-- Iterate over the employee list and display each employee in a card -->
       <div class="offset-2 justify-content-evenly align-items-center col-9">
-        <table class="table table-striped text-center">
-          <thead>
+          <table class="table table-striped text-center">
             <tr>
-              <th scope="col">Employee ID</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Username</th>
-              <th scope="col">Employee Role</th>
-              <th scope="col">Phone Number</th>
-              <th scope="col">Manager ID</th>
-              <th scope="col">Action</th>
+              <th>Rent ID</th>
+              <th>Day</th>
+              <th>Date Start</th>
+              <th>Date End</th>
+              <th>Return Date</th>
+              <th>Total Rent Price</th>
+              <th>Status</th>
+              <th>Payment</th>
+              <th>Save</th>
+              <!-- <th>Action</th> -->
             </tr>
-          </thead>
-          <tbody>
-            <!-- Use Thymeleaf loop to iterate over the employees -->
-            <tr th:each="employee: ${employees}">
-              <form action="/deleteStaff" method="post">
-                <input th:value="${employee.userid}" name="id" hidden/>
-                <td th:text="${employee.userid}"></td>
-                <td th:text="${employee.fullname}"></td>
-                <td th:text="${employee.username}"></td>
-                <td th:text="${employee.emprole}"></td>
-                <td th:text="${employee.phonenumE}"></td>
-                <td th:text="${employee.managerid}"></td>
+            <!-- Loop through the rentals list -->
+            <tr th:each="rental : ${rentals}">
+              <!-- Rental information -->
+              <td th:text="${rental.rentid}"></td>
+              <td th:text="${rental.day}"></td>
+              <td th:text="${rental.datestart}"></td>
+              <td th:text="${rental.dateend}"></td>
+              <form method="post" th:action="@{/saveRental}">
+                <!-- Hidden input for rent ID -->
+                <input type="hidden" name="rentid" th:value="${rental.rentid}" />
+                <!-- Input for return date -->
                 <td>
-                  <a
-                    th:href="@{'/updateStaff?id=' + ${employee.userid}}"
-                    class="btn btn-primary"
-                    >Update</a
-                  >
-                  <!-- <a class="dropdown-item" th:data-id="${patients.pId}"
-                               data-toggle="modal" data-target="#deleteModal">Delete</a> -->
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-toggle="modal"
-                    th:data-bs-target="'#exampleModal-' + ${employee.userid}"
-                  >
-                    Delete
-                  </button>
+                  <input type="date" name="returndate" th:value="${rental.returndate}" min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required placeholder="Enter Return Date" />
                 </td>
-                <div
-                  class="modal fade"
-                  th:id="'exampleModal-' + ${employee.userid}"
-                  tabindex="-1"
-                  role="dialog"
-                  aria-labelledby="deleteModalLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">
-                          Delete Employee
-                        </h5>
-                        <!-- <button
-                          type="button"
-                          class="close"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                        >
-                          <span aria-hidden="true">&times;</span>
-                        </button> -->
-                      </div>
-                      <div class="modal-body">
-                        <p>Are you sure you want to delete this employee?</p>
-                      </div>
-                      <div class="modal-footer">
-                        <button 
-                          type="button" 
-                          class="btn btn-secondary" 
-                          th:onclick="'window.location.href = \'' + @{/listStaff} + '\''">
-                          Cancel
-                        </button>
-                        <button
-                          id="deleteButton"
-                          class="btn btn-danger"
-                          type="submit"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <!-- Display total rent price -->
+                <td th:text="${rental.totalrentprice}"></td>
+                <!-- Select status -->
+                <td>
+                  <select name="statusrent">
+                    <option th:value="'Booked'" th:text="'Booked'" th:selected="${rental.statusrent == 'Booked'}"></option>
+                    <option th:value="'Finished'" th:text="'Finished'" th:selected="${rental.statusrent == 'Finished'}"></option>
+                  </select>
+                </td>
+                <!-- View receipt button -->
+                <td>
+                  <a class="btn btn-primary" th:href="@{/viewReceipt(rentid=${rental.rentid})}" role="button">View</a>
+                </td>
+                <!-- Save button -->
+                <td>
+                  <button type="submit" class="p-1 btn btn-primary">Save</button>
+                </td>
               </form>
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </table>
+          
+          <script>
+            // Disable dates before the current date in the date picker
+            window.onload = function() {
+              const dateInputs = document.querySelectorAll('input[type="date"]');
+              const today = new Date().toISOString().split('T')[0];
+              for (const dateInput of dateInputs) {
+                dateInput.setAttribute('min', today);
+              }
+            };
+          </script>
+          
+        </div>
+  </div>
 
     <!-- <script>
             $(document).ready(function() {

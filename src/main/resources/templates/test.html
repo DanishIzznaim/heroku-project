@@ -1,0 +1,306 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org"> 
+ 
+  <head> 
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="icon" href="images/dz.png"> 
+    <title>Home</title> 
+    <link rel="stylesheet" href="stylesheets/homepage.css"> 
+    <link rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" 
+        crossorigin="anonymous"> 
+  </head> 
+ 
+  <body> 
+    <nav class="navbar navbar-expand-lg"> 
+        <div class="container-fluid"> 
+            <a class="navbar-brand" href="#">DZ EMPIRE RENTAL</a> 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> 
+                <span class="navbar-toggler-icon"></span> 
+            </button> 
+            <div class="d-flex justify-content-end" id="navbarNav"> 
+                <ul class="navbar-nav"> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" aria-current="page" href="#">Home</a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="#">About</a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="#">Feedback</a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" href="#">Contact</a> 
+                    </li> 
+                    <li class="nav-item"> 
+                        <a class="nav-link" th:href="@{/login}">Login</a> 
+                    </li> 
+                </ul> 
+            </div> 
+        </div> 
+    </nav> 
+    <img src="images/headerhomepage.jpg" class="img-fluid" alt="header1" style="height: auto;"> 
+    <div class="container1" style="background-color: aliceblue;"> 
+      <h1 class="text-center" style="color: orangered;">DZ EMPIRE RENTAL</h1> 
+        <div class="text-center"> 
+          <h3 class="highlighted-text"> 
+              Looking for ways to spend your holiday? 
+          </h3> 
+ 
+          <h3 class="highlighted-text"> 
+            Why not go on a road trip in Selangor and rent a car at DZ Empire Rental. 
+          </h3> 
+ 
+          <p> 
+            Selangor, Malaysia has some indefinable quality that makes it perfect for road trips. Cruising down the roads with a Selangor, Malaysia car hire and the wind in your hair, your favorite tunes playing, and miles of open road ahead has to be the ideal start to any adventure. The sheer diversity of landscapes and cultures within Selangor, Malaysia alone makes for myriad tour opportunities, no matter what kind of journey you’re after. 
+          </p> 
+ 
+        </div> 
+  </div> 
+   
+    <div class="container" style="background-color: aliceblue;">
+      <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel"> 
+        <div class="carousel-indicators"> 
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" 
+                aria-current="true" aria-label="Slide 1"></button> 
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" 
+                aria-label="Slide 2"></button> 
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" 
+                aria-label="Slide 3"></button> 
+        </div> 
+ 
+        <div class="carousel-inner"> 
+            <div class="carousel-item active"> 
+                <a href="/sedan"> 
+                    <img src="images/sedanhome.jpg" class="d-block w-50 mx-auto" alt="..."> 
+                </a> 
+                <div class="carousel-caption d-none d-md-block"> 
+                <h1 style="color: aliceblue;">SEDAN</h1> 
+                <h3 class="mt-5 d-flex justify-content-center mb-3"><u>COMPACT</u></h3> 
+     
+            <div class="container-fluid mb-5"> 
+                <div class="row justify-content-evenly"> 
+        
+                <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+                    <img src="compact/compact1.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+                    <h3 class="text-center" name="car_name" style="color: darkorange;">HONDA CITY</h3> 
+                    <div class="container-fluid text-light mt-3"> 
+                        <p class="mt-2" name="car_price">Price: RM160/DAY</p> 
+                        <p class="mt-1" name="condition">Condition: 7/10</p> 
+                        <p class="mt-1" name="availability">Availability: Available</p> 
+                    </div> 
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-end">
+                <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+                    </div> 
+                </div> 
+                
+                    
+                <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+                    <img src="compact/compact2.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+                    <h3 class="text-center" name="car_name" style="color: darkorange;">HONDA CITY</h3> 
+                    <div class="container-fluid text-light mt-3"> 
+                        <p class="mt-2" name="car_price">Price: RM130/DAY</p> 
+                        <p class="mt-1" name="condition">Condition: 7/10</p> 
+                        <p class="mt-1" name="availability">Availability: Available</p> 
+                    </div> 
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                        <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+                    </div> 
+                </div> 
+        
+                <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+                    <img src="compact/compact3.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+                    <h3 class="text-center" name="car_name" style="color: darkorange;">PERODUA MYVI</h3> 
+                    <div class="container-fluid text-light mt-3"> 
+                        <p class="mt-2" name="car_price">Price: RM130/DAY</p> 
+                        <p class="mt-1" name="condition">Condition: 7/10</p> 
+                        <p class="mt-1" name="availability">Availability: Available</p> 
+                    </div> 
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                        <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+                    </div> 
+                </div> 
+        
+                </div> 
+            </div> 
+    
+  
+ 
+      <div class="container-fluid mb-5"> 
+        <div class="row justify-content-evenly"> 
+ 
+          <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+            <img src="compact/compact4.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+            <h3 class="text-center" name="car_name" style="color: darkorange;">PERODUA MYVI</h3> 
+            <div class="container-fluid text-light mt-3"> 
+                <p class="mt-2" name="car_price">Price: RM130/DAY</p> 
+                <p class="mt-1" name="condition">Condition: 7/10</p> 
+                <p class="mt-1" name="availability">Availability: Available</p> 
+            </div> 
+             
+            <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+            </div> 
+          </div> 
+         
+             
+          <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+            <img src="compact/compact5.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+            <h3 class="text-center" name="car_name" style="color: darkorange;">PERODUA AXIA</h3> 
+            <div class="container-fluid text-light mt-3"> 
+                <p class="mt-2" name="car_price">Price: RM105/DAY</p> 
+                <p class="mt-1" name="condition">Condition: 6/10</p> 
+                <p class="mt-1" name="availability">Availability: Available</p> 
+            </div> 
+             
+            <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+            </div> 
+          </div> 
+ 
+          <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+            <img src="compact/compact6.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+            <h3 class="text-center" name="car_name" style="color: darkorange;">PERODUA AXIA</h3> 
+            <div class="container-fluid text-light mt-3"> 
+                <p class="mt-2" name="car_price">Price: RM120/DAY</p> 
+                <p class="mt-1" name="condition"></p> 
+                <p class="mt-1" name="availability">Availability: Available</p> 
+            </div> 
+             
+            <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+            </div> 
+          </div> 
+ 
+        </div> 
+      </div> 
+      <!-- END OF COMPACT --> 
+ 
+      <!-- MPV --> 
+      <h3 class="mt-5 d-flex justify-content-center mb-3"><u>MPV</u> 
+      </h3> 
+     
+      <div class="container-fluid mb-5"> 
+        <div class="row justify-content-evenly"> 
+ 
+          <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+            <img src="mpv/mpv1.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+            <h3 class="text-center" name="car_name" style="color: darkorange;">TOYOTA VELLFIRE</h3> 
+            <div class="container-fluid text-light mt-3"> 
+                <p class="mt-2" name="car_price">Price: RM190/DAY</p> 
+                <p class="mt-1" name="condition">Condition: 8/10</p> 
+                <p class="mt-1" name="availability">Availability: Available</p> 
+            </div> 
+             
+            <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+            </div> 
+          </div> 
+         
+             
+          <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+            <img src="mpv/mpv2.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+            <h3 class="text-center" name="car_name" style="color: darkorange;">TOYOTA ALPHARD</h3> 
+            <div class="container-fluid text-light mt-3"> 
+                <p class="mt-2" name="car_price">Price: RM190/DAY</p> 
+                <p class="mt-1" name="condition">Condition: 7/10</p> 
+                <p class="mt-1" name="availability">Availability: Available</p> 
+            </div> 
+             
+            <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+            </div> 
+          </div> 
+ 
+          <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+            <img src="mpv/mpv3.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+            <h3 class="text-center" name="car_name" style="color: darkorange;">PERODUA ALZA</h3> 
+            <div class="container-fluid text-light mt-3"> 
+                <p class="mt-2" name="car_price">Price: RM170/DAY</p> 
+                <p class="mt-1" name="condition">Condition: 7/10</p> 
+                <p class="mt-1" name="availability">Availability: Available</p> 
+            </div> 
+             
+            <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+            </div> 
+          </div> 
+ 
+        </div> 
+      </div> 
+ 
+      <div class="container-fluid mb-5"> 
+        <div class="row justify-content-evenly"> 
+ 
+          <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+            <img src="mpv/mpv4.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+            <h3 class="text-center" name="car_name" style="color: darkorange;">PERODUA ALZA</h3> 
+            <div class="container-fluid text-light mt-3"> 
+                <p class="mt-2" name="car_price">Price: RM160/DAY</p> 
+                <p class="mt-1" name="condition">Condition: 8/10</p> 
+                <p class="mt-1" name="availability">Availability: Available</p> 
+            </div> 
+             
+            <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+            </div> 
+          </div> 
+         
+             
+          <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+            <img src="mpv/mpv5.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+            <h3 class="text-center" name="car_name" style="color: darkorange;">PROTON EXORA</h3> 
+            <div class="container-fluid text-light mt-3"> 
+                <p class="mt-2" name="car_price">Price: RM160/DAY</p> 
+                <p class="mt-1" name="condition">Condition: 7/10</p> 
+                <p class="mt-1" name="availability">Availability: Available</p> 
+            </div> 
+             
+            <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+            </div> 
+          </div> 
+ 
+          <div class="col-3" style="background-color: black; border-radius: 10px;"> 
+            <img src="mpv/mpv6.jpg" class="container-fluid mt-3 rounded" style="height: 200px; width: 100%; object-fit: cover;"> 
+            <h3 class="text-center" name="car_name" style="color: darkorange;">TOYOTA RUSH</h3> 
+            <div class="container-fluid text-light mt-3"> 
+                <p class="mt-2" name="car_price">Price: RM130/DAY</p> 
+                <p class="mt-1" name="condition">Condition: 6/10</p> 
+                <p class="mt-1" name="availability">Availability: Available</p> 
+            </div> 
+             
+            <div class="d-grid gap-2 d-md-flex justify-content-end"> 
+                <button class="btn btn-danger mb-2" type="button">BOOK NOW</button> 
+            </div> 
+          </div> 
+ 
+        </div> 
+      </div> 
+      <!-- END OF MPV --> 
+ 
+     
+     
+     
+ 
+    </div> 
+ 
+    <footer class="py-3 bg-dark text-white col-12"> 
+        <div class="container-fluid"> 
+            <p class="m-0 text-center">DZ EMPIRE CAR RENTAL &copy; 2023</p> 
+        </div> 
+    </footer> 
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
+        crossorigin="anonymous"> 
+    </script> 
+ 
+  </body> 
+</html>
