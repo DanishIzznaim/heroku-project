@@ -6,6 +6,7 @@ public class Customer extends User {
     private Date licensedate;
     private String icnumber;
     private int phonenumC;
+    public String fname;
 
     public Customer(int userid, String fullname, String username, String password, Date licensedate, String icnumber,int phonenumC) {
         super(userid, fullname, username, password);
@@ -18,6 +19,11 @@ public class Customer extends User {
         
     }
 
+
+    public Customer(int userid, String fname, String usernamecust, String password, String usertype, Date licensedate2,
+            String icnumber2, String phonenum) {
+        //TODO Auto-generated constructor stub
+    }
 
     public Date getLicensedate() {
         return this.licensedate;

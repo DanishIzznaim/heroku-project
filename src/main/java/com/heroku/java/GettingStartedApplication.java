@@ -31,7 +31,7 @@ public class GettingStartedApplication {
     public String index() {
         return "index";
     }
-
+    
     @GetMapping("/homepage")
     public String homepage() {
         return "homepage";
@@ -98,8 +98,8 @@ public class GettingStartedApplication {
     
     @GetMapping("/homeadmin")
     public String homeadmin() {
-        return "admin/homeadmin";
-    }
+                    return "admin/homeadmin";
+        }
         @GetMapping("/test")
     public String test() {
         return "test";
@@ -110,7 +110,7 @@ public class GettingStartedApplication {
     public String custdetail() {
         return "admin/custdetail";
     }
-    @GetMapping("/logout")
+        @GetMapping("/logout")
     public String logout(HttpSession session) {
        session.invalidate();
       return("redirect:/login");
