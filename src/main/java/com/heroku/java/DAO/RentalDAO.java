@@ -20,7 +20,9 @@ public class RentalDAO {
     }
 
     public int addRental(Rental rental) throws SQLException {
+        
         int rentid = 0;
+        System.out.println("rentid: "+rentid);
         try (Connection connection = dataSource.getConnection()) {
             String sql = "INSERT INTO rental (day, datestart, dateend,totalrentprice, customerid,carid) VALUES (?, ?, ?, ?, ?, ?) RETURNING rentid;";
             PreparedStatement statement = connection.prepareStatement(sql);
