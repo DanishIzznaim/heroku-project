@@ -125,9 +125,13 @@ public class rentalController {
             RentalDAO rentalDAO = new RentalDAO(dataSource);
             Rental rentalDetails = rentalDAO.getLatestRentalByCustId(customerId);// by customerid,will retrieve the
             // day,datestart,dateend,statusrent,totalrentprice
+            if (rentalDetails == null) {
+                model.addAttribute("noBooking", true);
+                return "customer/rentaldetailC";
+            }
             String statusrent = rentalDetails.getStatusrent();
-
-            if ("Finished".equals(statusrent) || rentalDetails == null) {
+            System.out.println("rental detail: "+rentalDetails);
+            if ("Finished".equals(statusrent)) {
                 model.addAttribute("noBooking", true);
                 return "customer/rentaldetailC";
             }
@@ -245,7 +249,7 @@ public class rentalController {
         }
     }
 
-    @GetMapping("deleteRentalCash")
+    @GetMapping("/deleteRentalCash")
     public String deleteCashRental(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
         try {
