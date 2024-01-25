@@ -204,5 +204,21 @@ public void updateRental(Rental rental) throws SQLException {
         }
         return rental;
     }
+
+
+    public void deleteRentalCash(int rentid){
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "DELETE FROM rental WHERE rentid = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, rentid);
+            statement.executeUpdate();
+    
+            System.out.println("success rental");
+        } catch (SQLException e) {
+            // Handle any SQL exceptions
+            e.printStackTrace();
+        }
+    }
 }
 

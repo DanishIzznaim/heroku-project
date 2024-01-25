@@ -84,24 +84,13 @@
         <h3><u>No Booking Yet</u></h3>
       </div>
       <div class="card p-3" th:unless="${noBooking}">
-          <!-- Check if a booking (car) and rental details are present -->
-          <h3><u>Rental Detail</u></h3>
-          <div class="row">
-              <div class="col-md-6">
-                  <img th:src="${car.imageSrc}" alt="Car Image" class="img-fluid" />
-                  <h4>Car Name: <span th:text="${car.carname}"></span></h4>
-                  <h4>Car Type: <span th:text="${car.cartype}"></span></h4>
-              </div>
-              <div class="col-md-6">
-                  <h4>Day: <span th:text="${rental.day}"></span></h4>
-                  <h4>Date Start: <span th:text="${rental.datestart}"></span></h4>
-                  <h4>Date End: <span th:text="${rental.dateend}"></span></h4>
-                  <h4>Status: <span th:text="${rental.statusrent}"></span></h4>
-                  <h4>Total Rent Price: <span th:text="${rental.totalrentprice}"></span></h4>
-              </div>
-              <div class="col-md-6">
-                <h6>If you want to cancel, Please call this Hotline Number: 0127182525</h6>
-            </div>
+        <!-- Check if a booking (car) and rental details are present -->
+        <h3><u>Rental Detail</u></h3>
+        <div class="row">
+          <div class="col-md-6">
+            <img th:src="${car.imageSrc}" alt="Car Image" class="img-fluid" />
+            <h4>Car Name: <span th:text="${car.carname}"></span></h4>
+            <h4>Car Type: <span th:text="${car.cartype}"></span></h4>
           </div>
           <div class="col-md-6">
             <h4>Day: <span th:text="${rental.day}"></span></h4>
@@ -114,10 +103,16 @@
             <h4>
               Payment Method: <span th:text="${payment.paymentmethod}"></span>
             </h4>
-
-            <div th:if="${payment.paymentmethod == 'Cash'}">
-              <button type="button" class="btn btn-danger">Cancel</button>
-            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <h6>
+            If you want to cancel, Please call this Hotline Number: 0127182525
+          </h6>
+        </div>
+        <div class="col-md-6">
+          <div th:if="${payment.paymentmethod == 'Cash'}">
+            <a th:href="@{/deleteRentalCash}" class="btn btn-danger">Cancel Booking</a>
           </div>
         </div>
       </div>

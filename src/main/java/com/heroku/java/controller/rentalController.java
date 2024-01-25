@@ -121,6 +121,7 @@ public class rentalController {
             Customer customerDetails = customerDAO.getCustomerByUsername(username);
 
             int customerId = customerDetails.getUserid();
+            System.out.println("cust id: " + customerId);
             RentalDAO rentalDAO = new RentalDAO(dataSource);
             Rental rentalDetails = rentalDAO.getLatestRentalByCustId(customerId);// by customerid,will retrieve the
             // day,datestart,dateend,statusrent,totalrentprice
@@ -244,6 +245,42 @@ public class rentalController {
         }
     }
 
+    @GetMapping("deleteRentalCash")
+    public String deleteCashRental(HttpSession session, Model model) {
+        String username = (String) session.getAttribute("username");
+        try {
+            CustomerDAO customerDAO = new CustomerDAO(dataSource);
+            Customer customerDetails = customerDAO.getCustomerByUsername(username);
 
-    
+            int customerId = customerDetails.getUserid();
+            System.out.println("cust id: " + customerId);
+            RentalDAO rentalDAO = new RentalDAO(dataSource);
+            Rental rentalDetails = rentalDAO.getLatestRentalByCustId(customerId);// by customerid,will retrieve the
+            
+            int rentid = rentalDetails.getRentid();
+
+
+            // int carId = rentalDetails.getCarid();
+            // CarDAO carDAO = new CarDAO(dataSource);
+            // Cars carDetails = carDAO.getCarById(carId);// by id it will retrieve the car image,carname,cartype
+
+            System.out.println("rent id : " + rentid);
+
+            PaymentDAO paymentDAO = new PaymentDAO(dataSource);
+            Payment paymentDetail = paymentDAO.getPaymentbyPaymentId(rentid);
+
+            int paymentid = paymentDetail.getPaymentid();
+            
+            paymentDAO.deleteCashPayment(paymentid);
+            paymentDAO.deletePayment(paymentid);
+            rentalDAO.deleteRentalCash(rentid);
+
+
+            return "redirect:/rentaldetailC";
+        } catch (Exception e) {
+            System.out.println("Error retrieving rental details: " + e.getMessage());
+            return "redirect:/";
+        }
+    }
+
 }

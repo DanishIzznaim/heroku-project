@@ -160,4 +160,35 @@ public class PaymentDAO {
         }
         return payment;
     }
+
+
+    public void deleteCashPayment(int paymentid){
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "DELETE FROM cashpayment WHERE paymentid = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, paymentid);
+            statement.executeUpdate();
+    
+            System.out.println("success delete cash payment");
+        } catch (SQLException e) {
+            // Handle any SQL exceptions
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePayment(int paymentid){
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "DELETE FROM payment WHERE paymentid = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, paymentid);
+            statement.executeUpdate();
+    
+            System.out.println("success delete payment");
+        } catch (SQLException e) {
+            // Handle any SQL exceptions
+            e.printStackTrace();
+        }
+    }
 }
